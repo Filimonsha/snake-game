@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { FormSignIn } from './modules/form';
+import { EntranceLayout } from '../../layout/entrance';
+
 
 const SignIn = () => {
   return (
-    <div>
-        Страница входа
-    </div>
+    <EntranceLayout>
+      <FormSignIn />
+    </EntranceLayout>
   )
 }
 
