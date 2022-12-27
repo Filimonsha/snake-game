@@ -2,6 +2,7 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+import * as S from './formInput.module.scss';
 
 type formInputProps = {
   label: string,
@@ -29,10 +30,11 @@ const FormInput = ({
   
   return (
     <Row className='mb-3'>
-      <Form.Group controlId={`${inputName}ValidationFormik`}>
-        <Form.Label>{label}</Form.Label>
+      <Form.Group controlId={`${inputName}ValidationFormik`} className={S.formInput}>
+        <Form.Label className={S.formInputLabel}>{label}</Form.Label>
         <InputGroup hasValidation>
           <Form.Control
+            className={S.formInputControl}
             type={type}
             placeholder={placeholder}
             name={inputName}
@@ -41,7 +43,10 @@ const FormInput = ({
             onBlur={handleBlur}
             isInvalid={!!(error && touched)}
           />
-          <Form.Control.Feedback type='invalid'>
+          <Form.Control.Feedback 
+            type='invalid'
+            className={S.formInputFeedback}
+          >
             {error}
           </Form.Control.Feedback>
         </InputGroup>

@@ -49,8 +49,12 @@ const FormSignIn = () => {
         handleBlur
       }) => (
         <>
+          <Form 
+            noValidate 
+            onSubmit={handleSubmit}
+            className={S.formSignIn}
+          >
           <h2 className={S.formTitle}>Войти</h2>
-          <Form noValidate onSubmit={handleSubmit}>
             <FormInput
               label='Логин'
               placeholder='Ваш логин в игре'
@@ -75,8 +79,13 @@ const FormSignIn = () => {
             />
             <Row className='pt-3'>
               <Stack direction='horizontal' gap={3}>
-                <Button type='submit'>Войти</Button>
-                <Link to={SIGN_UP_ROUTE} className='ms-auto'>Зарегистрироваться</Link>
+                <Button type='submit' className={S.formSubmitButton}>Войти</Button>
+                <Link 
+                  to={SIGN_UP_ROUTE} 
+                  className={`ms-auto ${S.formLink}`}
+                >
+                  Нет аккаунта?
+                </Link>
               </Stack>
             </Row>
           </Form>
