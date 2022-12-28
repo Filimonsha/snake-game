@@ -1,22 +1,20 @@
-.input {
+
+.input__label {
+  color: #130a35;
+  margin-left: 5px;
+}
+
+.input__control {
+  border-radius: 10px;
+  padding-left: 10px;
+  border-color: rgba(19, 10, 53, 0.5);
   
-  .input__label {
-    color: #130a35;
-    margin-left: 5px;
-  }
-  
-  .input__control {
-    border-radius: 10px;
-    padding-left: 10px;
+  &:focus {
     border-color: rgba(19, 10, 53, 0.5);
-    
-    &:focus {
-      box-shadow: 0 0 0 0.25rem rgba(19, 10, 53, 0.25);
-    }
+    box-shadow: 0 0 0 0.25rem rgba(19, 10, 53, 0.25);
   }
-  
-  .input__feedback {
-    padding-left: 15px;
-  }
-  
+}
+
+.input__feedback {
+  padding-left: 15px;
 }

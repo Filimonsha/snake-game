@@ -24,11 +24,11 @@ type LoginFormData = {
 
 const schema = yup.object().shape({
   login: yup.string()
-            .matches(Pattern.Login, 'Неверный формат логина')
-            .required('Укажите логин'),
+            .matches(Pattern.Login, 'Wrong username format')
+            .required('Enter your username'),
   password: yup.string()
-            .matches(Pattern.Password, 'Неверный формат пароля')
-            .required('Укажите пароль'),
+            .matches(Pattern.Password, 'Wrong password format')
+            .required('Enter your password'),
 });
 
 const FormSignIn = () => {
@@ -60,10 +60,10 @@ const FormSignIn = () => {
             onSubmit={handleSubmit}
             className={form}
           >
-          <h2 className={form__title}>Войти</h2>
+          <h2 className={form__title}>Log In</h2>
             <FormInput
-              label='Логин'
-              placeholder='Ваш логин в игре'
+              label='Username'
+              placeholder='Your username'
               inputName='login'
               type='text'
               value={values.login}
@@ -73,7 +73,7 @@ const FormSignIn = () => {
               touched={touched.login}
             />
             <FormInput
-              label='Пароль'
+              label='Password'
               placeholder='∙∙∙∙∙∙∙∙'
               inputName='password'
               type='password'
@@ -86,13 +86,13 @@ const FormSignIn = () => {
             <Row className='pt-3'>
               <Stack direction='horizontal' gap={3}>
                 <Button type='submit' className={form__submit}>
-                  Войти
+                  Log In
                 </Button>
                 <Link 
                   to={SIGN_UP_ROUTE} 
                   className={`ms-auto ${form__link}`}
                 >
-                  Нет аккаунта?
+                  Register
                 </Link>
               </Stack>
             </Row>
