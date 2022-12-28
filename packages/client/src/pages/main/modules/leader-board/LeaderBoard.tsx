@@ -1,5 +1,5 @@
 import React from 'react'
-import './leaderBoard.scss'
+import styles from './leaderBoard.module.scss'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import DataTable, { TableColumn } from 'react-data-table-component'
@@ -22,7 +22,7 @@ const LeaderBoard: React.FC = () => {
     },
     {
       name: 'Avatar',
-      cell: (row) => <img className='table-img' src={row.avatar || defaultAvatar} />,
+      cell: (row) => <img className={styles.table_img} src={row.avatar || defaultAvatar} />,
       sortable: false,
     },
     {
@@ -41,13 +41,13 @@ const LeaderBoard: React.FC = () => {
   const topPlayersData = dummyData.sort((a, b) => b.score - a.score).slice(0, 3);
 
   return (
-    <Container className='p-5 d-flex flex-column'>
-      <div className='wrapper-top'>
+    <Container className={`p-5 d-flex flex-column ${styles.container}`}>
+      <div className={styles.wrapper_top}>
         <h1 className='mb-3'>Top Players</h1>
         <div className='d-flex justify-content-evenly mb-3'>
           {topPlayersData && topPlayersData.map(data => 
-            <Card key={data.id}>
-              <Card.Img src={data.avatar} />
+            <Card className={styles.card} key={data.id}>
+              <Card.Img className={styles.card_img} src={data.avatar} />
               <Card.Body>
                 <Card.Title>{data.user}</Card.Title>
                 <Card.Text>{data.score}</Card.Text>
@@ -56,7 +56,7 @@ const LeaderBoard: React.FC = () => {
           )} 
         </div>
       </div>
-      <div className='wrapper-bottom'>
+      <div className={styles.wrapper_bottom}>
         <h2 className='mb-3'>All Users</h2>
         <DataTable
           columns={columns}
