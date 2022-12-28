@@ -2,7 +2,14 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
-import * as S from './formInput.module.scss';
+import styles from './formInput.module.scss';
+
+const {
+  input,
+  input__label,
+  input__control,
+  input__feedback,
+} = styles;
 
 type formInputProps = {
   label: string,
@@ -30,11 +37,11 @@ const FormInput = ({
   
   return (
     <Row className='mb-3'>
-      <Form.Group controlId={`${inputName}ValidationFormik`} className={S.formInput}>
-        <Form.Label className={S.formInputLabel}>{label}</Form.Label>
+      <Form.Group controlId={`${inputName}ValidationFormik`} className={input}>
+        <Form.Label className={input__label}>{label}</Form.Label>
         <InputGroup hasValidation>
           <Form.Control
-            className={S.formInputControl}
+            className={input__control}
             type={type}
             placeholder={placeholder}
             name={inputName}
@@ -45,7 +52,7 @@ const FormInput = ({
           />
           <Form.Control.Feedback 
             type='invalid'
-            className={S.formInputFeedback}
+            className={input__feedback}
           >
             {error}
           </Form.Control.Feedback>

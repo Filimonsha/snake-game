@@ -6,7 +6,6 @@ import { Main } from '../pages/main'
 import { SignIn } from '../pages/sign-in'
 import { SignUp } from '../pages/sign-up'
 import { Forum } from '../pages/forum'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,

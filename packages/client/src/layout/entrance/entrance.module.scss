@@ -1,22 +1,22 @@
-.entrancePage {
+.entrance {
   background-color: #130a35;
   padding: 50px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  
+  .entrance__header {
+    margin-bottom: 60px;
+  }
+  
+  .entrance__main {
+    flex-grow: 1;
+  }
+  
+  .entrance__container {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
 }
-
-.entranceHeader {
-  margin-bottom: 60px;
-}
-
-.entranceMain {
-  flex-grow: 1;
-}
-
-.formContainer {
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormSignIn } from './modules/form';
 import { EntranceLayout } from '../../layout/entrance';
 

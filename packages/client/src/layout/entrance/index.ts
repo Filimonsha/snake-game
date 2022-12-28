@@ -1,1 +1,1 @@
-export {default as EntranceLayout} from './entrance';
+export { default as EntranceLayout } from './entrance';

@@ -1,11 +1,11 @@
-.formInput {
+.input {
   
-  .formInputLabel {
+  .input__label {
     color: #130a35;
     margin-left: 5px;
   }
   
-  .formInputControl {
+  .input__control {
     border-radius: 10px;
     padding-left: 10px;
     border-color: rgba(19, 10, 53, 0.5);
@@ -15,7 +15,7 @@
     }
   }
   
-  .invalid-feedback {
+  .input__feedback {
     padding-left: 15px;
   }
   

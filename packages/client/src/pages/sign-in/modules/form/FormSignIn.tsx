@@ -3,13 +3,19 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 import * as yup from 'yup';
-import * as S from './formSignIn.module.scss';
+import styles from './formSignIn.module.scss';
 import { Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import { FormInput } from '../../../../components/form-input';
 import { Pattern } from '../../../../utils/const/validation';
 import { SIGN_UP_ROUTE } from '../../../../utils/const/route';
 
+const {
+  form,
+  form__title,
+  form__submit,
+  form__link
+} = styles;
 
 type LoginFormData = {
   login: string,
@@ -52,9 +58,9 @@ const FormSignIn = () => {
           <Form 
             noValidate 
             onSubmit={handleSubmit}
-            className={S.formSignIn}
+            className={form}
           >
-          <h2 className={S.formTitle}>Войти</h2>
+          <h2 className={form__title}>Войти</h2>
             <FormInput
               label='Логин'
               placeholder='Ваш логин в игре'
@@ -79,10 +85,12 @@ const FormSignIn = () => {
             />
             <Row className='pt-3'>
               <Stack direction='horizontal' gap={3}>
-                <Button type='submit' className={S.formSubmitButton}>Войти</Button>
+                <Button type='submit' className={form__submit}>
+                  Войти
+                </Button>
                 <Link 
                   to={SIGN_UP_ROUTE} 
-                  className={`ms-auto ${S.formLink}`}
+                  className={`ms-auto ${form__link}`}
                 >
                   Нет аккаунта?
                 </Link>
