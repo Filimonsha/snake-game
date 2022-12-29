@@ -5,30 +5,30 @@ import { MAIN_ROUTE } from '../../utils/const/route';
 
 const {
   entrance,
-  entrance__header,
-  entrance__main,
-  entrance__container
+  entranceHeader,
+  entranceMain,
+  entranceContainer
 } = styles;
 
-type EntranceLayoutProps = {
+interface IEntranceLayout {
   children: React.ReactNode,
 }
 
-const EntranceLayout = (props: EntranceLayoutProps) => {
+const EntranceLayout = (props: IEntranceLayout) => {
   return (
     <div className={entrance}>
-      <header className={entrance__header}>
+      <header className={entranceHeader}>
         <Link to={MAIN_ROUTE} title='На главную страницу'>
           <img 
-            src={logoUrl} 
+            src={logoUrl}
             alt="Логотип Snake Game" 
             height='80' 
             width='200' 
           />
         </Link>
       </header>
-      <main className={entrance__main}>
-        <div className={entrance__container}>
+      <main className={entranceMain}>
+        <div className={entranceContainer}>
           { props.children }
         </div>
       </main>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormControlProps } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
@@ -6,18 +7,15 @@ import styles from './formInput.module.scss';
 
 const {
   input,
-  input__label,
-  input__control,
-  input__feedback,
+  inputLabel,
+  inputControl,
+  inputFeedback,
 } = styles;
 
-type formInputProps = {
+interface IFormInputProps extends FormControlProps {
   label: string,
-  type: string,
   inputName: string,
   placeholder: string,
-  value: string,
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   error: string | undefined,
   touched: boolean | undefined,
@@ -29,30 +27,30 @@ const FormInput = ({
     inputName,
     placeholder,
     value,
-    handleChange,
+    onChange,
     handleBlur,
     error,
     touched
-  }: formInputProps) => {
+  }: IFormInputProps) => {
   
   return (
     <Row className='mb-3'>
       <Form.Group controlId={`${inputName}ValidationFormik`} className={input}>
-        <Form.Label className={input__label}>{label}</Form.Label>
+        <Form.Label className={inputLabel}>{label}</Form.Label>
         <InputGroup hasValidation>
           <Form.Control
-            className={input__control}
+            className={inputControl}
             type={type}
             placeholder={placeholder}
             name={inputName}
             value={value}
-            onChange={handleChange}
+            onChange={onChange}
             onBlur={handleBlur}
             isInvalid={!!(error && touched)}
           />
           <Form.Control.Feedback 
             type='invalid'
-            className={input__feedback}
+            className={inputFeedback}
           >
             {error}
           </Form.Control.Feedback>

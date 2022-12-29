@@ -12,12 +12,12 @@ import { SIGN_UP_ROUTE } from '../../../../utils/const/route';
 
 const {
   form,
-  form__title,
-  form__submit,
-  form__link
+  formTitle,
+  formSubmit,
+  formLink
 } = styles;
 
-type LoginFormData = {
+interface ILoginFormData {
   login: string,
   password: string,
 }
@@ -33,7 +33,7 @@ const schema = yup.object().shape({
 
 const FormSignIn = () => {
   
-  const handleSubmit = (data: LoginFormData) => {
+  const handleSubmit = (data: ILoginFormData) => {
     alert(JSON.stringify(data));
   }
   
@@ -60,14 +60,14 @@ const FormSignIn = () => {
             onSubmit={handleSubmit}
             className={form}
           >
-          <h2 className={form__title}>Log In</h2>
+          <h2 className={formTitle}>Log In</h2>
             <FormInput
               label='Username'
               placeholder='Your username'
               inputName='login'
               type='text'
               value={values.login}
-              handleChange={handleChange}
+              onChange={handleChange}
               handleBlur={handleBlur}
               error={errors.login}
               touched={touched.login}
@@ -78,19 +78,19 @@ const FormSignIn = () => {
               inputName='password'
               type='password'
               value={values.password}
-              handleChange={handleChange}
+              onChange={handleChange}
               handleBlur={handleBlur}
               error={errors.password}
               touched={touched.password}
             />
             <Row className='pt-3'>
               <Stack direction='horizontal' gap={3}>
-                <Button type='submit' className={form__submit}>
+                <Button type='submit' className={formSubmit}>
                   Log In
                 </Button>
                 <Link 
                   to={SIGN_UP_ROUTE} 
-                  className={`ms-auto ${form__link}`}
+                  className={`ms-auto ${formLink}`}
                 >
                   Register
                 </Link>
