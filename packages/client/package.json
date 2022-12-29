@@ -35,6 +35,9 @@
     "jest-environment-jsdom": "^29.0.1",
     "lefthook": "^1.1.1",
     "prettier": "^2.7.1",
+    "react-data-table-component": "^7.5.3",
+    "sass": "^1.57.1",
+    "styled-components": "^5.3.6",
     "ts-jest": "^28.0.8",
     "typescript": "^4.8.2",
     "vite": "^3.0.7"
