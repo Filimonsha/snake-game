@@ -1,11 +1,12 @@
 import { Provider } from 'react-redux'
 import { store } from '../store/store'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { FORUM_ROUTE, MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_OUT_ROUTE } from '../utils/const/route'
+import { FORUMS_ROUTE, FORUM_ROUTE, MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_OUT_ROUTE } from '../utils/const/route'
 import { Main } from '../pages/main'
 import { SignIn } from '../pages/sign-in'
 import { SignUp } from '../pages/sign-up'
-import { Forum } from '../pages/forum'
+import { ForumPick } from '../pages/forum/forum-pick'
+import { ForumChat } from '../pages/forum/forum-chat'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
@@ -34,7 +35,8 @@ function App() {
           <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
           <Route path={SIGN_OUT_ROUTE} element={<SignUp />} />
           <Route path={MAIN_ROUTE} element={<RequireAuth><Main /></RequireAuth>} />
-          <Route path={FORUM_ROUTE} element={<Forum />} />
+          <Route path={FORUMS_ROUTE} element={<ForumPick/>} />
+			    <Route path={FORUM_ROUTE} element={<ForumChat/>}/>
         </Routes>
       </BrowserRouter>
     </Provider>

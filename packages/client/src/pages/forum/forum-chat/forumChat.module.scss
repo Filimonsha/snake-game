@@ -1,0 +1,49 @@
+@import '../globals.scss';
+
+.forum, .forum * {
+	margin: 0;
+	box-sizing: border-box;
+	word-break: break-all;
+}
+
+.forum {
+    width: min(900px, 100%);
+	padding: 10px;
+	// display: flex;
+    // flex-direction: column;
+	margin-inline: auto;
+	font-size: min(4vw, 17px);
+}
+
+.header {
+	width: 100%;
+	font-size: clamp(7px, 2.4vw, 15px);
+	height: min(110px, 21vw);
+	background-color: $containerColor;
+	padding: 10px;
+}
+
+.headerContent {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
+}
+
+.main {
+	flex-grow: 1;
+	margin-block: 25px;
+	background-color: lighten($containerColor, 4);
+	padding: 10px;
+
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+}
+
+.footer {
+	margin-top: auto;
+	height: 50px;
+	background-color: $innerColor;
+}
