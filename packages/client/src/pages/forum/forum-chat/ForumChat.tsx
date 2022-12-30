@@ -1,4 +1,4 @@
-import {useEffect, useState, useRef, LegacyRef} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import styles from './forumChat.module.scss';
 import UserCard from './modules/user-card/userCard';
 
