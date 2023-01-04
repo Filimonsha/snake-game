@@ -1,11 +1,10 @@
 import React from 'react'
 import styles from './leaderBoardAvatar.module.scss'
-import { IDataRow } from '../../LeaderBoard'
-import { AVATAR_PLACEHOLDER } from '../../../../../../utils/const/const'
+import { AVATAR_PLACEHOLDER } from './constants'
 
-const LeaderBoardAvatar: React.FC<IDataRow> = (props: IDataRow) => {
+const LeaderBoardAvatar: React.FC<{ avatar: string }> = ({ avatar }): JSX.Element => {
   return(
-    <img className={styles.table_img} src={props.avatar || AVATAR_PLACEHOLDER} />
+    <img className={styles.table_img} src={avatar || AVATAR_PLACEHOLDER} />
   )
 }
 

@@ -3,14 +3,8 @@ import styles from './topPlayerCard.module.scss'
 import Card from 'react-bootstrap/Card'
 import { IData } from '../../LeaderBoard'
 
-const TopPlayerCard: React.FC<IData> = (props: IData) => {
-  const {
-    id,
-    avatar,
-    user,
-    score
-  } = props;
-
+const TopPlayerCard: React.FC<IData> = ({ id, avatar, user, score }) => {
+  
   return (
     <Card className={styles.card} key={id}>
       <Card.Img className={styles.card_img} src={avatar} />

@@ -6,7 +6,7 @@ import dummyData from './dummy.json'
 import { TopPlayerCard } from './components/TopPlayerCard'
 import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
 
-export interface IDataRow {
+interface IDataRow {
   rank: number;
   avatar: string;
   user: string;
@@ -28,7 +28,7 @@ const LeaderBoard: React.FC = () => {
     },
     {
       name: 'Avatar',
-      cell: (row) => <LeaderBoardAvatar {...row}/>,
+      cell: row => <LeaderBoardAvatar avatar={row.avatar}/>,
       sortable: false,
     },
     {
