@@ -17,6 +17,21 @@ const {
   formLink
 } = styles;
 
+const inputData = [
+  {
+    label: 'Username',
+    placeholder: 'Your username',
+    inputName: 'login',
+    type: 'text',
+  },
+  {
+    label: 'Password',
+    placeholder: '∙∙∙∙∙∙∙∙',
+    inputName: 'password',
+    type: 'password',
+  },
+];
+
 interface ILoginFormData {
   login: string,
   password: string,
@@ -61,28 +76,26 @@ const FormSignIn = () => {
             className={form}
           >
           <h2 className={formTitle}>Log In</h2>
-            <FormInput
-              label='Username'
-              placeholder='Your username'
-              inputName='login'
-              type='text'
-              value={values.login}
-              onChange={handleChange}
-              handleBlur={handleBlur}
-              error={errors.login}
-              touched={touched.login}
-            />
-            <FormInput
-              label='Password'
-              placeholder='∙∙∙∙∙∙∙∙'
-              inputName='password'
-              type='password'
-              value={values.password}
-              onChange={handleChange}
-              handleBlur={handleBlur}
-              error={errors.password}
-              touched={touched.password}
-            />
+          { 
+            inputData.map(({ label, placeholder, inputName, type }) => {
+              const value = values[inputName as keyof typeof values] || '';
+              const error = errors[inputName as keyof typeof values] || undefined;
+              const touchedInput = touched[inputName as keyof typeof values] || undefined;
+              
+              return <FormInput
+                  key={inputName}
+                  label={label}
+                  placeholder={placeholder}
+                  inputName={inputName}
+                  type={type}
+                  value={value}
+                  error={error}
+                  touched={touchedInput}
+                  onChange={handleChange}
+                  handleBlur={handleBlur}
+                />
+              })
+            }
             <Row className='pt-3'>
               <Stack direction='horizontal' gap={3}>
                 <Button type='submit' className={formSubmit}>
