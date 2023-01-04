@@ -1,10 +1,10 @@
-import React from 'react'
+import { MainSlide } from './modules/main-slide';
 
 const Main = () => {
   return (
-    <div>
-      Главная страница игры
-    </div>
+    <>
+      <MainSlide />
+    </>
   )
 }
 
