@@ -4,23 +4,17 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
 interface Modal {
-  show: boolean;
+  isShown: boolean;
   handleClose: () => void;
   handleSave: () => void;
   handleDelete: () => void;
 }
 
-const AvatarModal: React.FC<Modal> = (props: Modal) => {
-  const {
-    show,
-    handleClose,
-    handleSave,
-    handleDelete
-  } = props;
+const AvatarModal: React.FC<Modal> = ({ isShown, handleClose, handleSave, handleDelete }) => {
 
   return(
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal isShown={isShown} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Set your avatar</Modal.Title>
         </Modal.Header>
@@ -33,7 +27,7 @@ const AvatarModal: React.FC<Modal> = (props: Modal) => {
               Delete avatar
             </Button>
           </div>
-          <div className={styles.button_group}>
+          <div className={styles.buttonGroup}>
             <Button variant="primary" onClick={handleSave}>
               Save
             </Button>

@@ -10,69 +10,33 @@
   min-height: 100vh;
   width: 50%;
   margin: auto;
+}
 
-  &__avatar {
-    width: 130px;
-    height: 130px;
-    border: none;
-    background-color: #efefef;
-    border-radius: 50%;
-    align-self: center;
+.formAvatar {
+  width: 130px;
+  height: 130px;
+  border: none;
+  background-color: #efefef;
+  border-radius: 50%;
+  align-self: center;
 
-    &:hover {
-      background-color: #000;
-      opacity: 0.5;
-      cursor: pointer;
-    }
-  }
-
-  &__body {
-    padding: 50px 0;
-  }
-
-  &__control {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    position: relative;
-
-    &:not(:last-of-type) {
-      border-bottom: 1px solid #EAEAEA;
-    }
-
-    & input {
-      border: none;
-      text-align: end;
-      background-color: transparent;
-      color: #999;
-
-      &:focus-visible {
-        outline: none;
-      }
-    }
-  }
-
-  &__footer {
-    display: flex;
-    justify-content: space-evenly;
-  }
-
-  &__error {
-    position: absolute;
-    left: 105%;
-    white-space: nowrap;
-    top: 20px;
-    margin: 0;
-    color: red;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 8px;
+  &:hover {
+    background-color: #000;
+    opacity: 0.5;
+    cursor: pointer;
   }
 }
 
-.avatar__img {
+.formBody {
+  padding: 50px 0;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.avatarImg {
   width: 130px;
   height: 130px;
   border-radius: 50%;

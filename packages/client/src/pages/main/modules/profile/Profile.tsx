@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import styles from './profile.module.scss'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
-import { Formik, Field, Form } from 'formik'
+import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import dummyData from './dummy.json'
 import { AvatarModal } from './components/AvatarModal'
+import { FormField } from './components/FormField'
 
-interface FormTypes {
+interface IFormValues {
   avatar: string;
   first_name: string;
   second_name: string;
@@ -18,47 +19,52 @@ interface FormTypes {
 }
 
 const Profile: React.FC = () => {
-  const initialValues: FormTypes = {
+  const [user, setUser] = useState<IFormValues>({
     avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
     first_name: '',
     second_name: '',
     login: '',
     email: '',
     phone: '',
-    password: '',
-  };
+    password: ''
+  })
+  const [isAvatarShown, setIsAvatarShown] = useState<boolean>(false);
+
+  const firstNameRule = /^[a-zA-Z ]{2,30}$/;
+  const secondNameRule = /^[a-zA-Z ]{2,30}$/;
+  const loginRule = /^[a-zA-Z0-9_-]{3,20}$/;
+  const phoneRule = /^(\(\d{2,}\) ((\d{4}-\d{4})|(9\d{4}-\d{4})))|(\d{2})((9\d{8})|(\d{8}))$/;
+  const passwordRule = /^(?=.*[0-9])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,40}$/;
   
   const validationSchema = () => {
     return Yup.object().shape({
       first_name: Yup.string()
-                  .matches(/^[a-zA-Z ]{2,30}$/, 'Invalid name')
+                  .matches(firstNameRule, 'Invalid name')
                   .required('Required'),
       second_name: Yup.string()
-                  .matches(/^[a-zA-Z ]{2,30}$/, 'Invalid surname')
+                  .matches(secondNameRule, 'Invalid surname')
                   .required('Required'),
       login: Yup.string()
-                  .matches(/^[a-zA-Z0-9_-]{3,20}$/, '3 to 20 symbols and no space')
+                  .matches(loginRule, '3 to 20 symbols and no space')
                   .required('Required'),
       email: Yup.string()
                   .email('Invalid email')
                   .required('Required'),
       phone: Yup.string()
-                  .matches(/^(\(\d{2,}\) ((\d{4}-\d{4})|(9\d{4}-\d{4})))|(\d{2})((9\d{8})|(\d{8}))$/, 'Invalid phone number')
+                  .matches(phoneRule, 'Invalid phone number')
                   .required('Required'),
       password: Yup.string()
-                  .matches(/^(?=.*[0-9])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,40}$/, '8 to 40 symbols, at least 1 number, at least one capital letter')
+                  .matches(passwordRule, '8 to 40 symbols, at least 1 number, at least one capital letter')
                   .required('Required'),
     });
   }
-  const [user, setUser] = useState<FormTypes>(initialValues)
-  const [showAvatar, setShowAvatar] = useState<boolean>(false);
 
   useEffect(() => {
     setUser(dummyData[0]);
   }, [user])
   
 
-  const handleSubmit = (data: FormTypes) => {
+  const handleSubmit = (data: IFormValues) => {
     console.log('submit', data)
   }
 
@@ -68,17 +74,17 @@ const Profile: React.FC = () => {
 
   const handleAvatarChange = () => {
     console.log('avatar change')
-    setShowAvatar(true)
+    setIsAvatarShown(true)
   }
 
   const handleAvatarClose = () => {
     console.log('cancel change avatar');
-    setShowAvatar(false);
+    setIsAvatarShown(false);
   }
 
   const handleAvatarSave = () => {
     console.log('save avatar');
-    setShowAvatar(false);
+    setIsAvatarShown(false);
   }
 
   const handleAvatarDelete = () => {
@@ -88,48 +94,67 @@ const Profile: React.FC = () => {
   return (
     <Container className={styles.container}>
       <Formik
-        initialValues={initialValues}
+        enableReinitialize={true}
+        initialValues={user}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors }) => (
+        {({ errors, values }) => (
           <Form className={styles.form}> 
-            <div className={styles.form__avatar} onClick={handleAvatarChange}>
-              <img src={user.avatar || initialValues.avatar} alt='avatar' className={styles.avatar__img}></img>
+            <div className={styles.formAvatar} onClick={handleAvatarChange}>
+              <img src={values.avatar || user.avatar} alt='avatar' className={styles.avatarImg}></img>
             </div>
-            <div className={styles.form__body}>
-              <div className={styles.form__control}>
-                <label htmlFor='first_name'>Name</label>
-                <Field name='first_name' type='text' value={user.first_name}/>
-                {errors.first_name ? <div className={styles.form__error}>{errors.first_name}</div> : null}
-              </div>
-              <div className={styles.form__control}>
-                <label htmlFor='second_name'>Second name</label>
-                <Field name='second_name' type='text' value={user.second_name}/>
-                {errors.second_name ? <div className={styles.form__error}>{errors.second_name}</div> : null}
-              </div>
-              <div className={styles.form__control}>
-                <label htmlFor='login'>Nickname</label>
-                <Field name='login' type='text' value={user.login}/>
-                {errors.login ? <div className={styles.form__error}>{errors.login}</div> : null}
-              </div>
-              <div className={styles.form__control}>
-                <label htmlFor='email'>Email</label>
-                <Field name='email' type='email' value={user.email}/>
-                {errors.email ? <div className={styles.form__error}>{errors.email}</div> : null}
-              </div>
-              <div className={styles.form__control}>
-                <label htmlFor='phone'>Phone</label>
-                <Field name='phone' type='phone' value={user.phone}/>
-                {errors.phone ? <div className={styles.form__error}>{errors.phone}</div> : null}
-              </div>
-              <div className={styles.form__control}>
-                <label htmlFor='password'>Password</label>
-                <Field name='password' type='password' value={user.password}/>
-                {errors.password ? <div className={styles.form__error}>{errors.password}</div> : null}
-              </div>
+            <div className={styles.formBody}>
+              <FormField 
+                id='first_name'
+                title='Name'
+                type='text'
+                name='first_name'
+                value={values.first_name}
+                error={errors.first_name}
+              />
+              <FormField 
+                id='second_name'
+                title='Second name'
+                type='text'
+                name='second_name'
+                value={values.second_name}
+                error={errors.second_name}
+              />
+              <FormField 
+                id='login'
+                title='Nickname'
+                type='text'
+                name='login'
+                value={values.login}
+                error={errors.login}
+              />
+              <FormField 
+                id='email'
+                title='Email'
+                type='email'
+                name='email'
+                value={values.email}
+                error={errors.email}
+              />
+              <FormField 
+                id='phone'
+                title='Phone'
+                type='phone'
+                name='phone'
+                value={values.phone}
+                error={errors.phone}
+              />
+              <FormField 
+                id='password'
+                title='Password'
+                type='password'
+                name='password'
+                value={values.password}
+                error={errors.password}
+              />
             </div>
-            <div className={styles.form__footer}>
+            <div className={styles.formFooter}>
               <Button className={styles.button} type='submit'>
                 Save
               </Button>
@@ -141,7 +166,7 @@ const Profile: React.FC = () => {
         )}
       </Formik>
 
-      <AvatarModal show={showAvatar} handleClose={handleAvatarClose} handleSave={handleAvatarSave} handleDelete={handleAvatarDelete} />
+      <AvatarModal isShown={isAvatarShown} handleClose={handleAvatarClose} handleSave={handleAvatarSave} handleDelete={handleAvatarDelete} />
     </Container>
   )
 }
