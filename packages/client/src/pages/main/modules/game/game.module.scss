@@ -1,0 +1,48 @@
+.snakeGame {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+
+  }
+
+  &__canvas {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    canvas {
+      &:nth-child(1) {
+        position: absolute;
+        z-index: 1;
+      }
+
+      &:nth-child(2) {
+        z-index: 0;
+      }
+    }
+  }
+
+  .score {
+    display: flex;
+    justify-content: center;
+
+    &__icon {
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    &__counter{
+      display: flex;
+      margin-right: 20px;
+      &_count {
+        margin-left: 15px;
+        font-size: 22px;
+        font-weight: bold;
+      }
+    }
+  }
+}
