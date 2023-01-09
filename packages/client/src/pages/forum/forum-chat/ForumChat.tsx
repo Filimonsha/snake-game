@@ -35,9 +35,7 @@ const ForumChat = () => {
           <UserCard isPostCard={true}/>
         </ul>
       </main>
-      <footer className={styles.footer}>
-
-      </footer>
+      <footer className={styles.footer}/>
     </div>
   )
 }
