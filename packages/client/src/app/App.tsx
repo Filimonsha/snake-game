@@ -7,7 +7,6 @@ import { SignIn } from '../pages/sign-in'
 import { SignUp } from '../pages/sign-up'
 import { ForumPick } from '../pages/forum/forum-pick'
 import { ForumChat } from '../pages/forum/forum-chat'
-import { Forum } from '../pages/forum'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
