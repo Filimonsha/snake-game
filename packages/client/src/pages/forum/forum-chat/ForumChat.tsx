@@ -5,9 +5,6 @@ import UserCard from './modules/user-card/userCard';
 const ForumChat = () => {
   useEffect(() => {
     document.title = "Форум";
-    if (!location.pathname.match(/forum\/\d/)) {
-      location.replace("/forums");
-    }
     //if (forumRef.current) forumRef.current.style.minHeight = window.innerHeight.toString() + "px";
     for (let i = 0; i < chatCount; i++) {
       setFakeArray((arr) => [...arr, i])
@@ -30,7 +27,7 @@ const ForumChat = () => {
         <ul>
           {
             fakeArray.length === 0 ? 
-              <p>Ни одного комментария ещё не было оставлено</p> : 
+              <p className={styles.noAnswers}>Ни одного комментария ещё не было оставлено</p> : 
               fakeArray.map((a) => {
                 return <UserCard isPostCard={false} key={a}/>
               })

@@ -1,1 +1,1 @@
-export { default as ForumPick } from './ForumPick'
+export { default as ForumPick }from "./ForumPick";

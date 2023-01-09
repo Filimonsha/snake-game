@@ -12,17 +12,17 @@ body {
 
 .forumList {
 	background-color: $containerColor;
-	padding-inline: 10px;
-	padding-block: 10px;
+	padding: $gap10;
+	margin-inline: auto;
+    width: min(900px, 100%);
 }
 
 .link:not(.link:last-child, .link:first-child) {
-	margin-block: 10px;
+	margin-block: $gap10;
 }
 
 .link {
 	display: block;
-	height: 50px;
 	background-color: $secondaryColor;
 
 	a {
@@ -30,8 +30,6 @@ body {
 		align-items: center;
 		height: 100%;
 		text-decoration: none;
-	}
-	p {
-		margin-left: 10px;
+		padding: $gap10;
 	}
 }

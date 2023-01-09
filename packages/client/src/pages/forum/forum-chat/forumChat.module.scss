@@ -8,7 +8,7 @@
 
 .forum {
     width: min(900px, 100%);
-	padding: 10px;
+	padding: $gap10;
 	// display: flex;
     // flex-direction: column;
 	margin-inline: auto;
@@ -20,7 +20,7 @@
 	font-size: clamp(7px, 2.4vw, 15px);
 	height: min(110px, 21vw);
 	background-color: $containerColor;
-	padding: 10px;
+	padding: $gap10;
 }
 
 .headerContent {
@@ -34,7 +34,7 @@
 	flex-grow: 1;
 	margin-block: 25px;
 	background-color: lighten($containerColor, 4);
-	padding: 10px;
+	padding: $gap10;
 
 	ul {
 		list-style: none;
@@ -46,4 +46,10 @@
 	margin-top: auto;
 	height: 50px;
 	background-color: $innerColor;
+}
+
+.noAnswers  {
+	padding-inline: $gap10;
+	padding-block: $gap10;
+	background-color: $cardColor;
 }

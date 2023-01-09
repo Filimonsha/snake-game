@@ -3,12 +3,12 @@
 .card {
 	display: grid;
 	grid-template-columns: max-content auto;
-	gap: 10px;
+	gap: $gap10;
 	grid-template-areas: 
 	"user answer";
 	border-radius: 5px;
 	border: 1px solid rgba(0, 0, 0, 0.1);
-	padding: 10px;
+	padding: $gap10;
 	margin-bottom: 20px;
 	background-color: $cardColor;
 
@@ -65,14 +65,14 @@ form.card {
 	align-items: center;
 	flex-direction: column;
 	background-color: $secondaryColor;
-	padding: 10px;
+	padding: $gap10;
 }
 
 .userAnswer {
 	background-color: $secondaryColor;
 	display: block;
 	grid-area: answer;
-	padding: 10px;
+	padding: $gap10;
 }
 
 textarea.userAnswer {
@@ -112,7 +112,7 @@ textarea.userAnswer:focus {
 	}
 	.userInfo {
 		flex-direction: row;
-		padding: 5px 10px;
+		padding: 5px $gap10;
 	}
 	.userName {
 		flex-grow: 1;

@@ -15,18 +15,20 @@ const ForumPick = () => {
   const cardsCount = 5;
   
   return (
-    <div className={styles.forumList}>
-			{fakeArray.map((a) => {
-				return (
-          <div className={styles.link }key={a}>
-            <Link to={"/forum/" + a.toString()}>
-              <p>
-                Тема форума
-              </p>
-            </Link>
-          </div>
-        )
-			})}
+    <div className={styles.forumListContainer}>
+      <div className={styles.forumList}>
+        {fakeArray.map((a) => {
+          return (
+            <div className={styles.link }key={a}>
+              <Link to={a.toString()}>
+                <p>
+                  Тема форума
+                </p>
+              </Link>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
