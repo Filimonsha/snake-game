@@ -3,14 +3,14 @@ import styles from './avatarModal.module.scss'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 
-interface Modal {
+interface IProps {
   isShown: boolean;
   handleClose: () => void;
   handleSave: () => void;
   handleDelete: () => void;
 }
 
-const AvatarModal: React.FC<Modal> = ({ isShown, handleClose, handleSave, handleDelete }) => {
+const AvatarModal: React.FC<IProps> = ({ isShown, handleClose, handleSave, handleDelete }) => {
 
   return(
     <>

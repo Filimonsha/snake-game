@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './formField.module.scss'
 import { Field } from 'formik'
 
-interface IFieldValues {
+interface IProps {
   id: string;
   title: string;
   type: string;
@@ -11,7 +11,7 @@ interface IFieldValues {
   error: string | undefined;
 }
 
-const FormField: React.FC<IFieldValues> = ({ id, title, type, name, value, error }) => {
+const FormField: React.FC<IProps> = ({ id, title, type, name, value, error }) => {
   return(
     <div className={styles.formControl}>
       <label htmlFor={name}>{title}</label>

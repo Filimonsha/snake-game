@@ -3,10 +3,11 @@ import styles from './profile.module.scss'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import { Formik, Form } from 'formik'
-import * as Yup from 'yup'
 import dummyData from './dummy.json'
 import { AvatarModal } from './components/AvatarModal'
 import { FormField } from './components/FormField'
+import { validationSchema } from './validation'
+import { DEFAULT_USER_DATA } from './constants'
 
 interface IFormValues {
   avatar: string;
@@ -19,49 +20,12 @@ interface IFormValues {
 }
 
 const Profile: React.FC = () => {
-  const [user, setUser] = useState<IFormValues>({
-    avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
-    first_name: '',
-    second_name: '',
-    login: '',
-    email: '',
-    phone: '',
-    password: ''
-  })
+  const [user, setUser] = useState<IFormValues>(DEFAULT_USER_DATA)
   const [isAvatarShown, setIsAvatarShown] = useState<boolean>(false);
-
-  const firstNameRule = /^[a-zA-Z ]{2,30}$/;
-  const secondNameRule = /^[a-zA-Z ]{2,30}$/;
-  const loginRule = /^[a-zA-Z0-9_-]{3,20}$/;
-  const phoneRule = /^(\(\d{2,}\) ((\d{4}-\d{4})|(9\d{4}-\d{4})))|(\d{2})((9\d{8})|(\d{8}))$/;
-  const passwordRule = /^(?=.*[0-9])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,40}$/;
-  
-  const validationSchema = () => {
-    return Yup.object().shape({
-      first_name: Yup.string()
-                  .matches(firstNameRule, 'Invalid name')
-                  .required('Required'),
-      second_name: Yup.string()
-                  .matches(secondNameRule, 'Invalid surname')
-                  .required('Required'),
-      login: Yup.string()
-                  .matches(loginRule, '3 to 20 symbols and no space')
-                  .required('Required'),
-      email: Yup.string()
-                  .email('Invalid email')
-                  .required('Required'),
-      phone: Yup.string()
-                  .matches(phoneRule, 'Invalid phone number')
-                  .required('Required'),
-      password: Yup.string()
-                  .matches(passwordRule, '8 to 40 symbols, at least 1 number, at least one capital letter')
-                  .required('Required'),
-    });
-  }
 
   useEffect(() => {
     setUser(dummyData[0]);
-  }, [user])
+  }, [])
   
 
   const handleSubmit = (data: IFormValues) => {
