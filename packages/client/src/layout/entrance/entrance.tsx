@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './entrance.module.scss';
 import logoUrl from '../../assets/img/logo.svg';
 import { Link } from 'react-router-dom';
@@ -10,11 +11,7 @@ const {
   entranceContainer
 } = styles;
 
-interface IEntranceLayout {
-  children: React.ReactNode,
-}
-
-const EntranceLayout = (props: IEntranceLayout) => {
+const EntranceLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <div className={entrance}>
       <header className={entranceHeader}>
@@ -29,7 +26,7 @@ const EntranceLayout = (props: IEntranceLayout) => {
       </header>
       <main className={entranceMain}>
         <div className={entranceContainer}>
-          { props.children }
+          { children }
         </div>
       </main>
     </div>
