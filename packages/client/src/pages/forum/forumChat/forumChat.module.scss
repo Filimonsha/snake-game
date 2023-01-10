@@ -6,13 +6,22 @@
 	word-break: break-all;
 }
 
+.forumWrapper {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
 .forum {
+	display: flex;
+	flex-direction: column;
     width: min(900px, 100%);
 	padding: $gap10;
 	// display: flex;
     // flex-direction: column;
 	margin-inline: auto;
 	font-size: min(4vw, 17px);
+	min-height: 100%;
 }
 
 .header {
@@ -43,7 +52,6 @@
 }
 
 .footer {
-	margin-top: auto;
 	height: 50px;
 	background-color: $innerColor;
 }
@@ -51,5 +59,7 @@
 .noAnswers  {
 	padding-inline: $gap10;
 	padding-block: $gap10;
+	margin-bottom: $gap10;
 	background-color: $cardColor;
+	border-radius: 5px;
 }

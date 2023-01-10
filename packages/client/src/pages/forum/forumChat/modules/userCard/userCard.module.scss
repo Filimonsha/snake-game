@@ -2,7 +2,7 @@
 
 .card {
 	display: grid;
-	grid-template-columns: max-content auto;
+	grid-template-columns: min-content auto;
 	gap: $gap10;
 	grid-template-areas: 
 	"user answer";
@@ -29,19 +29,8 @@ form.card {
 }
 
 .submitButton {
-	background: darken($secondaryColor, 7);
-	font-size: min(3vw, 15px);
-	outline: none;
-	border: none;
-	border-radius: 5px;
-	justify-self: center;
-	height: 30px;
-	width: max(20%, 120px);
+	@extend %button;
 	grid-area: button;
-}
-
-.submitButton:focus {
-	border: 1px solid rgba(0, 0, 0, 0.6);
 }
 
 .avatar {
@@ -76,15 +65,7 @@ form.card {
 }
 
 textarea.userAnswer {
-	border: none;
-	outline: none;
-	resize: none;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	border-radius: 5px;
-}
-
-textarea.userAnswer:focus {
-	outline: 1px solid rgba(0, 0, 0, 0.548);
+	@extend %textArea;
 }
 
 .comment {

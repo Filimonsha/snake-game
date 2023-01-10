@@ -1,8 +1,9 @@
 import styles from './userCard.module.scss';
 import img from './download.jpg';
+import React, {useState} from 'react';
 
 const UserCard: ({ isPostCard }: { isPostCard: boolean }) => JSX.Element = ({isPostCard = false}) => {
-  const userName = "Пользователь"
+  const userName = "User"
   const comment = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam enim totam vero necessitatibus ipsa quis. Doloribus ab quas at. 
   Magni cumque quaerat temporibus eligendi fugiat dignissimos atque similique nesciunt inventore.
   Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
@@ -11,8 +12,13 @@ const UserCard: ({ isPostCard }: { isPostCard: boolean }) => JSX.Element = ({isP
   Ex facere placeat iste obcaecati incidunt porro magnam explicabo atque quasi.`
   const submitFunc = function (e: React.SyntheticEvent) {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    formData.get("text") ? alert("Ваш комментарий: " + formData.get("text")) : alert("Введите комментарий");
+    textState ? alert("Your comment is: " + textState) : alert("Enter a comment");
+    setTextState("")
+  }
+
+  const [textState, setTextState] = useState<string>("");
+  function changeEvent(e: React.ChangeEvent) {
+    setTextState((e.target as HTMLTextAreaElement).value)
   }
 
   return (
@@ -21,18 +27,10 @@ const UserCard: ({ isPostCard }: { isPostCard: boolean }) => JSX.Element = ({isP
       <form className={styles.card} onSubmit={submitFunc}>
         <div className={styles.userInfo}>
           <img className={styles.avatar} src={img}/>
-          <h2 className={styles.userName}>Вы</h2>
+          <h2 className={styles.userName}>You</h2>
         </div>
-        {
-          isPostCard ?
-          <textarea className={styles.userAnswer} name="text" placeholder="Ваш комментарий"/> :
-          <div className={styles.userAnswer}>
-            <p className={styles.comment}>
-              {comment}
-            </p>
-          </div>
-        }
-        <button className={styles.submitButton}type='submit'>Подтвердить</button>
+        <textarea value={textState} onChange={changeEvent} className={styles.userAnswer} name="text" placeholder="Your comment"/>
+        <button className={styles.submitButton}type='submit'>Submit</button>
       </form>
     </li> :
     <li className={styles.card}>
@@ -40,15 +38,11 @@ const UserCard: ({ isPostCard }: { isPostCard: boolean }) => JSX.Element = ({isP
         <img className={styles.avatar} src={img}/>
         <h2 className={styles.userName}>{userName}</h2>
       </div>
-      {
-        isPostCard ?
-        <textarea className={styles.userAnswer} placeholder="Ваш комментарий"/> :
-        <div className={styles.userAnswer}>
-          <p className={styles.comment}>
-            {comment}
-          </p>
-        </div>
-      }
+      <div className={styles.userAnswer}>
+        <p className={styles.comment}>
+          {comment}
+        </p>
+      </div>
     </li>
   )
 }

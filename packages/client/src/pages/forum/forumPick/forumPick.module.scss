@@ -40,15 +40,12 @@ body {
 	}
 
 	.linkClass.add {
-		height: 30px;
+		cursor: pointer;
 		position: relative;
 		p {
-			transform: translateX(-100%);
-			left: 50%;
 			font-weight: bold;
-			position: absolute;
-			font-size: 25px;
 			pointer-events: none;
+			margin-inline: auto;
 		}
 	}
 }
@@ -72,19 +69,16 @@ body {
 	grid-template-columns: repeat(2, 1fr);
 	display: grid;
 
-	& button {
-		margin-inline: min(40px, 4vw);
-		margin-block: 25px;
-	}
-
 	.add {
 		grid-row-start: 3;
 		grid-column-start: 1;
+		@extend %button;
 	}
 
 	.cancel {
 		grid-row-start: 3;
 		grid-column-start: 2;
+		@extend %button;
 	}
 
 	.textBlock {
@@ -92,6 +86,7 @@ body {
 		grid-column-start: 1;
 		grid-column-end: 3;
 		margin-inline: 20px;
+		@extend %textArea;
 	}
 
 	.title {
