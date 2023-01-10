@@ -1,0 +1,47 @@
+.container {
+  height: 100vh;
+  width: 70vw;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  width: 50%;
+  margin: auto;
+}
+
+.formAvatar {
+  width: 130px;
+  height: 130px;
+  border: none;
+  background-color: #efefef;
+  border-radius: 50%;
+  align-self: center;
+
+  &:hover {
+    background-color: #000;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}
+
+.formBody {
+  padding: 50px 0;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.avatarImg {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+}
+
+.button {
+  width: 100px;
+}
