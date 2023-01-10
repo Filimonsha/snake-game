@@ -25,14 +25,17 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^28.1.8",
     "@types/react": "^18.0.17",
+    "@types/react-bootstrap": "^0.32.32",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
     "@vitejs/plugin-react": "^2.0.1",
     "eslint": "^8.23.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^28",
     "jest-environment-jsdom": "^29.0.1",
     "lefthook": "^1.1.1",
