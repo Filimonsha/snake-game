@@ -1,6 +1,6 @@
 import { SIGN_UP_ROUTE } from '../../../../utils/const/route';
 
-export const inputsData = [
+export const INPUTS_DATA = [
   {
     label: 'Username',
     placeholder: 'Your username',
@@ -15,12 +15,12 @@ export const inputsData = [
   },
 ];
 
-export const initialValues = {
+export const INITIAL_VALUES = {
   login: '',
   password: '',
 }
 
-export const formData = {
+export const FORM_DATA = {
   title: 'Log In',
   linkText: 'Register',
   route: SIGN_UP_ROUTE,

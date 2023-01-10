@@ -2,7 +2,7 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import { Pattern } from '../../../../utils/const/validation';
 import { EntranceForm } from '../../../../modules/entranceForm';
-import { inputsData, formData, initialValues } from './data';
+import { INPUTS_DATA, FORM_DATA, INITIAL_VALUES } from './data';
 
 
 interface ILoginFormData {
@@ -29,10 +29,10 @@ const FormSignIn = () => {
     <Formik
       validationSchema={schema}
       onSubmit={handleSubmit}
-      initialValues={initialValues}
+      initialValues={INITIAL_VALUES}
     >
       {
-        ({ 
+        ({
           handleSubmit,
           handleChange,
           handleBlur,
@@ -47,8 +47,8 @@ const FormSignIn = () => {
             values={values}
             errors={errors}
             touched={touched}
-            inputsData={inputsData}
-            formData={formData}
+            inputsData={INPUTS_DATA}
+            formData={FORM_DATA}
           />
         )
       }
