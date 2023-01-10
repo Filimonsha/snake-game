@@ -9,6 +9,7 @@ interface IInput {
 
 interface IFormData {
   title: string,
+  buttonText: string,
   linkText: string,
   route: string,
 }

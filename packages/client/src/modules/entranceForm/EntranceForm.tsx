@@ -79,7 +79,7 @@ const EntranceForm: React.FC<TForm> = ({
     <Row className='pt-3'>
       <Stack direction='horizontal' gap={3}>
         <Button type='submit' className={formSubmit}>
-          Log In
+          {formData.buttonText}
         </Button>
         <Link 
           to={formData.route} 
