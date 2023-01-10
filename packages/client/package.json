@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "jest ./"
+    "test": "jest ./ --passWithNoTests"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
@@ -22,7 +22,6 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.0",
-    "sass": "^1.57.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

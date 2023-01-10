@@ -1,0 +1,35 @@
+.formControl {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  position: relative;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid #EAEAEA;
+  }
+
+  & input {
+    border: none;
+    text-align: end;
+    background-color: transparent;
+    color: #999;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+}
+
+.formError {
+  position: absolute;
+  left: 105%;
+  white-space: nowrap;
+  top: 20px;
+  margin: 0;
+  color: red;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 8px;
+}

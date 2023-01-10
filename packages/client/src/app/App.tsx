@@ -1,12 +1,13 @@
 import { Provider } from 'react-redux'
 import { store } from '../store/store'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { FORUM_ROUTE, MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE, LEADERBOARD_ROUTE } from '../utils/const/route'
+import { FORUM_ROUTE, MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE, LEADERBOARD_ROUTE, PROFILE_ROUTE } from '../utils/const/route'
 import { Main } from '../pages/main'
 import { SignIn } from '../pages/signIn'
 import { SignUp } from '../pages/signUp'
 import { Forum } from '../pages/forum'
-import { LeaderBoard } from '../pages/main/modules/leader-board'
+import { LeaderBoard } from '../pages/main/modules/leaderBoard'
+import { Profile } from '../pages/main/modules/profile'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
@@ -37,6 +38,7 @@ function App() {
           <Route path={MAIN_ROUTE} element={<RequireAuth><Main /></RequireAuth>} />
           <Route path={FORUM_ROUTE} element={<Forum />} />
           <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
+          <Route path={PROFILE_ROUTE} element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </Provider>
