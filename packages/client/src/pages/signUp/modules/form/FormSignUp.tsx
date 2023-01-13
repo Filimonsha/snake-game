@@ -8,15 +8,20 @@ import {
 } from './data';
 
 
-interface ILoginFormData {
+interface ISignUpFormData {
   login: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  phone: string,
   password: string,
+  passwordRepeat?: string,
 }
 
-const FormSignIn = () => {
+const FormSignUp = () => {
   
-  const handleSubmit = (data: ILoginFormData) => {
-    alert(JSON.stringify(data));
+  const handleSubmit = (data: ISignUpFormData) => {
+    delete data.passwordRepeat;
   }
   
   return (
@@ -50,4 +55,4 @@ const FormSignIn = () => {
   );
 }
 
-export default FormSignIn;
+export default FormSignUp;

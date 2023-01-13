@@ -1,11 +1,12 @@
-import React from 'react'
+import { FormSignUp } from './modules/form';
+import { EntranceLayout } from '../../layout/entrance';
 
 const SignUp = () => {
   return (
-    <div>
-      Registration
-    </div>
+    <EntranceLayout>
+      <FormSignUp />
+    </EntranceLayout>
   )
 }
 
-export default SignUp
+export default SignUp;
