@@ -1,10 +1,8 @@
-import { MainSlide } from './modules/main-slide';
+import { MainSlide } from './modules/mainSlide';
 
 const Main = () => {
   return (
-    <>
-      <MainSlide />
-    </>
+    <MainSlide />
   )
 }
 
