@@ -22,7 +22,6 @@ const FormSignUp = () => {
   
   const handleSubmit = (data: ISignUpFormData) => {
     delete data.passwordRepeat;
-    alert(JSON.stringify(data));
   }
   
   return (
