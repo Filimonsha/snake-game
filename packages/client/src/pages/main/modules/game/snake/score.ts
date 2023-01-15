@@ -36,6 +36,6 @@ export default class Score {
   }
 
   private fnUpdateScore() {
-    if (this.fnUpdate) this.fnUpdate(this.score)
+    this.fnUpdate?.(this.score)
   }
 }

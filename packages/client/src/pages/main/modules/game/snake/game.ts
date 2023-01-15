@@ -41,6 +41,4 @@ export default class Game {
     // отрисовка змейки
     this.snake.draw()
   }
-
-
 }

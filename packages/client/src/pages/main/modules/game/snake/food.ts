@@ -27,8 +27,8 @@ export default class Food {
     // очистка позиции еды
     if (this.food) this.canvas.clearRect(x, y, w, h)
 
-    this.x = Math.floor(Math.random() * this.config.gridColsRows + 1) * this.config.gridCellWidth
-    this.y = Math.floor(Math.random() * this.config.gridColsRows + 1) * this.config.gridCellWidth
+    this.x = this.randomPosition()
+    this.y = this.randomPosition()
     this.food = this.config.foodsList[Object.keys(this.config.foodsList)[Math.floor(Math.random() * Object.keys(this.config.foodsList).length)]]
   }
 
@@ -36,11 +36,17 @@ export default class Food {
     const { x, y, w, h } = this.getPosition()
 
     const img = new Image()
-    img.src = this.food as string
 
-    img.onload = () => {
-      this.canvas.drawImage(img as HTMLImageElement, x, y, w, h)
+    if (this.food) {
+      img.src = this.food
+      img.onload = () => {
+        this.canvas.drawImage(img as HTMLImageElement, x, y, w, h)
+      }
     }
+  }
+
+  private randomPosition() {
+    return Math.floor(Math.random() * this.config.gridColsRows + 1) * this.config.gridCellWidth
   }
 
   private getPosition() {

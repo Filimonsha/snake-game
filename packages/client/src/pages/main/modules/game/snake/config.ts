@@ -28,7 +28,7 @@ class Config {
   }
 }
 
-const pathMedia = 'snake-game/'
+const pathMedia = 'snakeGame/'
 
 const getBase64FromUrl = async (url: string) => {
   const data = await fetch(url)

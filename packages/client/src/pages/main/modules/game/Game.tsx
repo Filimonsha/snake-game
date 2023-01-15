@@ -1,39 +1,39 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { GameSnake } from './snake'
-import styles from './game.module.scss'
+import gameStyles from './game.module.scss'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
   const [score, setScore] = useState<number>(0)
 
   useEffect(() => {
-    if(blockCanvasGame){
+    if(blockCanvasGame.current){
       const game = new GameSnake(blockCanvasGame.current as HTMLDivElement)
       game.score.setFnUpdateScore(setScore)
     }
   }, [])
 
   return (
-    <Container className={`d-flex justify-content-center flex-column pt-5`}>
-      <div className={styles.snakeGame}>
-        <div className={styles.snakeGame__header}>
-          <div className={styles.score}>
-            <div className={styles.score__counter}>
-              <div className={styles.score__icon}>
-                <img src='snake-game/coin.svg' alt='' />
+    <Container className={gameStyles.snakeGameWrap}>
+      <div className={gameStyles.snakeGame}>
+        <div className={gameStyles.snakeGameHeader}>
+          <div className={gameStyles.score}>
+            <div className={gameStyles.scoreCounter}>
+              <div className={gameStyles.scoreIcon}>
+                <img src='snakeGame/coin.svg' alt='coin' />
               </div>
-              <div className={styles.score__counter_count}>{score}</div>
+              <div className={gameStyles.scoreCounterCount}>{score}</div>
             </div>
-            <div className={styles.score__counter}>
-              <div className={styles.score__icon}>
-                <img src='snake-game/cup.svg' alt='' />
+            <div className={gameStyles.scoreCounter}>
+              <div className={gameStyles.scoreIcon}>
+                <img src='snakeGame/cup.svg' alt='cup' />
               </div>
-              <div className={styles.score__counter_count}>9999</div>
+              <div className={gameStyles.scoreCounterCount}>9999</div>
             </div>
           </div>
         </div>
-        <div ref={blockCanvasGame} className={styles.snakeGame__canvas}></div>
+        <div ref={blockCanvasGame} className={gameStyles.snakeGameCanvas}></div>
       </div>
     </Container>
   )

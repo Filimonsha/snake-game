@@ -14,7 +14,7 @@ import { SignIn } from '../pages/sign-in'
 import { SignUp } from '../pages/sign-up'
 import { Forum } from '../pages/forum'
 import { LeaderBoard } from '../pages/main/modules/leader-board'
-import Game from '../pages/main/modules/game/Game'
+import { Game } from '../pages/main/modules/game'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,

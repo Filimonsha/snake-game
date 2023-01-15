@@ -18,13 +18,14 @@ export default class Snake {
     this.canvas = canvas
     this.config = Config
 
-    this.x = this.config.gridCellWidth
-    this.y = 0
+    this.x = 0
+    this.y = -this.config.gridCellWidth
 
+    // Начальная позиция змеи
     this.snake = [
       {
-        x: 1 * this.config.gridCellWidth,
-        y: 1 * this.config.gridCellWidth,
+        x: 7 * this.config.gridCellWidth,
+        y: 12 * this.config.gridCellWidth,
         view: 'red'
       }
     ]
