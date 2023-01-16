@@ -1,0 +1,44 @@
+@import '../../globals.scss';
+@import './modal.scss';
+
+body {
+	margin: 0;
+}
+
+.forumList, .forumList * {
+	margin: 0;
+	box-sizing: border-box;
+	word-break: break-all;
+}
+
+.forumList {
+	background-color: $containerColor;
+	padding: $gap10;
+	margin-inline: auto;
+    width: min(900px, 100%);
+}
+
+.link:not(.link:last-child) {
+	margin-bottom: $gap10;
+}
+
+.noChats {
+	margin-bottom: $gap10;
+	display: block;
+}
+
+.link {
+	display: flex;
+	padding: $gap10;
+	background-color: $secondaryColor;
+	border-radius: 10px;
+	text-decoration: none;
+	cursor: pointer;
+	position: relative;
+
+	.addLabel {
+		font-weight: bold;
+		pointer-events: none;
+		margin-inline: auto;
+	}
+}

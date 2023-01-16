@@ -1,90 +1,72 @@
 import React, {useEffect, useRef, useState} from 'react';
-import styles from './forumPick.module.scss';
+import styles from './scss/forumPick.module.scss';
 import { Link } from 'react-router-dom';
+import { MOCK_ARRAY } from './mockList'
+
+interface IForumList {id: string, title: string}
+
 const ForumPick = () => {
 
-  useEffect(() => {
-    document.title="Форум"
-  }, [])
-
-  const modalRef = useRef<HTMLDivElement>(null);
   const [textState, setTextState] = useState<string>("");
+  const [isHidden, setIsHidden] = useState<boolean>(true);
+  const [forumList, setForumList] = useState<IForumList[]>([]);
 
-  function addEvent() {
-    const modal = modalRef.current;
-    if (!modal) return
-    modal.style.display = "flex"
+  function showModalEvent() {
+    setIsHidden(false)
   }
   
   function submitEvent(e: React.SyntheticEvent) {
     e.preventDefault();
-    if (!modalRef.current) return
     if (!textState) {
       alert("Enter the title")
       return
     }
     alert(`Forum with the title "${textState}" was created`)
-    setFakeArray((arr) => [...arr, {title: textState, id: Math.random().toString()}])
-    modalRef.current.style.display = "none"
+    setIsHidden(true)
     setTextState("")
   }
-
+  
   function cancelEvent() {
-    if (!modalRef.current) return
-    modalRef.current.style.display = "none"
+    setIsHidden(true)
     setTextState("")
   }
 
-  function changeEvent(e: React.ChangeEvent) {
-    setTextState((e.target as HTMLTextAreaElement).value)
+  function changeEvent(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setTextState(e.target.value)
   }
 
-  const [fakeArray, setFakeArray] = useState([
-    {
-      title: "Forum title",
-      id: "gdf4"
-    },
-    {
-      title: "Forum title",
-      id: "hf2n"
-    },
-    {
-      title: "Forum title",
-      id: "g8lolk"
-    }
-  ])
+  useEffect(() => {
+    document.title="Форум"
+    setForumList(MOCK_ARRAY)
+  }, [])
 
   return (
     <div className={styles.forumListContainer}>
-      <div className={styles.modalWrapper} ref={modalRef}>
+      <div className={styles.modalWrapper} style={{display: isHidden ? "none" : "flex"}}>
         <form className={styles.modal}>
           <h2 className={styles.title}>Enter forum's title</h2>
-          <textarea value={textState} onChange={changeEvent} className={styles.textBlock} name="forumName"></textarea>
+          <textarea value={textState} onChange={changeEvent} className={styles.textBlock} name="forumName" placeholder="Forum's title"></textarea>
           <button type="submit" className={styles.add} onClick={submitEvent}>Submit</button>
           <button type="button" className={styles.cancel} onClick={cancelEvent}>Cancel</button>
         </form>
       </div>
       <div className={styles.forumList}>
-        <div className={styles.link}>
-          <div onClick={addEvent} className={`${styles.linkClass} ${styles.add}`}>
-            <p>
-              Add a new forum
-            </p>
-          </div>
+        <div onClick={showModalEvent} className={styles.link}>
+          <p className={styles.addLabel}>
+            Add a new forum
+          </p>
         </div>
-        {fakeArray.length === 0 ? 
-        <span className={styles.noChats}>"There is no forums yet"</span> : 
-        fakeArray.map((forum) => {
-          return (
-            <div className={styles.link} key={forum.id}>
-              <Link to={forum.id.toString()} className={styles.linkClass}>
-                <p>
-                  {forum.title}
-                </p>
-              </Link>
-            </div>
+        {
+          !forumList.length ? 
+          <span className={styles.noChats}>There are no forums yet</span> : 
+          forumList.map(forum => (
+            <Link to={forum.id} className={styles.link} key={forum.id}>
+              <p>
+                {forum.title}
+              </p>
+            </Link>
           )
-        })}
+        )}
       </div>
     </div>
   )

@@ -1,23 +1,18 @@
 import {useEffect, useState, useRef} from 'react';
 import styles from './forumChat.module.scss';
+import { MOCK_ARRAY } from './mockChat';
 import UserCard from './modules/userCard/userCard';
 
+interface IChatList {id: string, userName: string, comment: string}
+
 const ForumChat = () => {
+
+  const [forumList, setForumList] = useState<IChatList[]>([]);
+
   useEffect(() => {
     document.title = "Форум";
+    setForumList(MOCK_ARRAY)
   }, [])
-
-  const fakeArray: {id: string}[] = [
-    {
-      id: "gdf4"
-    },
-    {
-      id: "hf2n"
-    },
-    {
-      id: "g8lolk"
-    }
-  ]
   
   return (
     <div className={styles.forumWrapper}>
@@ -30,11 +25,9 @@ const ForumChat = () => {
         <main className={styles.main}>
           <ul>
             {
-              fakeArray.length === 0 ? 
-                <p className={styles.noAnswers}>There is no comments yet</p> : 
-                fakeArray.map((a) => {
-                  return <UserCard isPostCard={false} key={a.id}/>
-                })
+              !forumList.length ? 
+              <p className={styles.noAnswers}>There are no comments yet</p> : 
+              forumList.map(message => <UserCard userName={message.userName} comment={message.comment} key={message.id}/>)
             }
             <UserCard isPostCard={true}/>
           </ul>
