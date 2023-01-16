@@ -1,6 +1,7 @@
 import Config from './config'
+import { getRandomObjectItem } from './utils'
 
-export default class Food {
+class Food {
   private canvas: CanvasRenderingContext2D
   public x: number
   public y: number
@@ -27,9 +28,9 @@ export default class Food {
     // очистка позиции еды
     if (this.food) this.canvas.clearRect(x, y, w, h)
 
-    this.x = this.randomPosition()
-    this.y = this.randomPosition()
-    this.food = this.config.foodsList[Object.keys(this.config.foodsList)[Math.floor(Math.random() * Object.keys(this.config.foodsList).length)]]
+    this.x = this.getRandomPosition()
+    this.y = this.getRandomPosition()
+    this.food = getRandomObjectItem(this.config.foodsList)
   }
 
   draw() {
@@ -45,7 +46,7 @@ export default class Food {
     }
   }
 
-  private randomPosition() {
+  private getRandomPosition() {
     return Math.floor(Math.random() * this.config.gridColsRows + 1) * this.config.gridCellWidth
   }
 
@@ -58,3 +59,5 @@ export default class Food {
     }
   }
 }
+
+export default Food

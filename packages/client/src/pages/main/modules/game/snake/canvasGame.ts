@@ -1,6 +1,6 @@
 import Config from './config'
 
-export default class CanvasGame{
+class CanvasGame{
   private readonly element: HTMLCanvasElement
   public context: CanvasRenderingContext2D
   private config: typeof Config
@@ -15,3 +15,5 @@ export default class CanvasGame{
     block.appendChild(this.element)
   }
 }
+
+export default CanvasGame

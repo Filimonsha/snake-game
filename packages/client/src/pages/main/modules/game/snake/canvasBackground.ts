@@ -1,6 +1,6 @@
 import Config from './config'
 
-export default class CanvasBackground {
+class CanvasBackground {
   private readonly element: HTMLCanvasElement
   public context: CanvasRenderingContext2D
   private gridBg: HTMLImageElement | null
@@ -33,3 +33,5 @@ export default class CanvasBackground {
     }
   }
 }
+
+export default CanvasBackground

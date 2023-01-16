@@ -5,7 +5,7 @@ import Score from './score'
 import Snake from './snake'
 import Config from './config'
 
-export default class Game {
+class Game {
   private canvasBackground: CanvasBackground
   private canvasGame: CanvasGame
   private readonly food: Food
@@ -42,3 +42,5 @@ export default class Game {
     this.snake.draw()
   }
 }
+
+export default Game

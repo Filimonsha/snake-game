@@ -6,7 +6,7 @@ type TSnakePosition = {
   view: string
 }
 
-export default class Snake {
+class Snake {
   snake: TSnakePosition[]
   private canvas: CanvasRenderingContext2D
   private config: typeof Config
@@ -73,3 +73,5 @@ export default class Snake {
     })
   }
 }
+
+export default Snake

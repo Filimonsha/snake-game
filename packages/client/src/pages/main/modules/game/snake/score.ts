@@ -1,7 +1,7 @@
 import Snake from './snake'
 import Food from './food'
 
-export default class Score {
+class Score {
   public score: number
   private fnUpdate: null | ((v: number) => void)
   private snake: Snake
@@ -39,3 +39,5 @@ export default class Score {
     this.fnUpdate?.(this.score)
   }
 }
+
+export default Score
