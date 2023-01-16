@@ -11,6 +11,7 @@ class Config {
   public gridBackgroundsList: TListGridBg
   public foodsList: TListFoods
   public speed: number
+  public startPositionSnake: { x: number; y: number }
 
   constructor(bg: TListGridBg, foods: TListFoods) {
     this.canvasBgWidth = 800
@@ -25,6 +26,8 @@ class Config {
 
     this.gridBackgroundsList = bg
     this.foodsList = foods
+
+    this.startPositionSnake = {x: 7, y: 12}
   }
 }
 

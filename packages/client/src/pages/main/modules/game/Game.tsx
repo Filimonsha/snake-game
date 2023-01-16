@@ -9,7 +9,7 @@ const Game: React.FC = () => {
 
   useEffect(() => {
     if(blockCanvasGame.current){
-      const game = new GameSnake(blockCanvasGame.current as HTMLDivElement)
+      const game = new GameSnake(blockCanvasGame.current)
       game.score.setFnUpdateScore(setScore)
     }
   }, [])

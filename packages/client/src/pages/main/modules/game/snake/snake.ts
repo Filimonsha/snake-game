@@ -24,8 +24,8 @@ export default class Snake {
     // Начальная позиция змеи
     this.snake = [
       {
-        x: 7 * this.config.gridCellWidth,
-        y: 12 * this.config.gridCellWidth,
+        x: this.config.startPositionSnake.x * this.config.gridCellWidth,
+        y: this.config.startPositionSnake.y * this.config.gridCellWidth,
         view: 'red'
       }
     ]
