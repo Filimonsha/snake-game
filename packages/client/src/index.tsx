@@ -14,7 +14,8 @@ const registerServiceWorker = async () => {
       const registration = await navigator.serviceWorker.register('/sw.js');
       return registration;
     } catch (err) {
-      console.log(`Serviceworker registration failed: ${err}`)
+      console.error('Serviceworker registration failed');
+      return err;
     }
   }
 }

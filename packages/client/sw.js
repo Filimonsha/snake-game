@@ -31,24 +31,24 @@ const addResources = async (cacheName, resources) => {
 }
 
 
-// Удаляет старую версию кэша, если в переменной cacheName меняется версия кэша,
+// Удаляет старую версию кэша. Если в переменной cacheName меняется версия кэша,
 // а префикс остается прежним, то старая версия заменяется на новую
 // -- для событии activate
 
 const deleteOldCache = async (cachePrefix, cacheName) => {
   const cachesKeys = await caches.keys();
   const filteredKeys = cachesKeys
-    .map((key) => (
+    .map(key => (
       key.startsWith(cachePrefix) && key !== cacheName ?
         caches.delete(key) : null
     ))
-    .filter((key) => key !== null)
+    .filter(key => key !== null)
     
   return Promise.all(filteredKeys);
 }
 
 
-// Кладет даные в кэш. Дополнительная проверка в функции нужна, 
+// Кладет данные в кэш. Дополнительная проверка в функции нужна, 
 // чтобы отфильтровать данные запросов от браузерных расширений: с ними sw не работает
 // https://github.com/iamshaunjp/pwa-tutorial/issues/1
 
@@ -64,28 +64,37 @@ const putToCache = async (request, cacheName, response) => {
 
 const getFromNetwork = (request, cacheName, timeout) => (
   new Promise((fulfill, reject) => {
-    const timeoutId = setTimeout(reject, timeout);
+    let timeoutId;
     
-    fetch(request)
-      .then((response) => {
+    const fetchAndCache = async() => {
+      try {
+        const response = await fetch(request);
         clearTimeout(timeoutId);
+        await putToCache(request.clone(), cacheName, response.clone());
         fulfill(response);
-        putToCache(request.clone(), cacheName, response.clone());
-      }, reject);
+      } catch (err) {
+        reject(err);
+      }
+    }
+    
+    timeoutId = setTimeout(() => reject(new Error('No connection')), timeout);
+    fetchAndCache();
   })
 );
 
 
 // Получение данных из кэша
 
-const getFromCache = async (request, cacheName)  => (
-  caches.open(cacheName)
-    .then((cache) =>
-      cache.match(request)
-        .then((matching) => matching)
-        .catch((err) => console.error(err))
-    )
-);
+const getFromCache = async (request, cacheName) => {
+  try {
+    const cache = await caches.open(cacheName);
+    const matching = await cache.match(request);
+    return matching;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+}
 
 
 // Кэширование данных. Стратегия кэширования: network first
@@ -104,19 +113,19 @@ const cacheData = async (request, cacheName, timeout) => {
 
 // Слушатели событий
 
-self.addEventListener('install', (evt) => {
+self.addEventListener('install', evt => {
   evt.waitUntil(
     addResources(CACHE_NAME, resources)
   )
 });
 
-self.addEventListener('activate', (evt) => {
+self.addEventListener('activate', evt => {
   evt.waitUntil(
     deleteOldCache(CACHE_PREFIX, CACHE_NAME)
   );
 });
 
-self.addEventListener('fetch', (evt) => {
+self.addEventListener('fetch', evt => {
   const { request } = evt;
   evt.respondWith(cacheData(request, CACHE_NAME, TIMEOUT));
 });
