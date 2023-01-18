@@ -11,7 +11,8 @@ const initialState: InitialState = {
 const globalConfigurationSlice = createSlice({
   name: 'globalConfiguration',
   initialState,
-  reducers: {}
+  reducers: {
+  }
 })
 
 export const globalConfigurationActions = globalConfigurationSlice.actions
