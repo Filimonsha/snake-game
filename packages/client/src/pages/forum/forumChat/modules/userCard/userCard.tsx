@@ -1,10 +1,10 @@
-import styles from './userCard.module.scss';
+import styles from './scss/userCard.module.scss';
 import img from './download.jpg';
 import React, {useState} from 'react';
 
-interface ICardType {userName?: string, isPostCard?: boolean, comment?: string}
+interface ICardProps {userName?: string, isPostCard?: boolean, comment?: string}
 
-const UserCard: React.FC<ICardType> = ({userName = "", isPostCard = false, comment = ""}) => {
+const UserCard: React.FC<ICardProps> = ({userName = "", isPostCard = false, comment = ""}) => {
   const [textState, setTextState] = useState<string>("");
  
   function submitFunc (e: React.SyntheticEvent) {

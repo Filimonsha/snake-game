@@ -1,14 +1,14 @@
 export const MOCK_ARRAY = [
     {
-      title: "Forum title",
-      id: "gdf4"
+      TITLE: "Forum title",
+      ID: "gdf4"
     },
     {
-      title: "Forum title",
-      id: "hf2n"
+      TITLE: "Forum title",
+      ID: "hf2n"
     },
     {
-      title: "Forum title",
-      id: "g8lolk"
+      TITLE: "Forum title",
+      ID: "g8lolk"
     }
 ]

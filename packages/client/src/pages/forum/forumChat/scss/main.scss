@@ -1,0 +1,13 @@
+@import '../../globals.scss';
+
+.main {
+	flex-grow: 1;
+	margin-block: 25px;
+	background-color: lighten($containerColor, 4);
+	padding: $gap10;
+
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+}

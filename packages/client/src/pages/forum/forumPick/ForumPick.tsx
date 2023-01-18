@@ -3,13 +3,13 @@ import styles from './scss/forumPick.module.scss';
 import { Link } from 'react-router-dom';
 import { MOCK_ARRAY } from './mockList'
 
-interface IForumList {id: string, title: string}
+interface IMockForumList {ID: string, TITLE: string}
 
 const ForumPick = () => {
 
   const [textState, setTextState] = useState<string>("");
   const [isHidden, setIsHidden] = useState<boolean>(true);
-  const [forumList, setForumList] = useState<IForumList[]>([]);
+  const [forumList, setForumList] = useState<IMockForumList[]>([]);
 
   function showModalEvent() {
     setIsHidden(false)
@@ -60,9 +60,9 @@ const ForumPick = () => {
           !forumList.length ? 
           <span className={styles.noChats}>There are no forums yet</span> : 
           forumList.map(forum => (
-            <Link to={forum.id} className={styles.link} key={forum.id}>
+            <Link to={forum.ID} className={styles.link} key={forum.ID}>
               <p>
-                {forum.title}
+                {forum.TITLE}
               </p>
             </Link>
           )

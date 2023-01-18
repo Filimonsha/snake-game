@@ -1,13 +1,13 @@
 import {useEffect, useState, useRef} from 'react';
-import styles from './forumChat.module.scss';
+import styles from './scss/forumChat.module.scss';
 import { MOCK_ARRAY } from './mockChat';
 import UserCard from './modules/userCard/userCard';
 
-interface IChatList {id: string, userName: string, comment: string}
+interface IMockChatList {ID: string, USER_NAME: string, COMMENT: string}
 
 const ForumChat = () => {
 
-  const [forumList, setForumList] = useState<IChatList[]>([]);
+  const [forumList, setForumList] = useState<IMockChatList[]>([]);
 
   useEffect(() => {
     document.title = "Форум";
@@ -27,12 +27,11 @@ const ForumChat = () => {
             {
               !forumList.length ? 
               <p className={styles.noAnswers}>There are no comments yet</p> : 
-              forumList.map(message => <UserCard userName={message.userName} comment={message.comment} key={message.id}/>)
+              forumList.map(message => <UserCard userName={message.USER_NAME} comment={message.COMMENT} key={message.ID}/>)
             }
             <UserCard isPostCard={true}/>
           </ul>
         </main>
-        <footer className={styles.footer}/>
       </div>
     </div>
   )
