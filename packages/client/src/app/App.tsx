@@ -1,19 +1,13 @@
 import { Provider } from 'react-redux'
 import { store } from '../store/store'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import {
-  FORUM_ROUTE,
-  MAIN_ROUTE,
-  SIGN_IN_ROUTE,
-  SIGN_OUT_ROUTE,
-  LEADERBOARD_ROUTE,
-  GAME_ROUTE
-} from '../utils/const/route'
+import { FORUM_ROUTE, MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE, LEADERBOARD_ROUTE, PROFILE_ROUTE, GAME_ROUTE } from '../utils/const/route'
 import { Main } from '../pages/main'
-import { SignIn } from '../pages/sign-in'
-import { SignUp } from '../pages/sign-up'
+import { SignIn } from '../pages/signIn'
+import { SignUp } from '../pages/signUp'
 import { Forum } from '../pages/forum'
-import { LeaderBoard } from '../pages/main/modules/leader-board'
+import { LeaderBoard } from '../pages/main/modules/leaderBoard'
+import { Profile } from '../pages/main/modules/profile'
 import { Game } from '../pages/main/modules/game'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
@@ -41,10 +35,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
-          <Route path={SIGN_OUT_ROUTE} element={<SignUp />} />
+          <Route path={SIGN_UP_ROUTE} element={<SignUp />} />
           <Route path={MAIN_ROUTE} element={<RequireAuth><Main /></RequireAuth>} />
           <Route path={FORUM_ROUTE} element={<Forum />} />
           <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
+          <Route path={PROFILE_ROUTE} element={<Profile />} />
           <Route path={GAME_ROUTE} element={<Game />} />
         </Routes>
       </BrowserRouter>
