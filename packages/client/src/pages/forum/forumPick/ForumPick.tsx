@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './scss/forumPick.module.scss';
 import { Link } from 'react-router-dom';
 import { MOCK_ARRAY } from './mockList'

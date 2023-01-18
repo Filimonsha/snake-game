@@ -1,4 +1,4 @@
-import {useEffect, useState, useRef} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './scss/forumChat.module.scss';
 import { MOCK_ARRAY } from './mockChat';
 import UserCard from './modules/userCard/userCard';
