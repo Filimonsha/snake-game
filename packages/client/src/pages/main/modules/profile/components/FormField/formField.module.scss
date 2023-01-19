@@ -7,14 +7,18 @@
   position: relative;
 
   &:not(:last-of-type) {
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: 1px solid #FFC300;
+  }
+
+  & label {
+    color: #FFFFFF;
   }
 
   & input {
     border: none;
     text-align: end;
     background-color: transparent;
-    color: #999;
+    color: #FFFFFF;
 
     &:focus-visible {
       outline: none;

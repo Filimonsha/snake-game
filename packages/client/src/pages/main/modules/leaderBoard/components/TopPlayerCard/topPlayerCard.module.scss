@@ -1,10 +1,13 @@
 .card {
   width: 20%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  // box-shadow: 0 4px 8px 0 rgba(255, 195, 0, 1);
+  box-shadow: 0px -6px 12px 0px rgba(255, 195, 0, 1);
+
+  border-radius: 20px;
   background-color: #fafafa;
   text-align: center;
 
-  .card_img {
+  .cardImg {
     width: 100px;
     height: 100px;
     align-self: center;
