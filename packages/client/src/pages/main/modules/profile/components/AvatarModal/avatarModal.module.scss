@@ -7,3 +7,26 @@
   display: flex;
   gap: 10px;
 }
+
+.buttonDanger {
+  border-radius: 20px;
+}
+
+.buttonSave, .buttonCancel {
+  border: 1px solid transparent;
+  border-radius: 20px;
+
+  &:hover {
+    background-color: #FFF;
+    border: 1px solid #24440F;
+    color: #24440F;
+  }
+}
+
+.buttonSave {
+  background-color: #FFC300;
+}
+
+.buttonCancel {
+  background-color: #24440F;
+}

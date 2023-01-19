@@ -14,7 +14,7 @@ const AvatarModal: React.FC<IProps> = ({ isShown, handleClose, handleSave, handl
 
   return(
     <>
-      <Modal isShown={isShown} onHide={handleClose}>
+      <Modal show={isShown} onHide={handleClose} style={{ color: '#24440F', boxShadow: '0 4px 20px 0 rgba(255, 195, 0, 1)' }}>
         <Modal.Header closeButton>
           <Modal.Title>Set your avatar</Modal.Title>
         </Modal.Header>
@@ -23,15 +23,15 @@ const AvatarModal: React.FC<IProps> = ({ isShown, handleClose, handleSave, handl
         </Modal.Body>
         <Modal.Footer className={styles.footer}>
           <div>
-            <Button variant="danger" onClick={handleDelete}>
+            <Button variant="danger" className={styles.buttonDanger} onClick={handleDelete}>
               Delete avatar
             </Button>
           </div>
           <div className={styles.buttonGroup}>
-            <Button variant="primary" onClick={handleSave}>
+            <Button variant="primary" className={styles.buttonSave} onClick={handleSave}>
               Save
             </Button>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" className={styles.buttonCancel} onClick={handleClose}>
               Close
             </Button>
           </div>

@@ -49,24 +49,29 @@ const LeaderBoard: React.FC = () => {
   }, [dummyData])
 
   return (
-    <Container className={`p-5 d-flex flex-column ${styles.container}`}>
-      <div className={styles.wrapper_top}>
-        <h1 className='mb-3'>Top Players</h1>
-        <div className='d-flex justify-content-evenly mb-3'>
-          {topPlayersData && topPlayersData.map(data => <TopPlayerCard key={data.id} {...data}/>)} 
-        </div>
+    <div className={styles.board}>
+      <div className={styles.boardCircle}>
+        <Container className={`p-5 d-flex flex-column ${styles.container}`}>
+          <div className={styles.wrapperTop}>
+            <h1 className='mb-3'>Top Players</h1>
+            <div className='d-flex justify-content-evenly mb-3'>
+              {topPlayersData && topPlayersData.map(data => <TopPlayerCard key={data.id} {...data}/>)} 
+            </div>
+          </div>
+          <div className={styles.wrapperBottom}>
+            <h2 className='mb-3'>All Users</h2>
+            <DataTable
+              className={styles.table}
+              columns={columns}
+              data={data}
+              pagination={true}
+              paginationPerPage={5}
+              paginationRowsPerPageOptions={[5,10]}
+            />
+          </div>
+        </Container>
       </div>
-      <div className={styles.wrapper_bottom}>
-        <h2 className='mb-3'>All Users</h2>
-        <DataTable
-          columns={columns}
-          data={data}
-          pagination={true}
-          paginationPerPage={5}
-          paginationRowsPerPageOptions={[5,10]}
-        />
-      </div>
-    </Container>
+    </div>
   )
 }
 
