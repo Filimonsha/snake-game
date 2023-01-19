@@ -1,0 +1,29 @@
+@import '../../../../globals.scss';
+
+@media screen and (max-width: 620px) {
+	.card {
+		grid-template-areas: 
+		"user"
+		"answer" !important;
+		grid-template-columns: none !important;
+		grid-template-rows: min-content auto !important;
+	}
+	form.card {
+		grid-template-areas: 
+		"user"
+		"answer"
+		"button" !important;
+		grid-template-columns: none !important;
+		grid-template-rows: min-content auto !important;
+	}
+	textarea.userAnswer {
+		height: 200px !important;
+	}
+	.userInfo {
+		flex-direction: row !important;
+		padding: 5px $gap10 !important;
+	}
+	.userName {
+		flex-grow: 1 !important;
+	}
+}
