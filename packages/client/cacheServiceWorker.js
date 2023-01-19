@@ -66,11 +66,10 @@ const getFromNetwork = (request, cacheName, timeout) => (
   new Promise((fulfill, reject) => {
     let timeoutId;
     
-    const fetchAndCache = async() => {
+    const fetchData = async() => {
       try {
         const response = await fetch(request);
         clearTimeout(timeoutId);
-        await putToCache(request.clone(), cacheName, response.clone());
         fulfill(response);
       } catch (err) {
         reject(err);
@@ -78,7 +77,7 @@ const getFromNetwork = (request, cacheName, timeout) => (
     }
     
     timeoutId = setTimeout(() => reject(new Error('No connection')), timeout);
-    fetchAndCache();
+    fetchData();
   })
 );
 
@@ -98,11 +97,14 @@ const getFromCache = async (request, cacheName) => {
 
 
 // Кэширование данных. Стратегия кэширования: network first
+// Если соеднинение есть, берем данные с сервера и возвращаем их, предварительно положив в кэш
+// Если соединения нет, берем данные из кэша
 // -- для события fetch
 
 const cacheData = async (request, cacheName, timeout) => {
   try {
     const response = await getFromNetwork(request, cacheName, timeout);
+    await putToCache(request.clone(), cacheName, response.clone());
     return response;
   } catch {
     const cache = await getFromCache(request, cacheName);

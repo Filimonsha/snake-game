@@ -11,7 +11,7 @@ root.render(<App />)
 const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register('/sw.js');
+      const registration = await navigator.serviceWorker.register('/cacheServiceWorker.js');
       return registration;
     } catch (err) {
       console.error('Serviceworker registration failed');
