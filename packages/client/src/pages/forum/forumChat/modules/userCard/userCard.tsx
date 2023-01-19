@@ -6,13 +6,13 @@ interface ICardProps {userName?: string, isPostCard?: boolean, comment?: string}
 
 const UserCard: React.FC<ICardProps> = ({userName = "", isPostCard = false, comment = ""}) => {
   const [textState, setTextState] = useState<string>("");
- 
+
   function submitFunc (e: React.SyntheticEvent) {
     e.preventDefault();
     textState ? alert("Your comment is: " + textState) : alert("Enter a comment");
     setTextState("")
   }
-  
+
   function changeEvent(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setTextState(e.target.value)
   }

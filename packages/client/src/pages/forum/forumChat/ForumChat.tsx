@@ -6,14 +6,13 @@ import UserCard from './modules/userCard/userCard';
 interface IMockChatList {ID: string, USER_NAME: string, COMMENT: string}
 
 const ForumChat = () => {
-
   const [forumList, setForumList] = useState<IMockChatList[]>([]);
 
   useEffect(() => {
     document.title = "Форум";
     setForumList(MOCK_ARRAY)
   }, [])
-  
+
   return (
     <div className={styles.forumWrapper}>
       <div className={styles.forum}>
@@ -24,12 +23,12 @@ const ForumChat = () => {
         </header>
         <main className={styles.main}>
           <ul>
-            {
-              !forumList.length ? 
-              <p className={styles.noAnswers}>There are no comments yet</p> : 
-              forumList.map(message => <UserCard userName={message.USER_NAME} comment={message.COMMENT} key={message.ID}/>)
-            }
-            <UserCard isPostCard={true}/>
+          {
+            !forumList.length ? 
+            <p className={styles.noAnswers}>There are no comments yet</p> : 
+            forumList.map(message => <UserCard userName={message.USER_NAME} comment={message.COMMENT} key={message.ID}/>)
+          }
+          <UserCard isPostCard={true}/>
           </ul>
         </main>
       </div>
