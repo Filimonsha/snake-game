@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './forumPick.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MOCK_ARRAY } from './mockList';
 import Modal from "./modules/modal/modal";
 
@@ -9,6 +9,7 @@ interface IMockForumList {ID: string, TITLE: string}
 const ForumPick = () => {
   const [isModalHidden, setIsModalHidden] = useState<boolean>(true);
   const [forumList, setForumList] = useState<IMockForumList[]>([]);
+  const navigate = useNavigate();
 
   function showModalEvent() {
     setIsModalHidden(false)
@@ -21,24 +22,26 @@ const ForumPick = () => {
 
   return (
     <div className={styles.forumListContainer}>
-      {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden}/>}
-      <div className={styles.forumList}>
-        <div onClick={showModalEvent} className={styles.link}>
-          <p className={styles.addLabel}>
-            Add a new forum
-          </p>
+      <div className={styles.forumCircle}>
+        {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden}/>}
+        <div className={styles.forumList}>
+          <div className={styles.header}>
+            <div className={styles.backButton} onClick={() => navigate(-1)}></div>
+            All Discussions
+            <div onClick={showModalEvent} className={styles.addLabel}></div>
+          </div>
+          {
+            !forumList.length ? 
+            <span className={styles.noChats}>There are no forums yet</span> : 
+            forumList.map(forum => (
+              <Link to={forum.ID} className={styles.link} key={forum.ID}>
+                <p>
+                  {forum.TITLE}
+                </p>
+              </Link>
+            )
+          )}
         </div>
-        {
-          !forumList.length ? 
-          <span className={styles.noChats}>There are no forums yet</span> : 
-          forumList.map(forum => (
-            <Link to={forum.ID} className={styles.link} key={forum.ID}>
-              <p>
-                {forum.TITLE}
-              </p>
-            </Link>
-          )
-        )}
       </div>
     </div>
   )

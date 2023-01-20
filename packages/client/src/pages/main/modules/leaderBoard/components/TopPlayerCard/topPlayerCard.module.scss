@@ -1,10 +1,11 @@
+@import '../../../../../../utils/const/globals.scss';
+
 .card {
   width: 20%;
-  // box-shadow: 0 4px 8px 0 rgba(255, 195, 0, 1);
-  box-shadow: 0px -6px 12px 0px rgba(255, 195, 0, 1);
+  box-shadow: 0px -6px 12px 0px $yellow-shadow;
 
   border-radius: 20px;
-  background-color: #fafafa;
+  background-color: $grey;
   text-align: center;
 
   .cardImg {

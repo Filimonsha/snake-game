@@ -1,36 +1,38 @@
+@import '../../utils/const/globals.scss';
+
 .form {
-  background-color: #fefefe;
+  background-color: $grey;
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 4px 20px 0 rgba(255, 195, 0, 1);
+  box-shadow: 0 4px 20px 0 $yellow-shadow;
   
   .formTitle {
     margin-bottom: 30px;
     text-align: center;
-    color: #24440F;
+    color: $deep-green;
   }
   
   .formSubmit {
-    background-color: #FFC300;
+    background-color: $yellow;
     border: none;
     border-radius: 20px;
     padding: 12px 37px;
     line-height: 1;
-    color: #24440F;
+    color: $deep-green;
     
     &:hover {
-      background-color: #24440F;
-      color: #FFF;
+      background-color: $deep-green;
+      color: $white;
     }
   }
   
   .formLink {
     font-size: 14px;
-    color: #24440F;
+    color: $deep-green;
     text-decoration: none;
     
     &:hover {
-      color: #d5a400;
+      color: $yellow-hover;
       text-decoration: underline;
     }
   }

@@ -20,11 +20,7 @@ const UserCard: React.FC<ICardProps> = ({userName = "", isPostCard = false, comm
   return (
     isPostCard ? 
     <li>
-      <form className={styles.card} onSubmit={submitFunc}>
-        <div className={styles.userInfo}>
-          <img className={styles.avatar} src={img}/>
-          <h2 className={styles.userName}>You</h2>
-        </div>
+      <form className={styles.cardAnswer} onSubmit={submitFunc}>
         <textarea value={textState} onChange={changeEvent} className={styles.userAnswer} name="text" placeholder="Your comment"/>
         <button className={styles.submitButton} type='submit'>Submit</button>
       </form>

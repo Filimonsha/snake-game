@@ -1,5 +1,7 @@
+@import '../../utils/const/globals.scss';
+
 .entrance {
-  background-color: #24440F;
+  background-color: $deep-green;
   padding: 50px;
   min-height: 100vh;
   display: flex;

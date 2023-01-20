@@ -14,7 +14,7 @@ const AvatarModal: React.FC<IProps> = ({ isShown, handleClose, handleSave, handl
 
   return(
     <>
-      <Modal show={isShown} onHide={handleClose} style={{ color: '#24440F', boxShadow: '0 4px 20px 0 rgba(255, 195, 0, 1)' }}>
+      <Modal show={isShown} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Set your avatar</Modal.Title>
         </Modal.Header>

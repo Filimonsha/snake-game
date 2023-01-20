@@ -1,3 +1,5 @@
+@import '../../../../../../utils/const/globals.scss';
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -17,16 +19,16 @@
   border-radius: 20px;
 
   &:hover {
-    background-color: #FFF;
-    border: 1px solid #24440F;
-    color: #24440F;
+    background-color: $white;
+    border: 1px solid $deep-green;
+    color: $deep-green;
   }
 }
 
 .buttonSave {
-  background-color: #FFC300;
+  background-color: $yellow;
 }
 
 .buttonCancel {
-  background-color: #24440F;
+  background-color: $deep-green;
 }
