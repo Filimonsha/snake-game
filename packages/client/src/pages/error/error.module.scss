@@ -1,0 +1,54 @@
+.errorPage {
+  background-color: #24440F;
+  color: #FFF;
+  min-height: 100vh;
+  background-image: radial-gradient(rgba(#FFC300, 0.25), transparent);
+}
+
+.errorPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 150px;
+}
+
+.errorPageTitle {
+  margin: 0;
+  font-size: 60px;
+  line-height: 60px;
+}
+
+.errorPageCode {
+  font-size: 180px;
+  line-height: 180px;
+  padding: 20px 10px 30px;
+  position: relative;
+  margin-bottom: 50px;
+  font-weight: bold;
+  
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 20px;
+    width: 100%;
+    content: '';
+    background-color: #FFC300;
+    animation: 1s grow 1 ease-in-out;
+  }
+}
+
+.errorPageLink {
+  color: #FFF;
+  font-size: 20px;
+  
+  &:hover {
+    color: #FFC300;
+  }
+}
+
+@keyframes grow {
+  0% { width: 0 }
+  90% { width: 105% }
+  100% { width: 100% }
+}
