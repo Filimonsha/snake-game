@@ -50,7 +50,6 @@ class Game {
     this.config.speed = conf.speed ?? this.config.speed
     this.config.bgSelected = conf.bg ?? this.config.bgSelected
     this.config.foodSelected = conf.food ?? this.config.foodSelected
-    this.config.barrier = conf.barrier ?? this.config.barrier
   }
 
   // event который срабатывает при изменении score

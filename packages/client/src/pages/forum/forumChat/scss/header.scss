@@ -1,0 +1,16 @@
+@import '../../globals.scss';
+
+.header {
+	width: 100%;
+	font-size: clamp(7px, 2.4vw, 15px);
+	height: min(110px, 21vw);
+	background-color: $containerColor;
+	padding: $gap10;
+}
+
+.headerContent {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
+}

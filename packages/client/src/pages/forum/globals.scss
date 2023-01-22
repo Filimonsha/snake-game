@@ -1,0 +1,35 @@
+$innerColor: rgb(161, 91, 0);
+$secondaryColor: rgb(233, 198, 148);
+$bodyColor: rgb(228, 214, 179);
+$containerColor: rgb(248, 234, 217);
+$cardColor: rgb(245, 217, 181);
+$gap10: min(10px, 2vw);
+
+%button {
+	background: darken($secondaryColor, 7);
+	font-size: min(5vw, 15px);
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	justify-self: center;
+	height: 30px;
+	width: max(20%, 120px);
+	margin: auto;
+
+	&:focus {
+		border: 1px solid rgba(0, 0, 0, 0.6);
+	}
+}
+
+%textArea {
+	border: none;
+	outline: none;
+	resize: none;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	background-color: $secondaryColor;
+
+	&:focus {
+		outline: 1px solid rgba(0, 0, 0, 0.548);
+	}
+}

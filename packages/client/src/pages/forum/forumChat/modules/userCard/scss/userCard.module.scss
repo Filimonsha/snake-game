@@ -1,0 +1,36 @@
+@import '../../../../globals.scss';
+@import './media.scss';
+@import './user.scss';
+
+.card {
+	display: grid;
+	grid-template-columns: min-content auto;
+	gap: $gap10;
+	grid-template-areas: 
+	"user answer";
+	border-radius: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	padding: $gap10;
+	margin-bottom: 20px;
+	background-color: $cardColor;
+
+	& > div {
+		border-radius: 5px;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+form.card {
+	grid-template-areas: 
+	"user answer"
+	"button button";
+}
+
+.submitButton {
+	@extend %button;
+	grid-area: button;
+}

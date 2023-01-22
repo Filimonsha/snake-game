@@ -17,7 +17,6 @@ export interface IUpdateConfig {
   speed?: number
   bg?: TBgSelected
   food?: TFoodSelected
-  barrier?: boolean
 }
 
 const viewImgSnake = {
@@ -57,7 +56,6 @@ class Config {
   public startPositionSnake: { x: number; y: number }
   public bgSelected: TBgSelected
   public foodSelected: TFoodSelected
-  public barrier: boolean
   public viewSnake: TViewImgObject
   public maxBodySnake: number
 
@@ -78,7 +76,6 @@ class Config {
     this.speed = 250 // ms
     this.bgSelected = 0
     this.foodSelected = 'random'
-    this.barrier = false
 
     // Стартовая позиция змейки
     this.startPositionSnake = { x: 7, y: 12 }
