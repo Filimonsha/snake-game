@@ -1,8 +1,7 @@
 @import '../../../../utils/const/globals.scss';
 
 .header {
-	// font-size: clamp(7px, 2.4vw, 15px);
-	font-size: 20px;
+	font-size: clamp(7px, 2.4vw, 20px);
 	color: $white;
 	padding: 15px 0;
 	border-bottom: 1px solid $yellow;
@@ -10,14 +9,13 @@
 
 .headerContent {
 	display: flex;
-	justify-content: space-between;
+	gap: 20px;
 }
 
 .backButton {
 	background-image: url('../../../../assets/img/backButton.svg');
 	width: 32px;
 	height: 32px;
-	margin-right: 20px;
 	cursor: pointer;
 }
 

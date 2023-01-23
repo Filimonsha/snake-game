@@ -36,11 +36,15 @@ body {
 	border-bottom: 1px solid $yellow;
 }
 
+.headerContent {
+	display: flex;
+	gap: 20px;
+}
+
 .backButton {
 	background-image: url('../../../assets/img/backButton.svg');
 	width: 32px;
 	height: 32px;
-	margin-right: 20px;
 	cursor: pointer;
 }
 

@@ -11,7 +11,7 @@ const ForumChat = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = "Форум";
+    document.title = "Forum";
     setForumList(MOCK_ARRAY)
   }, [])
 
@@ -23,7 +23,6 @@ const ForumChat = () => {
             <div className={styles.headerContent}>
               <div className={styles.backButton} onClick={() => navigate(-1)} ></div>
               Forum title
-              <div className={styles.settings}></div>
             </div>
           </header>
           <main className={styles.main}>

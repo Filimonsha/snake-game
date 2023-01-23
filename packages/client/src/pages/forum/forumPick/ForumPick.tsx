@@ -16,7 +16,7 @@ const ForumPick = () => {
   }
 
   useEffect(() => {
-    document.title="Форум"
+    document.title="Forum"
     setForumList(MOCK_ARRAY)
   }, [])
 
@@ -26,8 +26,10 @@ const ForumPick = () => {
         {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden}/>}
         <div className={styles.forumList}>
           <div className={styles.header}>
-            <div className={styles.backButton} onClick={() => navigate(-1)}></div>
-            All Discussions
+            <div className={styles.headerContent}>
+              <div className={styles.backButton} onClick={() => navigate(-1)}></div>
+              All Discussions
+            </div>
             <div onClick={showModalEvent} className={styles.addLabel}></div>
           </div>
           {
