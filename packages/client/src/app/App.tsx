@@ -1,7 +1,6 @@
 import { Provider } from 'react-redux'
 import { store } from '../store/store'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { FORUM_ROUTE, MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE, LEADERBOARD_ROUTE, PROFILE_ROUTE, GAME_ROUTE } from '../utils/const/route'
 import { Main } from '../pages/main'
 import { SignIn } from '../pages/signIn'
 import { SignUp } from '../pages/signUp'
@@ -10,6 +9,16 @@ import { ForumChat } from '../pages/forum/forumChat'
 import { LeaderBoard } from '../pages/main/modules/leaderBoard'
 import { Profile } from '../pages/main/modules/profile'
 import { Game } from '../pages/main/modules/game'
+import { ErrorPage } from '../pages/error'
+import { 
+  FORUM_ROUTE, 
+  MAIN_ROUTE, 
+  SIGN_IN_ROUTE, 
+  SIGN_UP_ROUTE, 
+  LEADERBOARD_ROUTE, 
+  PROFILE_ROUTE, 
+  GAME_ROUTE,
+  ERROR_ROUTE } from '../utils/const/route'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
@@ -43,6 +52,8 @@ function App() {
           <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
           <Route path={PROFILE_ROUTE} element={<Profile />} />
           <Route path={GAME_ROUTE} element={<Game />} />
+          <Route path={ERROR_ROUTE} element={<ErrorPage title='Connection error' code='500'/>} />
+          <Route path='*' element={<ErrorPage title='Page not found' code='404'/>} />
         </Routes>
       </BrowserRouter>
     </Provider>
