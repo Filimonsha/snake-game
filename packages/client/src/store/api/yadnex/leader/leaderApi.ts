@@ -1,7 +1,7 @@
 import yandexApi from '../yandexBaseQuery'
 import { UserScoreData, LeaderboardRequest, LeaderboardResponse } from '../../../../utils/const/api/leader'
 
-const getLeaderEndpoint = (endpoint: string) => `leaderboard` + endpoint
+const getLeaderEndpoint = (endpoint: string) => `leaderboard/${endpoint}`
 
 export const leaderApi = yandexApi.injectEndpoints({
   endpoints: builder => ({
@@ -10,15 +10,15 @@ export const leaderApi = yandexApi.injectEndpoints({
         url: getLeaderEndpoint(''),
         method: 'POST',
         body: arg
-      }) 
+      })
     }),
 
-    allUsersLeaderboard: builder.mutation<LeaderboardResponse, LeaderboardRequest>({ 
+    getAllUsersLeaderboard: builder.mutation<LeaderboardResponse, LeaderboardRequest>({
       query: arg => ({
-        url: getLeaderEndpoint('/all'),
+        url: getLeaderEndpoint('all'),
         method: 'POST',
         body: arg
-      }) 
+      })
     })
 
   })
@@ -26,5 +26,5 @@ export const leaderApi = yandexApi.injectEndpoints({
 
 export const {
   useAddUserToLeaderboardMutation,
-  useAllUsersLeaderboardMutation
+  useGetAllUsersLeaderboardMutation
 } = leaderApi

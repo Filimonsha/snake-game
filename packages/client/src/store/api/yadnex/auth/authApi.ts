@@ -1,7 +1,7 @@
 import yandexApi from '../yandexBaseQuery'
 import { UserFullInfo, UserShortInfo } from '../../../../utils/const/api/auth'
 
-const getAuthEndpoint = (endpoint: string) => `auth/` + endpoint
+const getAuthEndpoint = (endpoint: string) => `auth/${endpoint}`
 
 export const authApi = yandexApi.injectEndpoints({
   endpoints: builder => ({
@@ -23,12 +23,16 @@ export const authApi = yandexApi.injectEndpoints({
       })
     }),
 
-    logout: builder.mutation<string, undefined>({
+    logout: builder.mutation<string, void>({
       query: arg => ({
         url: getAuthEndpoint('logout'),
         method: 'POST',
         body: arg
       })
+    }),
+
+    getUserInfo: builder.query<UserFullInfo,void>({
+      query: () => getAuthEndpoint('user')
     })
 
   })
@@ -37,5 +41,5 @@ export const authApi = yandexApi.injectEndpoints({
 export const {
   useSignInMutation,
   useSignUpMutation,
-  useLogoutMutation
+  useGetUserInfoQuery
 } = authApi

@@ -9,5 +9,6 @@ export type UserFullInfo = {
   login: string,
   email: string,
   password: string,
-  phone: string
+  phone: string,
+  avatar:string
 }
