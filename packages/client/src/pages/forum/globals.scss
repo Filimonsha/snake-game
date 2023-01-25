@@ -1,23 +1,18 @@
-$innerColor: rgb(161, 91, 0);
-$secondaryColor: rgb(233, 198, 148);
-$bodyColor: rgb(228, 214, 179);
-$containerColor: rgb(248, 234, 217);
-$cardColor: rgb(245, 217, 181);
-$gap10: min(10px, 2vw);
+@import '../../utils/const/globals.scss';
 
 %button {
-	background: darken($secondaryColor, 7);
+	background-color: $yellow;
+	color: $white;
 	font-size: min(5vw, 15px);
 	outline: none;
 	border: none;
-	border-radius: 5px;
-	justify-self: center;
-	height: 30px;
+	border-radius: 50px;
+	height: 35px;
 	width: max(20%, 120px);
 	margin: auto;
 
 	&:focus {
-		border: 1px solid rgba(0, 0, 0, 0.6);
+		box-shadow: 0 2px 10px 0 rgba($yellow, 0.7);
 	}
 }
 
@@ -27,7 +22,7 @@ $gap10: min(10px, 2vw);
 	resize: none;
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
-	background-color: $secondaryColor;
+	background-color: $white;
 
 	&:focus {
 		outline: 1px solid rgba(0, 0, 0, 0.548);

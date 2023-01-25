@@ -1,7 +1,18 @@
 @import '../globals.scss';
+@import '../../../utils/const/globals.scss';
 
 body {
 	margin: 0;
+}
+
+.forumListContainer {
+	height: 100vh;
+	background-color: $deep-green;
+}
+
+.forumCircle {
+	height: 100vh;
+  background: radial-gradient(rgba($background-circle, 0.25), transparent);
 }
 
 .forumList, .forumList * {
@@ -11,10 +22,37 @@ body {
 }
 
 .forumList {
-	background-color: $containerColor;
 	padding: $gap10;
 	margin-inline: auto;
-    width: min(900px, 100%);
+  width: min(900px, 100%);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	font-size: 20px;
+	color: $white;
+	padding: 15px 0;
+	border-bottom: 1px solid $yellow;
+}
+
+.headerContent {
+	display: flex;
+	gap: 20px;
+}
+
+.backButton {
+	background-image: url('../../../assets/img/backButton.svg');
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+}
+
+.addLabel {
+	background-image: url('../../../assets/img/addButton.svg');
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
 }
 
 .link:not(.link:last-child) {
@@ -22,22 +60,24 @@ body {
 }
 
 .noChats {
-	margin-bottom: $gap10;
+	margin-top: $gap10;
+	color: $white;
 	display: block;
 }
 
 .link {
 	display: flex;
-	padding: $gap10;
-	background-color: $secondaryColor;
-	border-radius: 10px;
+	padding: 15px 0;
+	color: $white;
 	text-decoration: none;
 	cursor: pointer;
-	position: relative;
+	font-size: 20px;
+	border-bottom: 1px solid $yellow;
 
-	.addLabel {
-		font-weight: bold;
-		pointer-events: none;
-		margin-inline: auto;
+	
+	&:hover {
+		color: $yellow;
+		border-bottom: 1px solid $yellow;
+		box-shadow: 0px 4px 6px -6px $yellow-shadow;
 	}
 }

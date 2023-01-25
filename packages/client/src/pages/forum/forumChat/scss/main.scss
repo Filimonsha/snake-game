@@ -1,10 +1,16 @@
 @import '../../globals.scss';
 
 .main {
-	flex-grow: 1;
-	margin-block: 25px;
-	background-color: lighten($containerColor, 4);
-	padding: $gap10;
+	padding-top: $gap10;
+	padding-bottom: $gap10;
+	height: 100vh;
+	overflow: hidden;
+	overflow-y: scroll;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar { 
+		width: 0; 
+	}	
 
 	ul {
 		list-style: none;

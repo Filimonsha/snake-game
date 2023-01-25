@@ -1,36 +1,41 @@
+@import '../../../../../../utils/const/globals.scss';
 @import '../../../../globals.scss';
 @import './media.scss';
 @import './user.scss';
 
-.card {
+.card, 
+.cardAnswer {
 	display: grid;
-	grid-template-columns: min-content auto;
-	gap: $gap10;
-	grid-template-areas: 
-	"user answer";
-	border-radius: 5px;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	padding: $gap10;
-	margin-bottom: 20px;
-	background-color: $cardColor;
-
-	& > div {
-		border-radius: 5px;
-		border: 1px solid rgba(0, 0, 0, 0.1);
-	}
+	margin-bottom: 40px;
 
 	&:last-child {
 		margin-bottom: 0;
 	}
 }
 
-form.card {
-	grid-template-areas: 
-	"user answer"
-	"button button";
+.card {
+	background-color: $white;
+	border-radius: 5px;
+	padding: 10px 20px;
+	grid-template-columns: min-content auto;
+	gap: 40px;
+	grid-template-areas: "user answer";
 }
+
+.cardAnswer {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	border-top: 1px solid $yellow;
+	padding: 15px 0;
+}
+
 
 .submitButton {
 	@extend %button;
-	grid-area: button;
+	margin: unset;
+
+	&:focus {
+		box-shadow: 0 2px 10px 0 rgba($yellow, 0.7);
+	}
 }
