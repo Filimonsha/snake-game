@@ -1,5 +1,6 @@
-import Config from './config'
+import Config, { TViewImg } from './config'
 import { getRandomObjectItem } from './utils'
+import { TSnakePosition } from './snake'
 
 class Food {
   private canvas: CanvasRenderingContext2D
@@ -7,7 +8,7 @@ class Food {
   public y: number
   private config: typeof Config
   private foodZoom: { offset: number; width: number }
-  private food: string | null
+  private food: TViewImg | null
 
   constructor(canvas: CanvasRenderingContext2D) {
     this.canvas = canvas
@@ -22,28 +23,47 @@ class Food {
     }
   }
 
-  random() {
+  // Установка еды в рандомное место
+  random(snakeListPosition: TSnakePosition[]) {
     const { x, y, w, h } = this.getPosition()
 
     // очистка позиции еды
     if (this.food) this.canvas.clearRect(x, y, w, h)
 
-    this.x = this.getRandomPosition()
-    this.y = this.getRandomPosition()
-    this.food = getRandomObjectItem(this.config.foodsList)
+    // Определение вида еды
+    this.setFood()
+
+    // Установка рандомной позиции с проверками
+    this.randomAndCheckPosition(snakeListPosition)
   }
 
   draw() {
     const { x, y, w, h } = this.getPosition()
+    if (this.food) this.canvas.drawImage(this.food, x, y, w, h)
+  }
 
-    const img = new Image()
+  // Установка вида еды
+  private setFood() {
+    const list = this.config.viewFoods
+    const foodSelected = this.config.foodSelected
+    this.food = foodSelected !== 'random' ? list[foodSelected] : getRandomObjectItem(this.config.viewFoods)
+  }
 
-    if (this.food) {
-      img.src = this.food
-      img.onload = () => {
-        this.canvas.drawImage(img as HTMLImageElement, x, y, w, h)
-      }
+  private randomAndCheckPosition(snakeListPosition: TSnakePosition[]) {
+    const coordinates = {
+      x: this.getRandomPosition(),
+      y: this.getRandomPosition()
     }
+
+    const isIntersectingPosition = snakeListPosition.some((el) => coordinates.x === el.x && coordinates.y === el.y)
+
+    if (isIntersectingPosition) {
+      this.randomAndCheckPosition(snakeListPosition)
+      return
+    }
+
+    this.x = coordinates.x
+    this.y = coordinates.y
   }
 
   private getRandomPosition() {

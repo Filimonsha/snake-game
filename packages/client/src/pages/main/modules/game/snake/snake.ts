@@ -1,76 +1,195 @@
-import Config from './config'
+import Config, { TViewImg } from './config'
+import Food from './food'
+import Game from './game'
+import Score from './score'
 
-type TSnakePosition = {
+export type TSnakePosition = {
   x: number
   y: number
-  view: string
+  orientation: TOrientation
 }
 
+type TOrientation = 'up' | 'right' | 'down' | 'left'
+
 class Snake {
-  snake: TSnakePosition[]
+  snakeListPosition: TSnakePosition[]
   private canvas: CanvasRenderingContext2D
   private config: typeof Config
+  private score: Score
+  private food: Food
+  private game: Game
   private x: number
   private y: number
+  private dx: number
+  private dy: number
+  private maxBodySnake: number
 
+  private orientation: TOrientation
 
-  constructor(canvas: CanvasRenderingContext2D) {
+  constructor(canvas: CanvasRenderingContext2D, score: Score, food: Food, game: Game) {
     this.canvas = canvas
     this.config = Config
+    this.score = score
+    this.food = food
+    this.game = game
 
-    this.x = 0
-    this.y = -this.config.gridCellWidth
+    // Для направления змейки
+    this.orientation = 'up'
+    this.dx = 0
+    this.dy = 0
 
     // Начальная позиция змеи
-    this.snake = [
-      {
-        x: this.config.startPositionSnake.x * this.config.gridCellWidth,
-        y: this.config.startPositionSnake.y * this.config.gridCellWidth,
-        view: 'red'
-      }
-    ]
+    this.x = this.config.startPositionSnake.x * this.config.gridCellWidth
+    this.y = this.config.startPositionSnake.y * this.config.gridCellWidth
 
+    // Длина змеи
+    this.maxBodySnake = this.config.maxBodySnake
+
+    // позиция всей змеи
+    this.snakeListPosition = []
+
+    // отслеживание клавиш
     this.control()
   }
 
   draw() {
-    this.clearSnake()
+    // расчет направления змеи
+    this.orientationSnake()
 
-    this.snake[0].x += this.x
-    this.snake[0].y += this.y
-
-    this.drawSnake()
+    // Проверка на конец игры
+    const dead = this.checkPositionDead()
+    if (!dead) {
+      this.clearSnake()
+      this.snakeListPosition.unshift({ x: this.x, y: this.y, orientation: this.orientation })
+      if (this.snakeListPosition.length > this.maxBodySnake) this.snakeListPosition.pop()
+      this.checkPositionSnakeAndFood()
+      this.drawSnake()
+    }
   }
 
+  // расчет направления змеи
+  private orientationSnake() {
+    switch (this.orientation) {
+      case 'up':
+        this.dx = 0
+        this.dy = -this.config.gridCellWidth
+        break
+      case 'right':
+        this.dx = this.config.gridCellWidth
+        this.dy = 0
+        break
+      case 'down':
+        this.dx = 0
+        this.dy = this.config.gridCellWidth
+        break
+      case 'left':
+        this.dx = -this.config.gridCellWidth
+        this.dy = 0
+        break
+    }
+    this.x += this.dx
+    this.y += this.dy
+  }
+
+  // проверка позииции змеи и еды
+  private checkPositionSnakeAndFood() {
+    if (this.snakeListPosition[0].x === this.food.x && this.snakeListPosition[0].y === this.food.y) {
+      this.score.scorePlus()
+      this.food.random(this.snakeListPosition)
+      this.maxBodySnake += 1
+    }
+  }
+
+  // проверки конца игры
+  private checkPositionDead() {
+    const arrDeadPosition = [
+      this.x < this.config.gridCellWidth,
+      this.x > this.config.gridCellWidth * this.config.gridColsRows,
+      this.y < this.config.gridCellWidth,
+      this.y > this.config.gridCellWidth * this.config.gridColsRows
+    ]
+
+    // Проверка на границы
+    const isDeadPosition = arrDeadPosition.some((el: boolean) => el)
+
+    // Проверка на съедение хвоста
+    const isEatTail = this.snakeListPosition.some((el) => this.x === el.x && this.y === el.y)
+
+    // Если совпадает с условиями останавливаем игру
+    if (isDeadPosition || isEatTail) {
+      this.game.stop()
+      return true
+    } else return false
+  }
+
+  // отрисовка вида змеи
   private drawSnake() {
-    this.snake.forEach(item => {
-      this.canvas.fillStyle = item.view
-      this.canvas.fillRect(item.x, item.y, this.config.gridCellWidth, this.config.gridCellWidth)
+    this.snakeListPosition.forEach((item, i, snake) => {
+      const snakeImg = this.config.viewSnake[i === 0 ? 'head' : i === (snake.length - 1) ? 'tail' : 'body']
+      this.drawSnakeRotate(snakeImg, item.x, item.y, this.getDegreeRotation(item.orientation))
     })
   }
 
+  // получение градусов поворота змеи
+  private getDegreeRotation(orientation: TOrientation) {
+    switch (orientation) {
+      case 'up':
+        return 0
+      case 'right':
+        return 90
+      case 'down':
+        return 180
+      case 'left':
+        return -90
+    }
+  }
+
+  // отрисовка поворота элементов
+  private drawSnakeRotate(img: TViewImg, x: number, y: number, angle: number) {
+    this.canvas.save()
+    this.canvas.translate(x + this.config.gridCellWidth / 2, y + this.config.gridCellWidth / 2)
+    this.canvas.rotate(angle * (Math.PI / 180))
+    this.canvas.translate(-x - this.config.gridCellWidth / 2, -y - this.config.gridCellWidth / 2)
+    this.canvas.drawImage(img, x, y, this.config.gridCellWidth, this.config.gridCellWidth)
+    this.canvas.restore()
+  }
+
+  // очистка
   private clearSnake() {
-    this.snake.forEach(item => {
+    this.snakeListPosition.forEach(item => {
       this.canvas.clearRect(item.x, item.y, this.config.gridCellWidth, this.config.gridCellWidth)
     })
   }
 
+  // управление
   control() {
     document.addEventListener('keydown', (e) => {
-      if (e.code == 'KeyW' || e.key == 'ArrowUp') {
-        this.y = -this.config.gridCellWidth
-        this.x = 0
-      } else if (e.code == 'KeyD' || e.key == 'ArrowRight') {
-        this.x = this.config.gridCellWidth
-        this.y = 0
-      } else if (e.code == 'KeyS' || e.key == 'ArrowDown') {
-        this.y = this.config.gridCellWidth
-        this.x = 0
-      } else if (e.code == 'KeyA' || e.key == 'ArrowLeft') {
-        this.x = -this.config.gridCellWidth
-        this.y = 0
+      if (e.code == 'KeyW' || e.key == 'ArrowUp' && this.orientation !== 'down') {
+        this.orientation = 'up'
+      } else if (e.code == 'KeyD' || e.key == 'ArrowRight' && this.orientation !== 'left') {
+        this.orientation = 'right'
+      } else if (e.code == 'KeyS' || e.key == 'ArrowDown' && this.orientation !== 'up') {
+        this.orientation = 'down'
+      } else if (e.code == 'KeyA' || e.key == 'ArrowLeft' && this.orientation !== 'right') {
+        this.orientation = 'left'
       }
     })
+  }
+
+  // сброс на начальное состояние
+  reset() {
+    this.orientation = 'up'
+    this.dx = 0
+    this.dy = 0
+
+    // Начальная позиция змеи
+    this.x = this.config.startPositionSnake.x * this.config.gridCellWidth
+    this.y = this.config.startPositionSnake.y * this.config.gridCellWidth
+
+    // Длина змеи
+    this.maxBodySnake = this.config.maxBodySnake
+
+    this.snakeListPosition = []
   }
 }
 
