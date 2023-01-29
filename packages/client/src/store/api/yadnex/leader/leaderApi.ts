@@ -1,5 +1,5 @@
 import yandexApi from '../yandexBaseQuery'
-import { UserScoreData, LeaderboardRequest, LeaderboardResponse } from '../../../../utils/const/api/leader'
+import { UserScoreData, LeaderboardRequest, LeaderboardResponse } from '../../../../types/leader'
 
 const getLeaderEndpoint = (endpoint: string) => `leaderboard/${endpoint}`
 

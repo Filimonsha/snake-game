@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { store } from '../store/store'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { FORUM_ROUTE, MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE, LEADERBOARD_ROUTE, PROFILE_ROUTE, GAME_ROUTE } from '../utils/const/route'
+import { FORUM_ROUTE, MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE, LEADERBOARD_ROUTE, PROFILE_ROUTE, GAME_ROUTE } from '../const/route'
 import { Main } from '../pages/main'
 import { SignIn } from '../pages/signIn'
 import { SignUp } from '../pages/signUp'

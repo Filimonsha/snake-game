@@ -8,7 +8,7 @@ import { FormField } from './components/FormField'
 import { validationSchema } from './validation'
 import { DEFAULT_USER_DATA } from './constants'
 import { useGetUserInfoQuery } from '../../../../store/api/yadnex/auth/authApi'
-import { UserFullInfo } from '../../../../utils/const/api/auth'
+import { UserFullInfo } from '../../../../types/auth'
 
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserFullInfo>(DEFAULT_USER_DATA)

@@ -7,7 +7,7 @@ import {
   VALIDATION_SCHEMA
 } from './data'
 import { useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
-import { UserShortInfo } from '../../../../utils/const/api/auth'
+import { UserShortInfo } from '../../../../types/auth'
 
 
 const FormSignIn = () => {

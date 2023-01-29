@@ -1,5 +1,5 @@
 import yandexApi from '../yandexBaseQuery'
-import { UserFullInfo, UserShortInfo } from '../../../../utils/const/api/auth'
+import { UserFullInfo, UserShortInfo } from '../../../../types/auth'
 
 const getAuthEndpoint = (endpoint: string) => `auth/${endpoint}`
 
