@@ -1,3 +1,5 @@
+@import '../../../../../../utils/const/globals.scss';
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -6,4 +8,27 @@
 .buttonGroup {
   display: flex;
   gap: 10px;
+}
+
+.buttonDanger {
+  border-radius: 20px;
+}
+
+.buttonSave, .buttonCancel {
+  border: 1px solid transparent;
+  border-radius: 20px;
+
+  &:hover {
+    background-color: $white;
+    border: 1px solid $deep-green;
+    color: $deep-green;
+  }
+}
+
+.buttonSave {
+  background-color: $yellow;
+}
+
+.buttonCancel {
+  background-color: $deep-green;
 }

@@ -1,52 +1,35 @@
 /*
-Данные функции загружают все необходимые для игры изображения и переводят их в
-base64.
+Данные функции кешируют все изображения
 Так при вторичной отрисовке они заново не подгружаются и быстрее отображаются.
 */
 
-import { getBase64FromUrl } from './utils'
+type TObjectOptimize = {
+  [p: string]: string
+}
 
-const getFoodOptimize = async () => {
-  const listFoods: { [p: string]: string } = {
-    apple: `snakeGame/food/apple.svg`,
-    banana: `snakeGame/food/banana.svg`,
-    cherry: `snakeGame/food/cherry.svg`,
-    grape: `snakeGame/food/grape.svg`,
-    pear: `snakeGame/food/pear.svg`,
-    strawberry: `snakeGame/food/strawberry.svg`
-  }
-
-  const listFoodsToBase64 = await Object.entries(listFoods).reduce(
+const objectOptimize = async (obj: TObjectOptimize) => {
+  return await Object.entries(obj).reduce(
     async (acc, [k, v]) => {
+      const img = new Image()
+      img.src = v
       return {
         ...await acc,
-        [k]: await getBase64FromUrl(v)
+        [k]: img
       }
     },
     Promise.resolve({})
   )
-
-  return listFoodsToBase64
 }
 
-const getGridsBgOptimize = async () => {
-  const listBg = [
-    `snakeGame/grid/BG-1.png`,
-    `snakeGame/grid/BG-2.png`,
-    `snakeGame/grid/BG-3.png`,
-    `snakeGame/grid/BG-4.png`,
-    `snakeGame/grid/BG-5.png`,
-    `snakeGame/grid/BG-6.png`
-  ]
-
-  const listBgToBase64 = await Promise.all(listBg.map(async (item: string) => {
-    return await getBase64FromUrl(item) as string
+const listOptimize = async (list: string[]) => {
+  return await Promise.all(list.map(async (item: string) => {
+    const img = await new Image()
+    img.src = item
+    return img
   }))
-
-  return listBgToBase64
 }
 
 export {
-  getFoodOptimize,
-  getGridsBgOptimize
+  objectOptimize,
+  listOptimize
 }

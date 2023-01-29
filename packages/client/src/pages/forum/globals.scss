@@ -1,0 +1,30 @@
+@import '../../utils/const/globals.scss';
+
+%button {
+	background-color: $yellow;
+	color: $white;
+	font-size: min(5vw, 15px);
+	outline: none;
+	border: none;
+	border-radius: 50px;
+	height: 35px;
+	width: max(20%, 120px);
+	margin: auto;
+
+	&:focus {
+		box-shadow: 0 2px 10px 0 rgba($yellow, 0.7);
+	}
+}
+
+%textArea {
+	border: none;
+	outline: none;
+	resize: none;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	background-color: $white;
+
+	&:focus {
+		outline: 1px solid rgba(0, 0, 0, 0.548);
+	}
+}

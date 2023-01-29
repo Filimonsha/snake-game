@@ -1,0 +1,37 @@
+@import '../../../../utils/const/globals.scss';
+@import './header.scss';
+@import './main.scss';
+
+.forum, .forum * {
+	margin: 0;
+	box-sizing: border-box;
+	word-break: break-all;
+}
+
+.forumWrapper {
+	height: 100vh;
+	background-color: $deep-green;
+}
+
+.forumCircle {
+	height: 100vh;
+  background: radial-gradient(rgba($background-circle, 0.25), transparent);
+}
+
+.forum {
+	display: flex;
+	flex-direction: column;
+  width: min(900px, 100%);
+	padding: $gap10;
+	margin-inline: auto;
+	font-size: min(4vw, 17px);
+	height: 100%;
+}
+
+.noAnswers  {
+	padding-inline: $gap10;
+	padding-block: $gap10;
+	margin-bottom: $gap10;
+	background-color: $grey;
+	border-radius: 5px;
+}

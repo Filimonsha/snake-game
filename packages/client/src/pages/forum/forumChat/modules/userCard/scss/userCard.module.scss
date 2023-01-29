@@ -1,0 +1,41 @@
+@import '../../../../../../utils/const/globals.scss';
+@import '../../../../globals.scss';
+@import './media.scss';
+@import './user.scss';
+
+.card, 
+.cardAnswer {
+	display: grid;
+	margin-bottom: 40px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.card {
+	background-color: $white;
+	border-radius: 5px;
+	padding: 10px 20px;
+	grid-template-columns: min-content auto;
+	gap: 40px;
+	grid-template-areas: "user answer";
+}
+
+.cardAnswer {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	border-top: 1px solid $yellow;
+	padding: 15px 0;
+}
+
+
+.submitButton {
+	@extend %button;
+	margin: unset;
+
+	&:focus {
+		box-shadow: 0 2px 10px 0 rgba($yellow, 0.7);
+	}
+}
