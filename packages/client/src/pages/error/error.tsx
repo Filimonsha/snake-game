@@ -1,6 +1,6 @@
 import styles from './error.module.scss';
 import { Link } from 'react-router-dom';
-import { MAIN_ROUTE } from '../../utils/const/route';
+import { MAIN_ROUTE } from '../../const/route';
 
 interface IErrorPage {
   title: string,

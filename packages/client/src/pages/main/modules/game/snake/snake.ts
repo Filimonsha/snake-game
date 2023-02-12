@@ -50,6 +50,8 @@ class Snake {
 
     // отслеживание клавиш
     this.control()
+    
+    this.preventScroll = this.preventScroll.bind(this);
   }
 
   draw() {
@@ -160,10 +162,21 @@ class Snake {
       this.canvas.clearRect(item.x, item.y, this.config.gridCellWidth, this.config.gridCellWidth)
     })
   }
+  
+  
+  // запрет на скролл страницы при управлении змейкой
+  private preventScroll(e: KeyboardEvent) {
+    const keys = ['KeyW', 'KeyD', 'KeyS', 'KeyA',
+                  'ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'];
+    if (keys.includes(e.code)) {
+      e.preventDefault();
+    }
+  }
 
   // управление
   control() {
     document.addEventListener('keydown', (e) => {
+      this.preventScroll(e);
       if (e.code == 'KeyW' || e.key == 'ArrowUp' && this.orientation !== 'down') {
         this.orientation = 'up'
       } else if (e.code == 'KeyD' || e.key == 'ArrowRight' && this.orientation !== 'left') {

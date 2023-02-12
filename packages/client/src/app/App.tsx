@@ -18,7 +18,7 @@ import {
   LEADERBOARD_ROUTE, 
   PROFILE_ROUTE, 
   GAME_ROUTE,
-  ERROR_ROUTE } from '../utils/const/route'
+  ERROR_ROUTE } from '../const/route'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
