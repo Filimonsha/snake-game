@@ -42,7 +42,7 @@ const ScreenStart: React.FC<IScreenStart> = ({ fnStart, score, scoreMax }) => {
             </div>
             :
             <div className={screenStartStyles.contentChoice}>
-              настройки
+              Settings
             </div>
           }
 

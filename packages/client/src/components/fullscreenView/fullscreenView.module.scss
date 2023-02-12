@@ -1,0 +1,27 @@
+.fsContainer {
+  position: relative;
+  
+  &:fullscreen {
+    background-color: #ffffff;
+  }
+  
+}
+
+.fsButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #50872c;
+  border-radius: 10px;
+  width: 45px;
+  height: 45px;
+  border: none;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+}
