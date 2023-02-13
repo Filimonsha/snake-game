@@ -1,8 +1,11 @@
+@import '../../const/globals.scss';
+
+
 .fsContainer {
   position: relative;
   
   &:fullscreen {
-    background-color: #ffffff;
+    background-color: $white;
   }
   
 }
@@ -14,7 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #50872c;
+  background: $green-neutral;
   border-radius: 10px;
   width: 45px;
   height: 45px;
