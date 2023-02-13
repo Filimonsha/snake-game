@@ -7,11 +7,13 @@ import styles from './entranceForm.module.scss';
 import { Link } from 'react-router-dom';
 import { FormInput } from '../../components/formInput';
 import { TForm, TInputsList } from './types';
+import yaIcon from '../../assets/img/yaIcon.svg';
 
 const {
   form,
   formTitle,
   formSubmit,
+  formOauth,
   formLink
 } = styles;
 
@@ -51,11 +53,13 @@ const EntranceForm: React.FC<TForm> = ({
   handleSubmit,
   handleBlur,
   handleChange,
+  handleOauth,
   values,
   errors,
   touched,
   inputsData,
-  formData
+  formData,
+  formType
 }) => (
   <Form
     noValidate 
@@ -77,16 +81,30 @@ const EntranceForm: React.FC<TForm> = ({
     />
   
     <Row className='pt-3'>
-      <Stack direction='horizontal' gap={3}>
-        <Button type='submit' className={formSubmit}>
-          {formData.buttonText}
-        </Button>
-        <Link 
-          to={formData.route} 
-          className={`ms-auto ${formLink}`}
+      <Stack gap={4}>
+        <Stack direction='horizontal' gap={3}>
+          <Button type='submit' className={formSubmit}>
+            {formData.buttonText}
+          </Button>
+          <Link 
+            to={formData.route} 
+            className={`ms-auto ${formLink}`}
+          >
+            {formData.linkText}
+          </Link>
+        </Stack>
+        {formType === 'login' && <Button 
+          className={formOauth}
+          onClick={handleOauth}
         >
-          {formData.linkText}
-        </Link>
+          <img
+            src={yaIcon}
+            alt='YandexID'
+            height='24'
+            width='24'
+          />
+          Sign in with Yandex ID
+        </Button>}
       </Stack>
     </Row>
     

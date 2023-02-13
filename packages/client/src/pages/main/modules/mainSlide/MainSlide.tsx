@@ -1,8 +1,10 @@
-import styles from './mainSlide.module.scss';
-import logoUrl from '../../../../assets/img/logo.svg';
-import mainTextUrl from '../../../../assets/img/main-text.svg';
-import { Link } from 'react-router-dom';
-import { SIGN_IN_ROUTE } from '../../../../const/route';
+import { useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
+import styles from './mainSlide.module.scss'
+import logoUrl from '../../../../assets/img/logo.svg'
+import mainTextUrl from '../../../../assets/img/main-text.svg'
+import { SIGN_IN_ROUTE } from '../../../../const/route'
+import { useSignInMutation } from '../../../../store/api/yadnex/auth/Oauth'
 
 const {
   mainSlide,
@@ -14,7 +16,16 @@ const {
   mainImg
 } = styles;
 
-export const MainSlide = () => {
+const MainSlide = () => {
+  const [searchParams] = useSearchParams()
+  const [signInWithOauth] = useSignInMutation()
+
+  useEffect(() => {
+    const code = searchParams.get(`code`)
+    if (!code) return
+    signInWithOauth(code)
+  }, [])
+
   return (
     <div className={mainSlide}>
       <div className={mainSlideBg}>
@@ -49,4 +60,4 @@ export const MainSlide = () => {
   );
 };
 
-export default MainSlide;
+export default MainSlide
