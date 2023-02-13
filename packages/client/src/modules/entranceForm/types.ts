@@ -18,7 +18,7 @@ interface IEntranceForm<Values> {
   handleSubmit: FormikHandlers['handleSubmit'],
   handleChange: FormikHandlers['handleChange'],
   handleBlur: FormikHandlers['handleBlur'],
-  handleOauth?: any, 
+  handleOauth?: () => Promise<void>, 
   values: Values,
   errors: FormikState<Values>['errors'],
   touched: FormikState<Values>['touched'],
