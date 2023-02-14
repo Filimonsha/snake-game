@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 
-const firstNameRule = /^[a-zA-Z ]{2,30}$/;
-const secondNameRule = /^[a-zA-Z ]{2,30}$/;
+const firstNameRule = /^[а-яёА-ЯЁa-zA-Z]{2,30}$/;
+const secondNameRule = /^[а-яёА-ЯЁa-zA-Z]{2,30}$/;
 const loginRule = /^[a-zA-Z0-9_-]{3,20}$/;
 const phoneRule = /^(\(\d{2,}\) ((\d{4}-\d{4})|(9\d{4}-\d{4})))|(\d{2})((9\d{8})|(\d{8}))$/;
 const passwordRule = /^(?=.*[0-9])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,40}$/;
@@ -22,7 +22,8 @@ export const validationSchema = () => {
                 .required('Required'),
     phone: Yup.string()
                 .matches(phoneRule, 'Invalid phone number')
-                .required('Required'),
+                .required('Required')
+                .nullable(),
     password: Yup.string()
                 .matches(passwordRule, '8 to 40 symbols, at least 1 number, at least one capital letter')
                 .required('Required'),

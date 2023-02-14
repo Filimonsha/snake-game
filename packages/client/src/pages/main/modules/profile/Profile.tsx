@@ -18,8 +18,7 @@ const Profile: React.FC = () => {
     if (data) {
       setUser(data)
     }
-  }, [])
-
+  }, [user, data])
 
   const handleSubmit = (data: UserFullInfo) => {
     console.log('submit', data)
@@ -61,7 +60,7 @@ const Profile: React.FC = () => {
             {({ errors, values }) => (
               <Form className={styles.form}> 
                 <div className={styles.formAvatar} onClick={handleAvatarChange}>
-                  <img src={values.avatar || user.avatar} alt='avatar' className={styles.avatarImg}></img>
+                  <img src={values.avatar || DEFAULT_USER_DATA.avatar} alt='avatar' className={styles.avatarImg}></img>
                 </div>
                 <div className={styles.formBody}>
                   <FormField 
@@ -69,7 +68,7 @@ const Profile: React.FC = () => {
                     title='Name'
                     type='text'
                     name='first_name'
-                    value={values.first_name}
+                    value={values.first_name || DEFAULT_USER_DATA.first_name}
                     error={errors.first_name}
                   />
                   <FormField 
@@ -77,7 +76,7 @@ const Profile: React.FC = () => {
                     title='Second name'
                     type='text'
                     name='second_name'
-                    value={values.second_name}
+                    value={values.second_name || DEFAULT_USER_DATA.second_name}
                     error={errors.second_name}
                   />
                   <FormField 
@@ -85,7 +84,7 @@ const Profile: React.FC = () => {
                     title='Nickname'
                     type='text'
                     name='login'
-                    value={values.login}
+                    value={values.login || DEFAULT_USER_DATA.login}
                     error={errors.login}
                   />
                   <FormField 
@@ -93,7 +92,7 @@ const Profile: React.FC = () => {
                     title='Email'
                     type='email'
                     name='email'
-                    value={values.email}
+                    value={values.email || DEFAULT_USER_DATA.email}
                     error={errors.email}
                   />
                   <FormField 
@@ -101,7 +100,7 @@ const Profile: React.FC = () => {
                     title='Phone'
                     type='phone'
                     name='phone'
-                    value={values.phone}
+                    value={values.phone || DEFAULT_USER_DATA.phone}
                     error={errors.phone}
                   />
                   <FormField 
@@ -109,7 +108,7 @@ const Profile: React.FC = () => {
                     title='Password'
                     type='password'
                     name='password'
-                    value={values.password}
+                    value={values.password || DEFAULT_USER_DATA.password}
                     error={errors.password}
                   />
                 </div>
