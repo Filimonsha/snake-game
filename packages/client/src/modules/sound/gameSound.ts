@@ -14,25 +14,19 @@ class GameSound {
     return new Audio(`${this.soundFolder}${fileName}.${extention}`);
   }
   
-  private play(audio: HTMLAudioElement | undefined) {
-    if (audio) {
-      audio.play();
-    }
-  }
-  
   playSnakeTurn(currentOrinetation: TOrientation, moveTo: TOrientation) {
     const audio = this.getAudio(moveTo);
-    currentOrinetation !== moveTo && this.play(audio);
+    currentOrinetation !== moveTo && audio?.play();
   }
   
   playSnakeEat() {
     const audio = this.getAudio('eat');
-    this.play(audio);
+    audio?.play();
   }
   
   playSnakeDie() {
     const audio = this.getAudio('die');
-    this.play(audio);
+    audio?.play();
   }
 }
 

@@ -5,23 +5,22 @@ import styles from './fullscreenView.module.scss';
 const FullscreenView: React.FC<PropsWithChildren> = ({ children }) => {
   const expandedElement = useRef(null);
   
-  let isFullscreen, setIsFullscreen;
-  let isError = false;
+  const {
+    isFullscreenSupported, 
+    isFullscreenEnabled, 
+    setFullscreen
+   } = useFullscreenStatus(expandedElement);
   
-  try {
-    [isFullscreen, setIsFullscreen] = useFullscreenStatus(expandedElement);
-  } catch (e) {
-    isError = true;
-    isFullscreen = false;
-    setIsFullscreen = undefined;
+  if (!isFullscreenSupported) {
+    return <>{ children }</>
   }
   
-  const handleExitFullscreen = () => document.exitFullscreen();
+  const exitFullscreen = () => document.exitFullscreen();
   
-  const btnFullscreen = isFullscreen ?
+  const btnFullscreen = isFullscreenEnabled ?
     <button
       type='button'
-      onClick={handleExitFullscreen}
+      onClick={exitFullscreen}
       className={styles.fsButton}
       aria-label='exit from to fullscreen mode'
     >
@@ -30,7 +29,7 @@ const FullscreenView: React.FC<PropsWithChildren> = ({ children }) => {
     :
     <button
       type='button'
-      onClick={setIsFullscreen}
+      onClick={setFullscreen}
       className={styles.fsButton}
       aria-label='switch to fullscreen mode'
     >
@@ -40,7 +39,7 @@ const FullscreenView: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div ref={expandedElement} className={styles.fsContainer}>
       {children}
-      {isError ? null : btnFullscreen}
+      {btnFullscreen}
     </div>
   );
 }
