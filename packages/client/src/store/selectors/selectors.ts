@@ -1,9 +1,9 @@
 import { RootState } from '../store';
 
-const selectGameSound = (state: RootState) => (
+const selectGameSoundState = (state: RootState) => (
   state.gameConfigurations.isGameSound
 );
 
 export {
-  selectGameSound
+  selectGameSoundState
 };

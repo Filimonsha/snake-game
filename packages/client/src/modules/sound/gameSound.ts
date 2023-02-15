@@ -1,12 +1,12 @@
 import { TOrientation } from '../../pages/main/modules/game/snake/snake';
-import { selectGameSound } from '../../store/selectors/selectors';
+import { selectGameSoundState } from '../../store/selectors/selectors';
 import { store } from '../../store/store';
 
 class GameSound {
   private soundFolder = '/src/assets/sounds/';
   
   private getAudio(fileName: string, extention = 'mp3') {
-    const isGameSound = selectGameSound(store.getState());
+    const isGameSound = selectGameSoundState(store.getState());
     
     if (!isGameSound) {
       return;
