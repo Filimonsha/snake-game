@@ -1,13 +1,14 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
-import Stack from 'react-bootstrap/Stack';
-import styles from './entranceForm.module.scss';
-import { Link } from 'react-router-dom';
-import { FormInput } from '../../components/formInput';
-import { TForm, TInputsList } from './types';
-import yaIcon from '../../assets/img/yaIcon.svg';
+import React from 'react'
+import classnames from 'classnames'
+import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Form from 'react-bootstrap/Form'
+import Stack from 'react-bootstrap/Stack'
+import styles from './entranceForm.module.scss'
+import { Link } from 'react-router-dom'
+import { FormInput } from '../../components/formInput'
+import { TForm, TInputsList } from './types'
+import yaIcon from '../../assets/img/yaIcon.svg'
 
 const {
   form,
@@ -88,7 +89,7 @@ const EntranceForm: React.FC<TForm> = ({
           </Button>
           <Link 
             to={formData.route} 
-            className={`ms-auto ${formLink}`}
+            className={classnames('ms-auto', formLink)}
           >
             {formData.linkText}
           </Link>
@@ -109,6 +110,6 @@ const EntranceForm: React.FC<TForm> = ({
     </Row>
     
   </Form>
-);
+)
 
-export default EntranceForm;
+export default EntranceForm
