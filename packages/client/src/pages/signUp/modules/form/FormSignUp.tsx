@@ -4,7 +4,8 @@ import {
   INPUTS_DATA,
   FORM_DATA,
   INITIAL_VALUES,
-  VALIDATION_SCHEMA
+  VALIDATION_SCHEMA,
+  FORM_TYPE
 } from './data'
 import { useSignUpMutation } from '../../../../store/api/yadnex/auth/authApi'
 
@@ -57,6 +58,7 @@ const FormSignUp = () => {
             touched={touched}
             inputsData={INPUTS_DATA}
             formData={FORM_DATA}
+            formType={FORM_TYPE}
           />
         )
       }
