@@ -7,26 +7,26 @@ type TObjectOptimize = {
   [p: string]: string
 }
 
-const objectOptimize = async (obj: TObjectOptimize) => {
-  return await Object.entries(obj).reduce(
-    async (acc, [k, v]) => {
+const objectOptimize = (obj: TObjectOptimize) => {
+  return Object.entries(obj).reduce(
+    (acc, [k, v]) => {
       const img = new Image()
       img.src = v
       return {
-        ...await acc,
+        ...acc,
         [k]: img
       }
     },
-    Promise.resolve({})
+    {}
   )
 }
 
-const listOptimize = async (list: string[]) => {
-  return await Promise.all(list.map(async (item: string) => {
-    const img = await new Image()
+const listOptimize = (list: string[]) => {
+  return list.map((item: string) => {
+    const img = new Image()
     img.src = item
     return img
-  }))
+  })
 }
 
 export {
