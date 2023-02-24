@@ -1,6 +1,8 @@
-import { SIGN_IN_ROUTE } from '../../../../utils/const/route';
-import { Pattern, Feedback } from '../../../../utils/const/validation';
+import { SIGN_IN_ROUTE } from '../../../../const/route';
+import { Pattern, Feedback } from '../../../../const/validation';
 import * as yup from 'yup';
+
+export const FORM_TYPE = 'register';
 
 export const INPUTS_DATA = [
   {
@@ -12,13 +14,13 @@ export const INPUTS_DATA = [
   {
     label: 'First name',
     placeholder: 'Your first name',
-    inputName: 'firstName',
+    inputName: 'first_name',
     type: 'text',
   },
   {
     label: 'Last name',
     placeholder: 'Your last name',
-    inputName: 'lastName',
+    inputName: 'last_name',
     type: 'text',
   },
   {

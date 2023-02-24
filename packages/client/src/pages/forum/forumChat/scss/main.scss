@@ -1,0 +1,19 @@
+@import '../../globals.scss';
+
+.main {
+	padding-top: $gap10;
+	padding-bottom: $gap10;
+	height: 100vh;
+	overflow: hidden;
+	overflow-y: scroll;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar { 
+		width: 0; 
+	}	
+
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+}

@@ -1,0 +1,32 @@
+@import '../../../../const/globals.scss';
+
+.header {
+	font-size: clamp(7px, 2.4vw, 20px);
+	color: $white;
+	padding: 15px 0;
+	border-bottom: 1px solid $yellow;
+}
+
+.headerContent {
+	display: flex;
+	gap: 20px;
+}
+
+.backButton {
+	background-image: url('../../../../assets/img/backButton.svg');
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+}
+
+.settings {
+	position: relative;
+
+	&:after {
+		position: absolute;
+		top: -25%;
+		right: 0;
+		content: '\2026';
+		font-size: 25px;
+	}
+}

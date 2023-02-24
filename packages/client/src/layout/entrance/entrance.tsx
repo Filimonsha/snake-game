@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './entrance.module.scss';
 import logoUrl from '../../assets/img/logo.svg';
 import { Link } from 'react-router-dom';
-import { MAIN_ROUTE } from '../../utils/const/route';
+import { MAIN_ROUTE } from '../../const/route';
 
 const {
   entrance,
@@ -16,11 +16,11 @@ const EntranceLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
     <div className={entrance}>
       <header className={entranceHeader}>
         <Link to={MAIN_ROUTE} title='На главную страницу'>
-          <img 
+          <img
             src={logoUrl}
-            alt="Логотип Snake Game" 
-            height='80' 
-            width='200' 
+            alt="Логотип Snake Game"
+            height='80'
+            width='200'
           />
         </Link>
       </header>

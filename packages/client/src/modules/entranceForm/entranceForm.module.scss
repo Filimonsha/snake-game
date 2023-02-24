@@ -1,35 +1,62 @@
+@import '../../const/globals.scss';
+
 .form {
-  background-color: #fefefe;
+  background-color: $grey;
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 4px 20px 0 rgba(237, 75, 109, 0.7);
+  box-shadow: 0 4px 20px 0 $yellow-shadow;
   
   .formTitle {
     margin-bottom: 30px;
     text-align: center;
-    color: #ed4b6d;
+    color: $deep-green;
   }
   
   .formSubmit {
-    background-color: rgba(19, 10, 53, 0.85);
+    background-color: $yellow;
     border: none;
     border-radius: 20px;
     padding: 12px 37px;
     line-height: 1;
-    color: #fefefe;
+    color: $deep-green;
     
     &:hover {
-      background-color: #130A35;
+      background-color: $deep-green;
+      color: $white;
+    }
+  }
+
+  .formOauth {
+    margin: auto;
+    background-color: $white;
+    color: black;
+    border-color: black;
+    border-radius: 100px;
+    height: 44px;
+    width: 280px;
+    font-size: 17px;
+    font-weight: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    gap: 12px;
+
+    &:active {
+      background-color: black;
+      border-color: black;
+      color: $white;
     }
   }
   
   .formLink {
     font-size: 14px;
-    color: rgba(19, 10, 53, 0.85);
+    color: $deep-green;
     text-decoration: none;
     
     &:hover {
-      color: #130A35;
+      color: $yellow-hover;
       text-decoration: underline;
     }
   }

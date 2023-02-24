@@ -1,6 +1,8 @@
 import * as yup from 'yup';
-import { SIGN_UP_ROUTE } from '../../../../utils/const/route';
-import { Pattern } from '../../../../utils/const/validation';
+import { SIGN_UP_ROUTE } from '../../../../const/route';
+import { Pattern } from '../../../../const/validation';
+
+export const FORM_TYPE = 'login';
 
 export const INPUTS_DATA = [
   {

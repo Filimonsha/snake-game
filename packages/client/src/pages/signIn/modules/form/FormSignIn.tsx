@@ -1,24 +1,23 @@
-import { Formik } from 'formik';
-import { EntranceForm } from '../../../../modules/entranceForm';
-import { 
+import { Formik } from 'formik'
+import { EntranceForm } from '../../../../modules/entranceForm'
+import {
   INPUTS_DATA,
   FORM_DATA,
   INITIAL_VALUES,
-  VALIDATION_SCHEMA
-} from './data';
+  VALIDATION_SCHEMA,
+  FORM_TYPE
+} from './data'
+import { useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
+import { UserShortInfo } from '../../../../types/auth'
+import { onOauth } from '../../../../store/api/yadnex/auth/Oauth'
 
-
-interface ILoginFormData {
-  login: string,
-  password: string,
-}
 
 const FormSignIn = () => {
-  
-  const handleSubmit = (data: ILoginFormData) => {
-    alert(JSON.stringify(data));
+  const [signIn] = useSignInMutation()
+  const handleSubmit = (data: UserShortInfo) => {
+    signIn(data)
   }
-  
+
   return (
     <Formik
       validationSchema={VALIDATION_SCHEMA}
@@ -27,27 +26,29 @@ const FormSignIn = () => {
     >
       {
         ({
-          handleSubmit,
-          handleChange,
-          handleBlur,
-          values,
-          errors,
-          touched
-        }) => (
+           handleSubmit,
+           handleChange,
+           handleBlur,
+           values,
+           errors,
+           touched
+         }) => (
           <EntranceForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             handleBlur={handleBlur}
+            handleOauth={onOauth}
             values={values}
             errors={errors}
             touched={touched}
             inputsData={INPUTS_DATA}
             formData={FORM_DATA}
+            formType={FORM_TYPE}
           />
         )
       }
     </Formik>
-  );
+  )
 }
 
-export default FormSignIn;
+export default FormSignIn
