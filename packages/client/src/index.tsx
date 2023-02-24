@@ -2,10 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
-import App from './app/App'
+import { App } from './app';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(<App />)
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
+  <React.StrictMode>
+      <App />
+  </React.StrictMode>
+)
 
 const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
@@ -19,4 +23,4 @@ const registerServiceWorker = async () => {
   }
 }
 
-registerServiceWorker();
+// registerServiceWorker();
