@@ -1,18 +1,18 @@
 @import '../../const/globals.scss';
 
 .inputLabel {
-  color: $deep-green;
+  color: var(--primary);
   margin-left: 5px;
 }
 
 .inputControl {
   border-radius: 10px;
   padding-left: 10px;
-  border-color: $deep-green;
+  border-color: var(--primary);
   
   &:focus {
-    border-color: $deep-green;
-    box-shadow: 0 0 0 0.25rem $yellow-shadow;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem var(--shadow-color);
   }
 }
 

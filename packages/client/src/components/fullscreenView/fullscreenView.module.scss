@@ -1,13 +1,12 @@
 @import '../../const/globals.scss';
 
-
 .fsContainer {
   position: relative;
+  background-color: var(--background-color);
   
   &:fullscreen {
-    background-color: $white;
+    background-color: var(--background-color);
   }
-  
 }
 
 .fsButton {
@@ -17,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: $green-neutral;
+  background: var(--fs-button);
   border-radius: 10px;
   width: 45px;
   height: 45px;

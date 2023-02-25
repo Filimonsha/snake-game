@@ -1,12 +1,12 @@
 @import '../../../../const/globals.scss';
 
 .board {
-  background-color: $deep-green;
+  background-color: var(--primary);
   min-height: 100vh;
 }
 
 .boardCircle {
-  background: radial-gradient(rgba($background-circle, 0.25), transparent);
+  background: radial-gradient(var(--curcle-color), transparent);
   min-height: 100vh;
 }
 
@@ -22,9 +22,9 @@
 }
 
 h1, h2 {
-  color: $yellow;
+  color: var(--secondary);
 }
 
 .table {
-  box-shadow: 0px -6px 12px 0px $yellow-shadow;
+  box-shadow: 0px -6px 12px 0px var(--shadow-color);
 }

@@ -2,10 +2,10 @@
 
 .card {
   width: 20%;
-  box-shadow: 0px -6px 12px 0px $yellow-shadow;
+  box-shadow: 0px -6px 12px 0px var(--shadow-color);
 
   border-radius: 20px;
-  background-color: $grey;
+  background-color: var(--background-color-dark);
   text-align: center;
 
   .cardImg {

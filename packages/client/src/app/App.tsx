@@ -20,6 +20,8 @@ import {
   GAME_ROUTE,
   ERROR_ROUTE } from '../const/route'
 
+import './app.module.scss';
+
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
   // если нет, то кидать на страницу авторизации.

@@ -13,7 +13,7 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	background-color: $deep-green;
+	background-color: var(--primary);
 	border-radius: 20px;
 	padding: 15px 20px;
 	margin: auto;
@@ -21,7 +21,7 @@
 
 .userAnswer {
 	background-color: #EEEEEE;
-	border: 1px solid $deep-green;
+	border: 1px solid var(--primary);
 	display: block;
 	grid-area: answer;
 	padding: $gap10;
@@ -33,7 +33,7 @@ textarea.userAnswer {
 
 .avatar {
 	display: block;
-	background-color: $grey;
+	background-color: var(--background-color-dark);
 	aspect-ratio: 1/1;
 	height: min(15vw, 100px);
 	border-radius: 50%;

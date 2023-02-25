@@ -1,15 +1,15 @@
 @import '../../../../const/globals.scss';
 
 .mainSlide {
-  color: white;
-  background-color: #163600;
+  color: var(--background-color);
+  background-color: var(--main-background-color);
   background-image: url('../../../../assets/img/wave.svg');
 }
 
 .mainSlideBg {
   min-height: 100vh;
   width: 100%;
-  background: radial-gradient(rgba($background-circle, 0.25), transparent);
+  background: radial-gradient(var(--curcle-color), transparent);
 }
 
 .mainContainer {
@@ -32,21 +32,21 @@
   display: inline-flex;
   text-transform: uppercase;
   padding: 10px 40px;
-  background-color: $yellow;
-  color: $white;
+  background-color: var(--secondary);
+  color: var(--background-color);
   text-decoration: none;
   border-radius: 20px;
   outline: none;
   font-weight: bold;
   
   &:hover {
-    color: $grey;
-    box-shadow: 0 2px 10px 0 rgba($yellow, 0.7);
+    color: var(--background-color-dark);
+    box-shadow: 0 2px 10px 0 var(--secondary-o70);
   }
   
   &:focus {
-    outline: 2px solid $grey;
-    box-shadow: 0 2px 10px 0 rgba($yellow, 0.7);
+    outline: 2px solid var(--background-color-dark);
+    box-shadow: 0 2px 10px 0 var(--secondary-o70);
   }
 }
 

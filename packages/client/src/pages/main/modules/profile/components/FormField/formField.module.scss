@@ -9,18 +9,18 @@
   position: relative;
 
   &:not(:last-of-type) {
-    border-bottom: 1px solid $yellow;
+    border-bottom: 1px solid var(--secondary);
   }
 
   & label {
-    color: $white;
+    color: var(--text-color);
   }
 
   & input {
     border: none;
     text-align: end;
     background-color: transparent;
-    color: $white;
+    color: var(--text-color);
 
     &:focus-visible {
       outline: none;

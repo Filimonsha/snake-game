@@ -1,3 +1,5 @@
+@import '../../../../const/globals.scss';
+
 .snakeGame {
   display: flex;
   flex-direction: column;
@@ -53,7 +55,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(57, 103, 9, 0.77) 21%, rgb(19 40 10 / 30%) 57%, rgba(129, 175, 25, 0) 71%);
+      background: radial-gradient(circle, $dark-green 20%, $light-dark 55%, $dark 70%);
       backdrop-filter: blur(1px);
       z-index: -1;
     }
