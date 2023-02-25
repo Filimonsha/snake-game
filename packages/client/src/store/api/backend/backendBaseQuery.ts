@@ -1,9 +1,10 @@
 import { fetchBaseQuery } from '@reduxjs/toolkit/query';
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
+import { SERVER_BASE, SERVER_PORT, SERVER_API } from '../../../const/route';
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:3001/api/v1/',
+  baseUrl: `${SERVER_BASE}${SERVER_PORT}${SERVER_API}`,
   mode: 'cors'
 })
 

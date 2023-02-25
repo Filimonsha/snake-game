@@ -13,16 +13,16 @@ export const themeApi = backendApi.injectEndpoints({
     }),
     createTheme: builder.mutation<ThemeResponse, ThemeRequest>({
       query: arg => ({
-        url: getThemeEndpoint(),
+        url: getThemeEndpoint(arg.userId),
         method: 'POST',
-        body: arg,
+        body: arg.theme,
       })
     }),
     updateTheme: builder.mutation<ThemeResponse, ThemeRequest>({
       query: arg => ({
-        url: getThemeEndpoint(),
+        url: getThemeEndpoint(arg.userId),
         method: 'PUT',
-        body: arg,
+        body: arg.theme,
       })
     }),
   })
