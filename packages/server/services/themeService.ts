@@ -1,4 +1,5 @@
 import { Theme } from '../db';
+import { DEFAULT_THEME } from '../constants';
 
 interface ITheme {
   userId: number,
@@ -7,9 +8,12 @@ interface ITheme {
 
 class ThemeService {
   
-  public getTheme = async (userId: number) => (
-    Theme.findOne({ 
+  public getOrCreateTheme = async (userId: number) => (
+    Theme.findOrCreate({
       where: { userId },
+      defaults: {
+        theme: DEFAULT_THEME,
+      },
     })
   );
   
