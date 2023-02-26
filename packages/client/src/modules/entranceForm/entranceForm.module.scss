@@ -5,13 +5,13 @@
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0 4px 20px 0 var(--shadow-color);
-  
+
   .formTitle {
     margin-bottom: 30px;
     text-align: center;
     color: var(--primary);
   }
-  
+
   .formSubmit {
     background-color: var(--secondary);
     border: none;
@@ -19,18 +19,42 @@
     padding: 12px 37px;
     line-height: 1;
     color: var(--primary);
-    
+
     &:hover {
       background-color: var(--primary);
       color: var(--background-color);
     }
   }
-  
+
+  .formOauth {
+    margin: auto;
+    background-color: $white;
+    color: black;
+    border-color: black;
+    border-radius: 100px;
+    height: 44px;
+    width: 280px;
+    font-size: 17px;
+    font-weight: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    gap: 12px;
+
+    &:active {
+      background-color: black;
+      border-color: black;
+      color: $white;
+    }
+  }
+
   .formLink {
     font-size: 14px;
     color: var(--primary);
     text-decoration: none;
-    
+
     &:hover {
       color: var(--hover-color);
       text-decoration: underline;

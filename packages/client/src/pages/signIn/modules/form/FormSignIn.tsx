@@ -4,13 +4,15 @@ import {
   INPUTS_DATA,
   FORM_DATA,
   INITIAL_VALUES,
-  VALIDATION_SCHEMA
+  VALIDATION_SCHEMA,
+  FORM_TYPE
 } from './data'
 import { useGetUserInfoQuery, useLogoutMutation, useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
 import { UserShortInfo } from '../../../../types/auth'
 import { Alert } from 'react-bootstrap'
 import { useEffect } from 'react'
 import { useGetThemeMutation } from '../../../../store/api/backend/theme/themeApi'
+import { onOauth } from '../../../../store/api/yadnex/auth/Oauth'
 
 
 const FormSignIn = () => {
@@ -60,7 +62,6 @@ const FormSignIn = () => {
               </Alert>
             }
           </>
-
         )
       }
     </Formik>
