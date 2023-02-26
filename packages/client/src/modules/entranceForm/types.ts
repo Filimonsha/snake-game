@@ -18,6 +18,7 @@ interface IEntranceForm<Values> {
   handleSubmit: FormikHandlers['handleSubmit'],
   handleChange: FormikHandlers['handleChange'],
   handleBlur: FormikHandlers['handleBlur'],
+  handleOauth?: () => Promise<void>, 
   values: Values,
   errors: FormikState<Values>['errors'],
   touched: FormikState<Values>['touched'],
@@ -26,7 +27,8 @@ interface IEntranceForm<Values> {
 export type TForm =
   IEntranceForm<{[key: string]: string}> & {
     inputsData: IInput[],
-    formData: IFormData
+    formData: IFormData,
+    formType?: string
   };
   
 export type TInputsList = Omit<TForm, 'handleSubmit' | 'formData'>;

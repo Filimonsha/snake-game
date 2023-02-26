@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import screenStartStyles from './screenStart.module.scss'
+import { useTypedSelector } from '../../../../../store/hooks/typedSelector'
+import { useTypedDispatch } from '../../../../../store/hooks/typedDispatch'
+import { gameConfigurationActions } from '../../../../../store/slice/gameConfigurationSlice';
 
 interface IScreenStart {
   fnStart: () => void
@@ -7,11 +10,20 @@ interface IScreenStart {
   scoreMax: number
 }
 
+const { toggleGameSound } = gameConfigurationActions;
+
 const ScreenStart: React.FC<IScreenStart> = ({ fnStart, score, scoreMax }) => {
   const [settingsVisible, setSettingsVisible] = useState<boolean>(false)
+  
+  const isGameSound = useTypedSelector(state => state.gameConfigurations.isGameSound);
+  const dispatch = useTypedDispatch();
 
   const settingBtnToggle = () => {
     setSettingsVisible((visible) => !visible)
+  }
+  
+  const toggleSound = () => {
+    dispatch(toggleGameSound());
   }
 
   return (
@@ -42,14 +54,32 @@ const ScreenStart: React.FC<IScreenStart> = ({ fnStart, score, scoreMax }) => {
             </div>
             :
             <div className={screenStartStyles.contentChoice}>
-              настройки
+              <b>Settings</b>
+              <div className={screenStartStyles.contentItem}>
+                <span>
+                  Game sound
+                </span>
+                <button
+                  className={screenStartStyles.contentButton}
+                  type='button'
+                  onClick={toggleSound}
+                >
+                  {isGameSound ? 'On' : 'Off'}
+                </button>
+              </div>
             </div>
           }
 
         </div>
 
         <div className={screenStartStyles.footer}>
-          <button type='button' onClick={fnStart} className={screenStartStyles.buttonStart}>Играть</button>
+          <button
+            type='button'
+            onClick={fnStart}
+            className={screenStartStyles.buttonStart}
+          >
+            Play
+          </button>
         </div>
 
       </div>

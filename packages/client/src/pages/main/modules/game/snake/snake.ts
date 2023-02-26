@@ -2,6 +2,8 @@ import Config, { TViewImg } from './config'
 import Food from './food'
 import Game from './game'
 import Score from './score'
+import { gameSound } from '../../../../../modules/sound/gameSound'
+
 
 export type TSnakePosition = {
   x: number
@@ -9,7 +11,7 @@ export type TSnakePosition = {
   orientation: TOrientation
 }
 
-type TOrientation = 'up' | 'right' | 'down' | 'left'
+export type TOrientation = 'up' | 'right' | 'down' | 'left'
 
 class Snake {
   snakeListPosition: TSnakePosition[]
@@ -50,6 +52,8 @@ class Snake {
 
     // отслеживание клавиш
     this.control()
+    
+    this.preventScroll = this.preventScroll.bind(this);
   }
 
   draw() {
@@ -94,6 +98,7 @@ class Snake {
   // проверка позииции змеи и еды
   private checkPositionSnakeAndFood() {
     if (this.snakeListPosition[0].x === this.food.x && this.snakeListPosition[0].y === this.food.y) {
+      gameSound.playSnakeEat();
       this.score.scorePlus()
       this.food.random(this.snakeListPosition)
       this.maxBodySnake += 1
@@ -117,6 +122,7 @@ class Snake {
 
     // Если совпадает с условиями останавливаем игру
     if (isDeadPosition || isEatTail) {
+      gameSound.playSnakeDie();
       this.game.stop()
       return true
     } else return false
@@ -160,17 +166,32 @@ class Snake {
       this.canvas.clearRect(item.x, item.y, this.config.gridCellWidth, this.config.gridCellWidth)
     })
   }
+  
+  
+  // запрет на скролл страницы при управлении змейкой
+  private preventScroll(e: KeyboardEvent) {
+    const keys = ['KeyW', 'KeyD', 'KeyS', 'KeyA',
+                  'ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'];
+    if (keys.includes(e.code)) {
+      e.preventDefault();
+    }
+  }
 
   // управление
   control() {
     document.addEventListener('keydown', (e) => {
+      this.preventScroll(e);
       if (e.code == 'KeyW' || e.key == 'ArrowUp' && this.orientation !== 'down') {
+        gameSound.playSnakeTurn(this.orientation, 'up');
         this.orientation = 'up'
       } else if (e.code == 'KeyD' || e.key == 'ArrowRight' && this.orientation !== 'left') {
+        gameSound.playSnakeTurn(this.orientation, 'right');
         this.orientation = 'right'
       } else if (e.code == 'KeyS' || e.key == 'ArrowDown' && this.orientation !== 'up') {
+        gameSound.playSnakeTurn(this.orientation, 'down');
         this.orientation = 'down'
       } else if (e.code == 'KeyA' || e.key == 'ArrowLeft' && this.orientation !== 'right') {
+        gameSound.playSnakeTurn(this.orientation, 'left');
         this.orientation = 'left'
       }
     })
