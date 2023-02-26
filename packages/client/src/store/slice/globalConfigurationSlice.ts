@@ -1,17 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { themeApi } from '../api/backend/theme/themeApi'
 
 type InitialState = {
-  some: string
+  currentTheme: string;
 }
 
 const initialState: InitialState = {
-  some: ''
+  currentTheme: 'light'
 }
 
 const globalConfigurationSlice = createSlice({
   name: 'globalConfiguration',
   initialState,
-  reducers: {
+  reducers: {},
+  extraReducers: builder => {
+    builder.addMatcher(themeApi.endpoints.getTheme.matchFulfilled, (state, action) => {
+      state.currentTheme = action.payload.theme
+    })
   }
 })
 
