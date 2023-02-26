@@ -6,16 +6,28 @@ import {
   INITIAL_VALUES,
   VALIDATION_SCHEMA
 } from './data'
-import { useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
+import { useGetUserInfoQuery, useLogoutMutation, useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
 import { UserShortInfo } from '../../../../types/auth'
+import { Alert } from 'react-bootstrap'
+import { useEffect } from 'react'
+import { useGetThemeMutation } from '../../../../store/api/backend/theme/themeApi'
 
 
 const FormSignIn = () => {
-  const [signIn] = useSignInMutation()
+  const [signIn, { isError, isSuccess }] = useSignInMutation()
+  const [getTheme] = useGetThemeMutation()
+  const [logout] = useLogoutMutation()
+  const {data:userData} = useGetUserInfoQuery(undefined,{skip:!isSuccess})
   const handleSubmit = (data: UserShortInfo) => {
+    logout()
     signIn(data)
   }
 
+  useEffect(() => {
+    if (userData) {
+      getTheme({userId:userData.id})
+    }
+  },[userData])
   return (
     <Formik
       validationSchema={VALIDATION_SCHEMA}
@@ -31,16 +43,24 @@ const FormSignIn = () => {
            errors,
            touched
          }) => (
-          <EntranceForm
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            values={values}
-            errors={errors}
-            touched={touched}
-            inputsData={INPUTS_DATA}
-            formData={FORM_DATA}
-          />
+          <>
+            <EntranceForm
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              values={values}
+              errors={errors}
+              touched={touched}
+              inputsData={INPUTS_DATA}
+              formData={FORM_DATA}
+            />
+            {
+              isError && <Alert variant='danger'>
+                Неверный логин или пароль
+              </Alert>
+            }
+          </>
+
         )
       }
     </Formik>

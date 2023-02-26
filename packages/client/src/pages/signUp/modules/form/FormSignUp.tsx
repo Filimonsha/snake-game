@@ -6,7 +6,10 @@ import {
   INITIAL_VALUES,
   VALIDATION_SCHEMA
 } from './data'
-import { useSignUpMutation } from '../../../../store/api/yadnex/auth/authApi'
+import { useLogoutMutation, useSignUpMutation } from '../../../../store/api/yadnex/auth/authApi'
+import { useEffect, useState } from 'react'
+import { useGetThemeMutation } from '../../../../store/api/backend/theme/themeApi'
+import { UserFullInfo } from '../../../../types/auth'
 
 
 interface ISignUpFormData {
@@ -20,8 +23,11 @@ interface ISignUpFormData {
 }
 
 const FormSignUp = () => {
-  const [signUp] = useSignUpMutation()
+  const [signUp,{isSuccess,data}] = useSignUpMutation()
+  const [getTheme] = useGetThemeMutation()
+  const [logout] = useLogoutMutation()
   const handleSubmit = (data: ISignUpFormData) => {
+    logout();
     signUp({
       login: data.login,
       email: data.email,
@@ -29,10 +35,14 @@ const FormSignUp = () => {
       second_name: data.lastName,
       password: data.password,
       phone: data.phone
-    })
+    });
     delete data.passwordRepeat
   }
-
+  useEffect(()=>{
+    if (isSuccess && data){
+      getTheme({userId:data.id})
+    }
+  },[isSuccess])
   return (
     <Formik
       validationSchema={VALIDATION_SCHEMA}

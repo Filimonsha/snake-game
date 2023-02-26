@@ -10,17 +10,20 @@ import { LeaderBoard } from '../pages/main/modules/leaderBoard'
 import { Profile } from '../pages/main/modules/profile'
 import { Game } from '../pages/main/modules/game'
 import { ErrorPage } from '../pages/error'
-import { 
-  FORUM_ROUTE, 
-  MAIN_ROUTE, 
-  SIGN_IN_ROUTE, 
-  SIGN_UP_ROUTE, 
-  LEADERBOARD_ROUTE, 
-  PROFILE_ROUTE, 
+import {
+  FORUM_ROUTE,
+  MAIN_ROUTE,
+  SIGN_IN_ROUTE,
+  SIGN_UP_ROUTE,
+  LEADERBOARD_ROUTE,
+  PROFILE_ROUTE,
   GAME_ROUTE,
-  ERROR_ROUTE } from '../const/route'
+  ERROR_ROUTE
+} from '../const/route'
 
-import './app.module.scss';
+import './app.module.scss'
+import { useEffect } from 'react'
+import { useTypedSelector } from '../store/hooks/typedSelector'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
@@ -40,24 +43,36 @@ function RequireAuth({ children }: { children: JSX.Element }) {
   return children
 }
 
-function App() {
+function ThemeProvider({ children }: { children: JSX.Element }){
+  const currentTheme = useTypedSelector(state => state.globalConfigurations.currentTheme)
+  useEffect(() => {
+    const root = document.documentElement
+    root.classList.add(currentTheme)
+    console.log(root, currentTheme)
+  }, [currentTheme])
 
+  return children
+}
+
+function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
-          <Route path={SIGN_UP_ROUTE} element={<SignUp />} />
-          <Route path={MAIN_ROUTE} element={<RequireAuth><Main /></RequireAuth>} />
-          <Route path={FORUM_ROUTE} element={<ForumPick/>}/>
-			    <Route path={FORUM_ROUTE + "/*"} element={<ForumChat/>}/>
-          <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
-          <Route path={PROFILE_ROUTE} element={<Profile />} />
-          <Route path={GAME_ROUTE} element={<Game />} />
-          <Route path={ERROR_ROUTE} element={<ErrorPage title='Connection error' code='500'/>} />
-          <Route path='*' element={<ErrorPage title='Page not found' code='404'/>} />
-        </Routes>
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
+            <Route path={SIGN_UP_ROUTE} element={<SignUp />} />
+            <Route path={MAIN_ROUTE} element={<RequireAuth><Main /></RequireAuth>} />
+            <Route path={FORUM_ROUTE} element={<ForumPick />} />
+            <Route path={FORUM_ROUTE + '/*'} element={<ForumChat />} />
+            <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
+            <Route path={PROFILE_ROUTE} element={<Profile />} />
+            <Route path={GAME_ROUTE} element={<Game />} />
+            <Route path={ERROR_ROUTE} element={<ErrorPage title='Connection error' code='500' />} />
+            <Route path='*' element={<ErrorPage title='Page not found' code='404' />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
   )
 }
