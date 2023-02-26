@@ -14,6 +14,7 @@ const Profile: React.FC = () => {
   const [user, setUser] = useState<UserFullInfo>(DEFAULT_USER_DATA)
   const [isAvatarShown, setIsAvatarShown] = useState<boolean>(false);
   const {data} = useGetUserInfoQuery()
+  
   useEffect(() => {
     if (data){
       setUser(data)

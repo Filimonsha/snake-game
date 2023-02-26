@@ -5,6 +5,7 @@ import DataTable, { TableColumn } from 'react-data-table-component'
 import dummyData from './dummy.json'
 import { TopPlayerCard } from './components/TopPlayerCard'
 import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
+import { Header } from '../../../../modules/header'
 
 interface IDataRow {
   rank: number;
@@ -51,6 +52,9 @@ const LeaderBoard: React.FC = () => {
   return (
     <div className={styles.board}>
       <div className={styles.boardCircle}>
+        <div className={styles.headerContainer}>
+          <Header />
+        </div>
         <Container className={`p-5 d-flex flex-column ${styles.container}`}>
           <div className={styles.wrapperTop}>
             <h1 className='mb-3'>Top Players</h1>

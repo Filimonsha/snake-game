@@ -21,35 +21,6 @@
   justify-content: space-between;
 }
 
-.mainHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-.mainLink {
-  display: inline-flex;
-  text-transform: uppercase;
-  padding: 10px 40px;
-  background-color: var(--secondary);
-  color: var(--background-color);
-  text-decoration: none;
-  border-radius: 20px;
-  outline: none;
-  font-weight: bold;
-  
-  &:hover {
-    color: var(--background-color-dark);
-    box-shadow: 0 2px 10px 0 var(--secondary-o70);
-  }
-  
-  &:focus {
-    outline: 2px solid var(--background-color-dark);
-    box-shadow: 0 2px 10px 0 var(--secondary-o70);
-  }
-}
-
 .mainHero {
   flex-grow: 1;
   display: flex;

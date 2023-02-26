@@ -5,14 +5,18 @@ body {
 	margin: 0;
 }
 
-.forumListContainer {
-	height: 100vh;
-	background-color:  var(--primary);
+.forum {
+	background-color: var(--primary);
+}
+
+.headerContainer {
+	padding-inline: 50px;
+	padding-top: 50px;
 }
 
 .forumCircle {
-	height: 100vh;
-    background: radial-gradient(var(--curcle-color), transparent);
+	min-height: 100vh;
+  background: radial-gradient(var(--curcle-color), transparent);
 }
 
 .forumList, .forumList * {

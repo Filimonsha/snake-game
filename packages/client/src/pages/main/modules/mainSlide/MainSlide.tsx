@@ -1,15 +1,11 @@
 import styles from './mainSlide.module.scss';
-import logoUrl from '../../../../assets/img/logo.svg';
 import mainTextUrl from '../../../../assets/img/main-text.svg';
-import { Link } from 'react-router-dom';
-import { SIGN_IN_ROUTE } from '../../../../const/route';
+import { Header } from '../../../../modules/header';
 
 const {
   mainSlide,
   mainSlideBg,
   mainContainer,
-  mainLink,
-  mainHeader,
   mainHero,
   mainImg
 } = styles;
@@ -19,20 +15,7 @@ export const MainSlide = () => {
     <div className={mainSlide}>
       <div className={mainSlideBg}>
         <div className={mainContainer}>
-          <header className={mainHeader}>
-            <img
-              src={logoUrl}
-              alt="Логотип Snake Game"
-              height='80'
-              width='200'
-            />
-            <Link
-              to={SIGN_IN_ROUTE}
-              className={mainLink}
-            >
-              Log in
-            </Link>
-          </header>
+          <Header />
           <main className={mainHero}>
             <h1 className='visually-hidden'>Snake Game</h1>
             <img
