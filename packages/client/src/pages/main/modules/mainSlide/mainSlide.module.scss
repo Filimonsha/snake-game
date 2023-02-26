@@ -1,4 +1,4 @@
-@import '../../../../utils/const/globals.scss';
+@import '../../../../const/globals.scss';
 
 .mainSlide {
   color: white;
@@ -38,12 +38,12 @@
   border-radius: 20px;
   outline: none;
   font-weight: bold;
-  
+
   &:hover {
     color: $grey;
     box-shadow: 0 2px 10px 0 rgba($yellow, 0.7);
   }
-  
+
   &:focus {
     outline: 2px solid $grey;
     box-shadow: 0 2px 10px 0 rgba($yellow, 0.7);
@@ -60,7 +60,7 @@
 .mainImg {
   display: block;
   object-fit: contain;
-  
+
   @media screen and (max-width: 700px) {
     width: 400px;
     height: 200px;

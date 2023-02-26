@@ -10,15 +10,15 @@ import { LeaderBoard } from '../pages/main/modules/leaderBoard'
 import { Profile } from '../pages/main/modules/profile'
 import { Game } from '../pages/main/modules/game'
 import { ErrorPage } from '../pages/error'
-import { 
-  FORUM_ROUTE, 
-  MAIN_ROUTE, 
-  SIGN_IN_ROUTE, 
-  SIGN_UP_ROUTE, 
-  LEADERBOARD_ROUTE, 
-  PROFILE_ROUTE, 
+import {
+  FORUM_ROUTE,
+  MAIN_ROUTE,
+  SIGN_IN_ROUTE,
+  SIGN_UP_ROUTE,
+  LEADERBOARD_ROUTE,
+  PROFILE_ROUTE,
   GAME_ROUTE,
-  ERROR_ROUTE } from '../utils/const/route'
+  ERROR_ROUTE } from '../const/route'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,

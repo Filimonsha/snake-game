@@ -1,6 +1,6 @@
 import styles from './error.module.scss';
 import { Link } from 'react-router-dom';
-import { MAIN_ROUTE } from '../../utils/const/route';
+import { MAIN_ROUTE } from '../../const/route';
 
 interface IErrorPage {
   title: string,
@@ -16,7 +16,7 @@ const ErrorPage: React.FC<IErrorPage> = ({ title, code }) => (
       <p className={styles.errorPageCode}>
         {code}
       </p>
-      <Link 
+      <Link
         to={MAIN_ROUTE}
         className={styles.errorPageLink}
       >

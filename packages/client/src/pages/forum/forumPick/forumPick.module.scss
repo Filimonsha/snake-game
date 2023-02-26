@@ -1,5 +1,5 @@
 @import '../globals.scss';
-@import '../../../utils/const/globals.scss';
+@import '../../../const/globals.scss';
 
 body {
 	margin: 0;
@@ -74,7 +74,7 @@ body {
 	font-size: 20px;
 	border-bottom: 1px solid $yellow;
 
-	
+
 	&:hover {
 		color: $yellow;
 		border-bottom: 1px solid $yellow;
