@@ -1,4 +1,4 @@
-import { AllowNull, Column, ForeignKey, Model, Table } from 'sequelize-typescript'
+import { AllowNull, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript'
 
 export type TForumTopic = {
   id?: number
@@ -27,7 +27,7 @@ export class ForumTopic extends Model<TForumTopic> {
 @Table
 export class ForumResponse extends Model<TForumResponse> {
   @AllowNull(false)
-  @Column
+  @Column(DataType.TEXT)
   text!: string
 
   @AllowNull(false)
