@@ -1,6 +1,4 @@
-import { Provider } from 'react-redux'
-import { store } from '../store/store'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { Main } from '../pages/main'
 import { SignIn } from '../pages/signIn'
 import { SignUp } from '../pages/signUp'
@@ -41,8 +39,6 @@ function RequireAuth({ children }: { children: JSX.Element }) {
 function App() {
 
   return (
-    <Provider store={store}>
-      <BrowserRouter>
         <Routes>
           <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
           <Route path={SIGN_UP_ROUTE} element={<SignUp />} />
@@ -51,12 +47,10 @@ function App() {
 			    <Route path={FORUM_ROUTE + "/*"} element={<ForumChat/>}/>
           <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
           <Route path={PROFILE_ROUTE} element={<Profile />} />
-          <Route path={GAME_ROUTE} element={<Game />} />
+          {/* <Route path={GAME_ROUTE} element={<Game />} /> */}
           <Route path={ERROR_ROUTE} element={<ErrorPage title='Connection error' code='500'/>} />
           <Route path='*' element={<ErrorPage title='Page not found' code='404'/>} />
         </Routes>
-      </BrowserRouter>
-    </Provider>
   )
 }
 
