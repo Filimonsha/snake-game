@@ -21,7 +21,7 @@ export const getResponsesList = async (req: Request, res: Response) => {
 
     const forumResponses = await ForumResponse.findAll({
       where: { topicId },
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'ASC']]
     })
 
     return res.json(forumResponses)
