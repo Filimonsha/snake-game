@@ -6,9 +6,10 @@ const DEFAULT_THEME = 'light'
 export const requestTheme = async (req: Request, res: Response) => {
   try {
     const { idUser } = req.params
+    const numberIdUser = Number(idUser)
 
     const [currentTheme] = await ThemeSite.findOrCreate({
-      where: { idUser },
+      where: { idUser:numberIdUser },
       defaults: {
         theme: DEFAULT_THEME
       }
@@ -26,9 +27,10 @@ export const createTheme = async (req: Request, res: Response) => {
   try {
     const { idUser } = req.params
     const { theme } = req.body
+    const numberIdUser = Number(idUser)
 
     const newTheme = await ThemeSite.create({
-      idUser,
+      idUser:numberIdUser,
       theme
     })
 
@@ -44,11 +46,12 @@ export const updateTheme = async (req: Request, res: Response) => {
   try {
     const { idUser } = req.params
     const { theme } = req.body
+    const numberIdUser = Number(idUser)
 
     const response = await ThemeSite.update(
       { theme },
       {
-        where: { idUser },
+        where: { idUser:numberIdUser },
         returning: true
       }
     )

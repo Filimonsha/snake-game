@@ -18,9 +18,10 @@ export const getTopicsList = async (_req: Request, res: Response) => {
 export const getResponsesList = async (req: Request, res: Response) => {
   try {
     const { topicId } = req.params
+    const numberTopicId = Number(topicId)
 
     const forumResponses = await ForumResponse.findAll({
-      where: { topicId },
+      where: { topicId: numberTopicId },
       order: [['createdAt', 'ASC']]
     })
 
@@ -35,10 +36,11 @@ export const getResponsesList = async (req: Request, res: Response) => {
 export const createTopic = async (req: Request, res: Response) => {
   try {
     const { title, creatorUserId } = req.body
+    const numberCreatorUserId = Number(creatorUserId)
 
     const forumTopic = await ForumTopic.create({
       title,
-      creatorUserId
+      creatorUserId:numberCreatorUserId
     })
 
     return res.status(201).json(forumTopic)
@@ -53,12 +55,13 @@ export const createResponse = async (req: Request, res: Response) => {
   try {
     const { topicId } = req.params
     const { text, idUser } = req.body
+    const numberIdUser = Number(idUser)
     const numberTopicId = Number(topicId)
 
     const forumResponse = await ForumResponse.create({
       text,
       topicId: numberTopicId,
-      idUser,
+      idUser: numberIdUser
     })
 
     return res.status(201).json(forumResponse)

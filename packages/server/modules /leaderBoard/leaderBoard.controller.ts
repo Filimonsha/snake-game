@@ -18,9 +18,10 @@ export const getLeaderList = async (_req: Request, res: Response) => {
 export const getPointUser = async (req: Request, res: Response) => {
   try {
     const { idUser } = req.params
+    const numberIdUser = Number(idUser)
 
     const pointUser = await LeaderBoard.findOne({
-      where: { idUser }
+      where: { idUser:numberIdUser }
     });
 
     return res.json(pointUser)
@@ -35,11 +36,18 @@ export const writePointUser = async (req: Request, res: Response) => {
   try {
     const { idUser } = req.params
     const { point } = req.body
+    const numberIdUser = Number(idUser)
     const numberPoint = Number(point)
 
     const [user] = await LeaderBoard.findOrCreate({
-      where: { idUser }
+      where: { idUser:numberIdUser },
+      defaults: {
+        idUser: numberIdUser,
+        point: 0
+      }
     })
+
+    console.log(user)
 
     user.point = Math.max(user.point, numberPoint)
     await user.save()

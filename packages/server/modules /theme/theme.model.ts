@@ -1,18 +1,18 @@
 import { AllowNull, Column, Model, PrimaryKey, Table } from 'sequelize-typescript'
 
 export type TThemeSite = {
-  idUser?: string,
+  idUser?: number,
   theme: string,
 }
 
-@Table({ 
-  timestamps: false 
+@Table({
+  timestamps: false
 })
 export class ThemeSite extends Model<TThemeSite> {
   @PrimaryKey
   @AllowNull(false)
   @Column
-  idUser!: string
+  idUser!: number
 
   @AllowNull(false)
   @Column

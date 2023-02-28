@@ -3,14 +3,14 @@ import { AllowNull, Column, DataType, ForeignKey, Model, Table } from 'sequelize
 export type TForumTopic = {
   id?: number
   title: string
-  creatorUserId: string
+  creatorUserId: number
 }
 
 export type TForumResponse = {
   id?: number
   text: string
   topicId: number
-  idUser: string
+  idUser: number
 }
 
 @Table
@@ -21,7 +21,7 @@ export class ForumTopic extends Model<TForumTopic> {
 
   @AllowNull(false)
   @Column
-  creatorUserId!: string
+  creatorUserId!: number
 }
 
 @Table
@@ -37,5 +37,5 @@ export class ForumResponse extends Model<TForumResponse> {
 
   @AllowNull(false)
   @Column
-  idUser!: string
+  idUser!: number
 }

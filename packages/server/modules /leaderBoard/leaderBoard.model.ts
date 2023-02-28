@@ -1,7 +1,7 @@
 import { AllowNull, Column, Model, PrimaryKey, Table } from 'sequelize-typescript'
 
 export type TLeaderBoard = {
-  idUser: string
+  idUser: number
   point: number
 }
 
@@ -9,7 +9,7 @@ export type TLeaderBoard = {
 export class LeaderBoard extends Model<TLeaderBoard> {
   @PrimaryKey
   @Column
-  idUser!: string
+  idUser!: number
 
   @AllowNull(false)
   @Column
