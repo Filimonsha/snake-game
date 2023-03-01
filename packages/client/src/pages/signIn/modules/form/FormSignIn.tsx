@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Formik } from 'formik'
 import { EntranceForm } from '../../../../modules/entranceForm'
 import {
@@ -11,11 +12,13 @@ import { useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
 import { UserShortInfo } from '../../../../types/auth'
 import { onOauth } from '../../../../store/api/yadnex/auth/Oauth'
 
-
 const FormSignIn = () => {
   const [signIn] = useSignInMutation()
+  const navigate = useNavigate()
+
   const handleSubmit = (data: UserShortInfo) => {
     signIn(data)
+    return navigate('/game')
   }
 
   return (

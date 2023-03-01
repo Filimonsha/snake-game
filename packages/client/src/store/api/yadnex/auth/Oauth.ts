@@ -15,7 +15,7 @@ export const onOauth = async () => {
 
 export const oauthApi = yandexApi.injectEndpoints({
   endpoints: builder => ({
-    signIn: builder.mutation<string, string>({
+    Oauth: builder.mutation<string, string>({
       query: arg => ({
         url: OAUTH_URL,
         method: 'POST',
@@ -29,5 +29,5 @@ export const oauthApi = yandexApi.injectEndpoints({
 })
 
 export const {
-  useSignInMutation
+  useOauthMutation
 } = oauthApi
