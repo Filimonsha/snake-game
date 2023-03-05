@@ -4,7 +4,7 @@ import styles from './mainSlide.module.scss'
 import logoUrl from '../../../../assets/img/logo.svg'
 import mainTextUrl from '../../../../assets/img/main-text.svg'
 import { SIGN_IN_ROUTE } from '../../../../const/route'
-import { useSignInMutation } from '../../../../store/api/yadnex/auth/Oauth'
+import { useOauthMutation } from '../../../../store/api/yadnex/auth/Oauth'
 
 const {
   mainSlide,
@@ -18,7 +18,7 @@ const {
 
 const MainSlide = () => {
   const [searchParams] = useSearchParams()
-  const [signInWithOauth] = useSignInMutation()
+  const [signInWithOauth] = useOauthMutation()
 
   useEffect(() => {
     const code = searchParams.get(`code`)
