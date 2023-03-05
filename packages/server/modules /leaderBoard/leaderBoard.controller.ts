@@ -47,8 +47,6 @@ export const writePointUser = async (req: Request, res: Response) => {
       }
     })
 
-    console.log(user)
-
     user.point = Math.max(user.point, numberPoint)
     await user.save()
 

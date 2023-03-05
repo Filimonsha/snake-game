@@ -1,11 +1,40 @@
-import type { NextFunction, Request, Response } from 'express'
+import type { Response, NextFunction } from 'express';
+import { User } from '../modules /auth/auth.model';
+import * as jwt from 'jsonwebtoken';
+import { getToken } from './getToken';
+import type { TUserRequest } from '../types/user';
 
-export const checkLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-  // если true то дальше, false ошибка
-  if (req) {
-    next()
-  } else {
-    const message = 'Not logged in!'
-    res.status(401).send({ message })
+const checkLoggedIn = async (req: TUserRequest, res: Response, next: NextFunction) => {
+  
+  const token = getToken(req);
+  
+  if (!token) {
+    return res.status(401)
+      .json('Not logged in')
+  }
+
+  try {
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET!) as {id: number};
+
+    const user = await User.findOne({
+      where: {
+        id: decodedToken.id
+      }
+    });
+
+    if (!user) {
+      return res.status(401)
+        .json({ reason: 'User not found' });
+    }
+    
+    req.user = user;
+    next();
+    return;
+    
+  } catch (error) {
+    return res.status(500)
+      .json({ reason: `${error}` });
   }
 }
+
+export { checkLoggedIn };

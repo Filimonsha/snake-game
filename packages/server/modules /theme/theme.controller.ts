@@ -1,66 +1,65 @@
-import type { Request, Response } from 'express'
+import type { Response } from 'express'
+import type { TUserRequest } from '../../types/user';
 import { ThemeSite } from './theme.model'
 
 const DEFAULT_THEME = 'light'
 
-export const requestTheme = async (req: Request, res: Response) => {
+export const requestTheme = async (req: TUserRequest, res: Response) => {
   try {
-    const { idUser } = req.params
-    const numberIdUser = Number(idUser)
+    const idUser = req.user?.id
 
     const [currentTheme] = await ThemeSite.findOrCreate({
-      where: { idUser:numberIdUser },
+      where: { idUser },
       defaults: {
         theme: DEFAULT_THEME
       }
     })
 
     return res.json(currentTheme)
-  } catch (err) {
+  } catch (error) {
     return res
       .status(500)
-      .json({ errors: 'Error' })
+      .json({ reason: `${error}`})
   }
 }
 
-export const createTheme = async (req: Request, res: Response) => {
+export const createTheme = async (req: TUserRequest, res: Response) => {
   try {
-    const { idUser } = req.params
+    
+    const idUser = req.user?.id
     const { theme } = req.body
-    const numberIdUser = Number(idUser)
 
     const newTheme = await ThemeSite.create({
-      idUser:numberIdUser,
+      idUser,
       theme
     })
 
     return res.status(201).json(newTheme)
-  } catch (err) {
+  } catch (error) {
     return res
       .status(500)
-      .json({ errors: 'Error' })
+      .json({ reason: `${error}`})
   }
 }
 
-export const updateTheme = async (req: Request, res: Response) => {
+export const updateTheme = async (req: TUserRequest, res: Response) => {
   try {
-    const { idUser } = req.params
+    const idUser = req.user?.id
     const { theme } = req.body
-    const numberIdUser = Number(idUser)
 
     const response = await ThemeSite.update(
       { theme },
       {
-        where: { idUser:numberIdUser },
+        where: { idUser },
         returning: true
       }
     )
     const [updatedTheme] = response[1]
 
     return res.status(201).json(updatedTheme)
-  } catch (err) {
+  } catch (error) {
     return res
       .status(500)
-      .json({ errors: 'Error' })
+      .json({ reason: `${error}`})
   }
 }
