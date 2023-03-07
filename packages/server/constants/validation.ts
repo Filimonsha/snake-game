@@ -7,9 +7,9 @@ export const Pattern = {
 }
 
 export const Message = {
-  Phone: 'Invalid phone',
-  Password: 'Invalid password',
+  Phone: 'Invalid phone format',
+  Password: 'Invalid password format',
   Email: 'Email must be a valid email address',
-  Name: 'Invalid name',
-  Login: 'Invalid login'
+  Name: 'Invalid name format',
+  Login: 'Invalid login format'
 }

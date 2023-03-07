@@ -8,6 +8,7 @@ import { leaderBoardRoutes } from './modules /leaderBoard/leaderBoard.routes'
 import { forumRoutes } from './modules /forum/forum.routes'
 import { themeRoutes } from './modules /theme/theme.routes'
 import { authRoutes } from './modules /auth/auth.routes'
+import { userRoutes } from './modules /user/user.routes'
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 dotenv.config()
@@ -39,6 +40,7 @@ app.use(`${API_ROUTE}/leaderboard`, leaderBoardRoutes)
 app.use(`${API_ROUTE}/forum`, forumRoutes)
 app.use(`${API_ROUTE}/theme`, themeRoutes)
 app.use(`${API_ROUTE}/auth`, authRoutes)
+app.use(`${API_ROUTE}/user`, userRoutes)
 
 app.get('/', (_, res) => {
   res.json('👋 Howdy from the server :)')

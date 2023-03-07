@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
-import { validate } from 'class-validator';
-import { IsEmail, Matches } from 'class-validator';
+import { IsEmail, Matches, validate } from 'class-validator';
 import type { TUserFull } from '../../types/user';
 import { Pattern, Message } from '../../constants/validation';
 import { AllowNull, AutoIncrement, BeforeSave, Column, 
@@ -55,18 +54,17 @@ export class User extends Model<TUserFull> {
   avatar: string | null = null;
   
   @BeforeSave
-  static async hashPassword(user: User) {
+  static async validateChange (user: User) {
+    
+    const validationErrors = await validate(user);
+    if (validationErrors.length) {
+      throw new Error('Some fields are not valid');
+    }
+    
     if (user.changed('password')) {
-      const isPasswordValid = await validate(
-        user.password, { constraints: { matches: Pattern.Password } });
       
-      if (isPasswordValid.length) {
+      if (!Pattern.Password.test(user.password)) {
         throw new Error(Message.Password);
-      }
-      
-      const validationErrors = await validate(user);
-      if (validationErrors.length) {
-        throw new Error('Some fields are not valid');
       }
       
       const hash = await bcrypt.hash(user.password, SALT_ROUNDS);
