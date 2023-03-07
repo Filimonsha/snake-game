@@ -60,6 +60,10 @@ const Profile: React.FC = () => {
             {({ errors, values }) => (
               <Form className={styles.form}> 
                 <div className={styles.formAvatar} onClick={handleAvatarChange}>
+                  {/* Полный роут для аватара 
+                      RESOURCES_URL/values.avatar 
+                      RESOURCES_URL = BASE_SERVER_URL + 'resources/'
+                  */}
                   <img src={values.avatar || DEFAULT_USER_DATA.avatar} alt='avatar' className={styles.avatarImg}></img>
                 </div>
                 <div className={styles.formBody}>

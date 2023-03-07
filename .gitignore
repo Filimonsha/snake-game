@@ -6,5 +6,5 @@ node_modules/
 dist
 tmp
 
-resources/*
-!resources/.keep 
+resources/
+!resources/.keep

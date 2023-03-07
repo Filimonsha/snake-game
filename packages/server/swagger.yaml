@@ -8,13 +8,13 @@ servers:
 tags:
   - name: Auth
     description: ''
+  - name: User
+    description: ''
   - name: Theme
     description: ''
   - name: LeaderBoard
     description: ''
   - name: Forum
-    description: ''
-  - name: User
     description: ''
 paths:
   /auth/signup:
@@ -104,6 +104,82 @@ paths:
                 login: john
                 email: my@email.com
                 phone: "+79223332211"
+                avatar: "/path/to/avatar.jpg"
+    /user/profile:
+    put:
+      summary: 'Update profile data'
+      tags: [User]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                second_name:
+                  type: string
+                display_name:
+                  type: string
+                login:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+      responses:
+        200:
+          description: User info
+          content: 
+            application/json:
+              example:
+                id: 1
+                first_name: John
+                second_name: Doe
+                display_name: John Doe
+                login: john
+                email: my@email.com
+                phone: "+79223332211"
+                avatar: "/path/to/avatar.jpg"
+  /user/password:
+    put:
+      summary: 'Update profile password'
+      tags: [User]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_password:
+                  type: string
+                new_password:
+                  type: string
+      responses:
+        200:
+          description: Ok
+  /user/avatar:
+    put:
+      summary: 'Uploads a file'
+      tags: [User]
+      description: 'Avatar'
+      consumes:
+        - multipart/form-data
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: User info
+          content:
+            application/json:
+              example:
                 avatar: "/path/to/avatar.jpg"
   /theme:
     get:
@@ -250,85 +326,3 @@ paths:
       responses:
         200:
           description: Success
-  /user/profile:
-    put:
-      summary: 'Update profile data'
-      tags: [User]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                first_name:
-                  type: string
-                second_name:
-                  type: string
-                display_name:
-                  type: string
-                login:
-                  type: string
-                email:
-                  type: string
-                phone:
-                  type: string
-      responses:
-        200:
-          description: User info
-          content: 
-            application/json:
-              example:
-                id: 1
-                first_name: John
-                second_name: Doe
-                display_name: John Doe
-                login: john
-                email: my@email.com
-                phone: "+79223332211"
-                avatar: "/path/to/avatar.jpg"
-  /user/avatar:
-    put:
-      summary: 'Uploads a file'
-      tags: [User]
-      description: 'Avatar'
-      consumes:
-        - multipart/form-data
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                avatar:
-                  type: string
-                  format: binary
-        200:
-          description: User info
-          content:
-            application/json:
-              example:
-                id: 1
-                first_name: John
-                second_name: Doe
-                display_name: John Doe
-                login: john
-                email: my@email.com
-                phone: "+79223332211"
-                avatar: "/path/to/avatar.jpg"
-  /user/password:
-    put:
-      summary: 'Update profile password'
-      tags: [User]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                old_password:
-                  type: string
-                new_password:
-                  type: string
-      responses:
-        200:
-          description: Ok

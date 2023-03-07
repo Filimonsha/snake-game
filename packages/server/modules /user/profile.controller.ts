@@ -87,7 +87,3 @@ export const updatePassword = async (req: TUserRequest, res: Response) => {
       .json({ reason: `${error}`});
   }
 }
-
-export const updateAvatar = () => {
-  console.log('😃')
-}
