@@ -1,6 +1,5 @@
 import type { Request, Response } from 'express';
 import type { TUserLogin, TUserFull } from '../../types/user';
-import { validate } from 'class-validator';
 import { User } from './auth.model';
 import { createSendToken } from '../../utils/createSendToken';
 import type { TUserRequest } from '../../types/user';
@@ -11,17 +10,8 @@ export const signUpUser = async (req: Request, res: Response) => {
     
     const userData: TUserFull = req.body;
     const user = await User.create(userData);
-    const validationErrors = await validate(user);
-
-    if (validationErrors.length > 0) {
-      const reason = validationErrors.join(', ')
-      return res
-        .status(400)
-        .json({ reason });
-    }
 
     await user.save();
-    
     return createSendToken(user, 201, res);
     
   } catch (error) {

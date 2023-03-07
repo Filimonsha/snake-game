@@ -64,6 +64,11 @@ export class User extends Model<TUserFull> {
         throw new Error(Message.Password);
       }
       
+      const validationErrors = await validate(user);
+      if (validationErrors.length) {
+        throw new Error('Some fields are not valid');
+      }
+      
       const hash = await bcrypt.hash(user.password, SALT_ROUNDS);
       user.password = hash;
     }
