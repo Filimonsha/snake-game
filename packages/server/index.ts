@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 import express from 'express'
-// import { dbConnect } from './db'
+import { dbConnect } from './db'
 import { json, urlencoded } from 'body-parser'
 import { leaderBoardRoutes } from './modules /leaderBoard/leaderBoard.routes'
 import { forumRoutes } from './modules /forum/forum.routes'
@@ -30,7 +30,7 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 
 // db connect
-// dbConnect()
+dbConnect()
 
 // swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
