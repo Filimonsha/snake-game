@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
-import { User } from '../modules /auth/auth.model';
+import { User } from '../modules/auth/auth.model';
 import * as jwt from 'jsonwebtoken';
 import { getToken } from '../utils/getToken';
 

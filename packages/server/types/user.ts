@@ -1,4 +1,4 @@
-import type { User } from '../modules /auth/auth.model';
+import type { User } from '../modules/auth/auth.model';
 import type { Request } from 'express';
 
 export type TUserFull = {

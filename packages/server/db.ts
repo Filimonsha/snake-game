@@ -1,9 +1,9 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
 import dotenv from 'dotenv'
-import { LeaderBoard } from './modules /leaderBoard/leaderBoard.model'
-import { ForumResponse, ForumTopic } from './modules /forum/forum.model'
-import { ThemeSite } from './modules /theme/theme.model'
-import { User } from './modules /auth/auth.model'
+import { LeaderBoard } from './modules/leaderBoard/leaderBoard.model'
+import { ForumResponse, ForumTopic } from './modules/forum/forum.model'
+import { ThemeSite } from './modules/theme/theme.model'
+import { User } from './modules/auth/auth.model'
 
 dotenv.config()
 

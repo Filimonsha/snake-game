@@ -1,7 +1,7 @@
 import type { Response, CookieOptions } from 'express';
 import * as jwt from 'jsonwebtoken';
 import dotenv from 'dotenv'
-import type { User } from '../modules /auth/auth.model';
+import type { User } from '../modules/auth/auth.model';
 
 dotenv.config()
 

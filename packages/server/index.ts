@@ -4,11 +4,11 @@ import cookieParser from 'cookie-parser';
 import express from 'express'
 import { dbConnect } from './db'
 import { json, urlencoded } from 'body-parser'
-import { leaderBoardRoutes } from './modules /leaderBoard/leaderBoard.routes'
-import { forumRoutes } from './modules /forum/forum.routes'
-import { themeRoutes } from './modules /theme/theme.routes'
-import { authRoutes } from './modules /auth/auth.routes'
-import { userRoutes } from './modules /user/user.routes'
+import { leaderBoardRoutes } from './modules/leaderBoard/leaderBoard.routes'
+import { forumRoutes } from './modules/forum/forum.routes'
+import { themeRoutes } from './modules/theme/theme.routes'
+import { authRoutes } from './modules/auth/auth.routes'
+import { userRoutes } from './modules/user/user.routes'
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 dotenv.config()
