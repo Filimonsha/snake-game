@@ -1,4 +1,4 @@
-import { checkLoggedIn } from '../../utils/checkLoggedIn'
+import { checkLoggedIn } from '../../middlewares/checkLoggedIn'
 import { Router } from 'express'
 import { createResponse, createTopic, getResponsesList, getTopicsList } from './forum.controller'
 

@@ -87,3 +87,34 @@ export const updatePassword = async (req: TUserRequest, res: Response) => {
       .json({ reason: `${error}`});
   }
 }
+
+export const updateAvatar = async (req: TUserRequest, res: Response) => {
+  try {
+    
+    if (!req.user) {
+      return res
+      .status(404)
+      .json({ reason: 'Not logged in or user not found'})
+    }
+    
+    const { id, avatar } = req.user.dataValues
+    
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ reason: 'User not found' });
+    }
+
+    user.avatar = avatar;
+    await user.save();
+    const userData = getUserProfileData(user.dataValues);
+
+    return res.status(201).json(userData);
+    
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ reason: `${error}`})
+  }
+}

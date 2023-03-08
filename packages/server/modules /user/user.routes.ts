@@ -1,9 +1,14 @@
 import { Router } from 'express'
-import { updateProfile, updatePassword } from './profile.controller'
-import { upload, uploadAvatar } from './avatar.controller';
-import { checkLoggedIn } from '../../utils/checkLoggedIn'
+import { updateProfile, updatePassword, updateAvatar } from './user.controller'
+import { upload, uploadAvatar } from '../../middlewares/uploadAvatar';
+import { checkLoggedIn } from '../../middlewares/checkLoggedIn'
 
 export const userRoutes = Router({ mergeParams: true })
   .put('/profile', checkLoggedIn, updateProfile)
   .put('/password', checkLoggedIn, updatePassword)
-  .put('/avatar', upload.single('avatar'), uploadAvatar)
+  .put('/avatar',
+    checkLoggedIn,
+    upload.single('avatar'), 
+    uploadAvatar, 
+    updateAvatar
+  )

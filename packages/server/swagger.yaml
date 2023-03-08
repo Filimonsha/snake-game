@@ -180,6 +180,13 @@ paths:
           content:
             application/json:
               example:
+                id: 1
+                first_name: John
+                second_name: Doe
+                display_name: John Doe
+                login: john
+                email: my@email.com
+                phone: "+79223332211"
                 avatar: "/path/to/avatar.jpg"
   /theme:
     get:

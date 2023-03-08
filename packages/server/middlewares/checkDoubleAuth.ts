@@ -1,7 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
 import { User } from '../modules /auth/auth.model';
 import * as jwt from 'jsonwebtoken';
-import { getToken } from './getToken';
+import { getToken } from '../utils/getToken';
+
+
+// Проверка авторизации, чтобы пользователь 
+// не мог зарегистрироваться или залогиниться дважды
+// или сделать сразу одно и другое
 
 const checkDoubleAuth = async (req: Request, res: Response, next: NextFunction) => {
   
@@ -13,7 +18,7 @@ const checkDoubleAuth = async (req: Request, res: Response, next: NextFunction) 
   }
 
   try {
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET!) as { id: number };
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET || '') as { id: number };
 
     const user = await User.findOne({
       where: {

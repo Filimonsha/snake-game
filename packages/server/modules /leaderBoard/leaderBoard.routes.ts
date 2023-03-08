@@ -1,4 +1,4 @@
-import { checkLoggedIn } from '../../utils/checkLoggedIn'
+import { checkLoggedIn } from '../../middlewares/checkLoggedIn'
 import { getLeaderList, getPointUser, writePointUser } from './leaderBoard.controller'
 import { Router } from 'express'
 

@@ -35,6 +35,9 @@ dbConnect()
 // swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// avatars
+app.use('/resources', express.static('resources'));
+
 // routes
 app.use(`${API_ROUTE}/leaderboard`, leaderBoardRoutes)
 app.use(`${API_ROUTE}/forum`, forumRoutes)
