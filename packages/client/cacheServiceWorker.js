@@ -1,7 +1,7 @@
 const CACHE_PREFIX = 'snake-game-cache';
 const CACHE_VERSION = 'v1';
 const CACHE_NAME = `${CACHE_PREFIX}-${CACHE_VERSION}`;
-const TIMEOUT = 10000;
+const TIMEOUT = 5000;
 
 
 // Динамический импорт ресурсов для кэширования
@@ -62,22 +62,28 @@ const putToCache = async (request, cacheName, response) => {
 //  Получение данных из сети
 //  Если время получения данных больше timeout, промис реджектится
 
-const getFromNetwork = async (request) => {
-  try {
-    const response = await fetch(request, {mode: 'cors'});
+const getFromNetwork = async (request, _cacheName, timeout) => (
+  new Promise((fulfill, reject) => {
+    let timeoutId;
     
-    if (!response.url.startsWith('http://localhost:3000')) {
-      console.log(response)
+    const fetchData = async () => {
+      try {
+        const response = await fetch(request);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        clearTimeout(timeoutId);
+        fulfill(response);
+      } catch (err) {
+        console.error(`Error fetching from network: ${err}`);
+        reject(err);
+      }
     }
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response;
-  } catch (err) {
-    console.log(request)
-    console.error(`Error fetching from network: ${err}`);
-  }
-};
+    
+    timeoutId = setTimeout(() => reject(new Error('No connection')), timeout);
+    fetchData();
+  })
+);
 
 
 // Получение данных из кэша
