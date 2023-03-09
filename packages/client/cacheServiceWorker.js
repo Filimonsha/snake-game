@@ -1,7 +1,7 @@
 const CACHE_PREFIX = 'snake-game-cache';
 const CACHE_VERSION = 'v1';
 const CACHE_NAME = `${CACHE_PREFIX}-${CACHE_VERSION}`;
-const TIMEOUT = 5000;
+const TIMEOUT = 10000;
 
 
 // Динамический импорт ресурсов для кэширования
@@ -62,16 +62,20 @@ const putToCache = async (request, cacheName, response) => {
 //  Получение данных из сети
 //  Если время получения данных больше timeout, промис реджектится
 
-const getFromNetwork = (request, cacheName, timeout) => (
+const getFromNetwork = async (request, _cacheName, timeout) => (
   new Promise((fulfill, reject) => {
     let timeoutId;
     
-    const fetchData = async() => {
+    const fetchData = async () => {
       try {
         const response = await fetch(request);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         clearTimeout(timeoutId);
         fulfill(response);
       } catch (err) {
+        console.error(`Error fetching from network: ${err}`);
         reject(err);
       }
     }
@@ -103,12 +107,21 @@ const getFromCache = async (request, cacheName) => {
 
 const cacheData = async (request, cacheName, timeout) => {
   try {
+    if (request.method === 'POST' || request.method === 'PUT') {
+      const response = await fetch(request);
+      return response;
+    }
     const response = await getFromNetwork(request, cacheName, timeout);
-    await putToCache(request.clone(), cacheName, response.clone());
-    return response;
-  } catch {
+    if (response) {
+      await putToCache(request.clone(), cacheName, response.clone());
+      return response;
+    }
     const cache = await getFromCache(request, cacheName);
-    return cache;
+    if (cache) {
+      return cache;
+    }
+  } catch {
+    throw new Error('No response from network or cache');
   }
 }
 
