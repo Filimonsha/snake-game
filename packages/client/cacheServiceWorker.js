@@ -62,28 +62,22 @@ const putToCache = async (request, cacheName, response) => {
 //  Получение данных из сети
 //  Если время получения данных больше timeout, промис реджектится
 
-const getFromNetwork = async (request, cacheName, timeout) => (
-  new Promise((fulfill, reject) => {
-    let timeoutId;
+const getFromNetwork = async (request) => {
+  try {
+    const response = await fetch(request, {mode: 'cors'});
     
-    const fetchData = async () => {
-      try {
-        const response = await fetch(request);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        clearTimeout(timeoutId);
-        fulfill(response);
-      } catch (err) {
-        console.error(`Error fetching from network: ${err}`);
-        reject(err);
-      }
+    if (!response.url.startsWith('http://localhost:3000')) {
+      console.log(response)
     }
-    
-    timeoutId = setTimeout(() => reject(new Error('No connection')), timeout);
-    fetchData();
-  })
-);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response;
+  } catch (err) {
+    console.log(request)
+    console.error(`Error fetching from network: ${err}`);
+  }
+};
 
 
 // Получение данных из кэша
@@ -107,6 +101,10 @@ const getFromCache = async (request, cacheName) => {
 
 const cacheData = async (request, cacheName, timeout) => {
   try {
+    if (request.method === 'POST' || request.method === 'PUT') {
+      const response = await fetch(request);
+      return response;
+    }
     const response = await getFromNetwork(request, cacheName, timeout);
     if (response) {
       await putToCache(request.clone(), cacheName, response.clone());
@@ -116,12 +114,7 @@ const cacheData = async (request, cacheName, timeout) => {
     if (cache) {
       return cache;
     }
-    throw new Error('No response from network or cache');
   } catch {
-    const cache = await getFromCache(request, cacheName);
-    if (cache) {
-      return cache;
-    }
     throw new Error('No response from network or cache');
   }
 }

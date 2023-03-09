@@ -19,8 +19,10 @@ import {
   PROFILE_ROUTE,
   GAME_ROUTE,
   ERROR_ROUTE } from '../const/route'
+  
+import RequireAuth from '../hooks/requireAuth'
 
-function RequireAuth({ children }: { children: JSX.Element }) {
+// function RequireAuth({ children }: { children: JSX.Element }) {
   // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
   // если нет, то кидать на страницу авторизации.
 
@@ -35,8 +37,8 @@ function RequireAuth({ children }: { children: JSX.Element }) {
   // return <Navigate to='/login' state={{ from: location }} replace />
   // }
 
-  return children
-}
+//   return children
+// }
 
 function App() {
 
@@ -50,7 +52,7 @@ function App() {
           <Route path={FORUM_ROUTE} element={<ForumPick/>}/>
 			    <Route path={FORUM_ROUTE + "/*"} element={<ForumChat/>}/>
           <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
-          <Route path={PROFILE_ROUTE} element={<Profile />} />
+          <Route path={PROFILE_ROUTE} element={<RequireAuth><Profile /></RequireAuth>} />
           <Route path={GAME_ROUTE} element={<Game />} />
           <Route path={ERROR_ROUTE} element={<ErrorPage title='Connection error' code='500'/>} />
           <Route path='*' element={<ErrorPage title='Page not found' code='404'/>} />
