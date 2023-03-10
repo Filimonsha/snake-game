@@ -65,7 +65,11 @@ const Profile: React.FC = () => {
                       RESOURCES_URL = BASE_SERVER_URL + 'resources/'
                       http://localhost:3001/resources/av-278fedc8-9668-4717-b3f1-ceb677be5655-1.png
                   */}
-                  <img src={values.avatar || DEFAULT_USER_DATA.avatar} alt='avatar' className={styles.avatarImg}></img>
+                  <img 
+                    src={values.avatar || DEFAULT_USER_DATA.avatar} 
+                    alt='avatar' className={styles.avatarImg} 
+                    crossOrigin='anonymous'>
+                  </img>
                 </div>
                 <div className={styles.formBody}>
                   <FormField 
