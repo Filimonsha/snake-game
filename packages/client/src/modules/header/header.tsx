@@ -1,23 +1,23 @@
-import styles from './header.module.scss';
-import { Link } from 'react-router-dom';
-import logoUrl from '../../assets/img/logo.svg';
-import { ProfileSettings } from '../profileSettings';
-import { DEFAULT_USER_DATA } from '../../pages/main/modules/profile/constants';
-import { UserFullInfo } from '../../types/auth';
-import { useEffect, useState } from 'react';
-import { useGetUserInfoQuery } from '../../store/api/yadnex/auth/authApi';
+import styles from './header.module.scss'
+import { Link } from 'react-router-dom'
+import logoUrl from '../../assets/img/logo.svg'
+import { ProfileSettings } from '../profileSettings'
+import { DEFAULT_USER_DATA } from '../../pages/main/modules/profile/constants'
+import { UserFullInfo } from '../../types/auth'
+import { useEffect, useState } from 'react'
+import { useGetUserInfoQuery } from '../../store/api/yadnex/auth/authApi'
 import {
   SIGN_IN_ROUTE,
   MAIN_ROUTE,
   FORUM_ROUTE,
   LEADERBOARD_ROUTE,
   GAME_ROUTE
-} from '../../const/route';
+} from '../../const/route'
 
 
 const Header = () => {
-  const [user, setUser] = useState<UserFullInfo>(DEFAULT_USER_DATA);
-  const [isProfileShown, setIsProfileShown] = useState<boolean>(false);
+  const [user, setUser] = useState<UserFullInfo>(DEFAULT_USER_DATA)
+  const [isProfileShown, setIsProfileShown] = useState<boolean>(false)
   const { data, isSuccess } = useGetUserInfoQuery()
   
   useEffect(() => {
@@ -25,20 +25,16 @@ const Header = () => {
       setUser(data)
     }
   }, [data])
-  
-  const showProfile = () => {
-    setIsProfileShown(true);
-  }
-  
-  const hideProfile = () => {
-    setIsProfileShown(false);
+
+  const toggleShowProfile = () => {
+    isProfileShown ? setIsProfileShown(false) : setIsProfileShown(true)
   }
   
   const profile = (
     <div className={styles.profile}>
       <ProfileSettings userName={user.first_name}/>
     </div> 
-  );
+  )
   
   const avatar = (
     <div className={styles.headerAvatar}>
@@ -48,13 +44,13 @@ const Header = () => {
         className={styles.headerAvatarImg}>
       </img>
     </div>
-  );
+  )
   
   const loginLink = (
     <Link to={SIGN_IN_ROUTE} className={styles.link}>
       Log in
     </Link> 
-  );
+  )
   
   return (
     <header className={styles.header}>
@@ -82,8 +78,7 @@ const Header = () => {
       </nav>
       <div 
         className={styles.profileContainer}
-        onMouseEnter={showProfile}
-        onMouseLeave={hideProfile}
+        onClick={toggleShowProfile}
       >
         { isProfileShown && isSuccess ? profile : null }
         { isSuccess ? avatar : loginLink }
@@ -92,4 +87,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default Header

@@ -6,6 +6,7 @@ import dummyData from './dummy.json'
 import { TopPlayerCard } from './components/TopPlayerCard'
 import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
 import { Header } from '../../../../modules/header'
+import avatar from '../../../../assets/img/avatar.png'
 
 interface IDataRow {
   rank: number;
@@ -19,8 +20,8 @@ export interface IData extends IDataRow {
 }
 
 const LeaderBoard: React.FC = () => {
-  const [topPlayersData, setTopPlayersData] = useState<IData[]>([]);
-  const data = dummyData;
+  const [topPlayersData, setTopPlayersData] = useState<IData[]>([])
+  const data = dummyData
   const columns: TableColumn<IDataRow>[] = [
     {
       name: 'Rank',
@@ -29,7 +30,7 @@ const LeaderBoard: React.FC = () => {
     },
     {
       name: 'Avatar',
-      cell: row => <LeaderBoardAvatar avatar={row.avatar}/>,
+      cell: row => <LeaderBoardAvatar avatar={row.avatar ? row.avatar : avatar}/>,
       sortable: false,
     },
     {
@@ -42,11 +43,12 @@ const LeaderBoard: React.FC = () => {
       selector: row => row.score,
       sortable: true,
     },
-  ];
+  ]
 
   useEffect(() => {
-    const topPlayers = dummyData.sort((a, b) => b.score - a.score).slice(0, 3);
-    setTopPlayersData(topPlayers);
+    const topPlayers = dummyData.sort((a, b) => b.score - a.score).slice(0, 3)
+    topPlayers.forEach(player => player.avatar = (player.avatar ? player.avatar : avatar))
+    setTopPlayersData(topPlayers)
   }, [dummyData])
 
   return (

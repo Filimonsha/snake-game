@@ -4,7 +4,7 @@ export type UserShortInfo = {
 }
 
 export type UserFullInfo = {
-  id:number,
+  id?: number,
   first_name: string,
   second_name: string,
   login: string,

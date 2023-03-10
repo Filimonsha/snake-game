@@ -13,14 +13,14 @@
   }
 
   & label {
-    color: var(--text-color);
+    color: var(--text-color-white);
   }
 
   & input {
     border: none;
     text-align: end;
     background-color: transparent;
-    color: var(--text-color);
+    color: var(--text-color-white);
 
     &:focus-visible {
       outline: none;

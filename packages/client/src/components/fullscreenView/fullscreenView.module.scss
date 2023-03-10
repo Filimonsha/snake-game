@@ -2,10 +2,9 @@
 
 .fsContainer {
   position: relative;
-  background-color: var(--background-color);
   
   &:fullscreen {
-    background-color: var(--background-color);
+    background-color: var(--primary);
   }
 }
 

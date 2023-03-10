@@ -1,5 +1,19 @@
 @import '../../../../const/globals.scss';
 
+.board {
+  background-color: var(--primary);
+  min-height: 100vh;
+}
+
+.boardCircle {
+  background: radial-gradient(var(--curcle-color), transparent);
+  min-height: 100vh;
+}
+
+.headerContainer {
+  padding: 50px 50px 0 50px;
+}
+
 .snakeGame {
   display: flex;
   flex-direction: column;

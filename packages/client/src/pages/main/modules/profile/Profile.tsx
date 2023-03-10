@@ -9,11 +9,13 @@ import { validationSchema } from './validation'
 import { DEFAULT_USER_DATA } from './constants'
 import { useGetUserInfoQuery } from '../../../../store/api/yadnex/auth/authApi'
 import { UserFullInfo } from '../../../../types/auth'
+import { useNavigate } from 'react-router-dom'
 
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserFullInfo>(DEFAULT_USER_DATA)
   const [isAvatarShown, setIsAvatarShown] = useState<boolean>(false);
   const {data} = useGetUserInfoQuery()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (data) {
@@ -26,7 +28,7 @@ const Profile: React.FC = () => {
   }
 
   const handleCancel = () => {
-    console.log('cancel change')
+    return navigate('/game')
   }
 
   const handleAvatarChange = () => {

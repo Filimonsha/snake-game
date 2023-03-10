@@ -1,5 +1,7 @@
+import avatar from '../../../../assets/img/avatar.png'
+
 export const DEFAULT_USER_DATA = {
-  avatar: 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
+  avatar,
   first_name: '',
   second_name: '',
   login: '',

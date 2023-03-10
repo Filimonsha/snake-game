@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 import { PROFILE_ROUTE } from '../../const/route';
 import { ThemeToggler } from '../../components/themeToggler';
 import styles from './profileSettings.module.scss';
+import { useLogoutMutation } from '../../store/api/yadnex/auth/authApi';
 
 const ProfileSettings: React.FC<{ userName: string}> = ({ userName }) => {
+  const [logout] = useLogoutMutation()
+
+  const onLogout = () => {
+    logout()
+  }
   
   return ( 
     <div className={styles.profile}>
@@ -16,7 +22,7 @@ const ProfileSettings: React.FC<{ userName: string}> = ({ userName }) => {
         My profile
       </Link>
       <ThemeToggler />
-      <button className={styles.profileLogout}>
+      <button className={styles.profileLogout} onClick={onLogout}>
         Logout
       </button>
     </div>
