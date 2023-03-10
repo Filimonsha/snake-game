@@ -1,14 +1,20 @@
-import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
-import { themeModel } from './models/themeModel';
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript'
+import dotenv from 'dotenv'
+import { LeaderBoard } from './modules/leaderBoard/leaderBoard.model'
+import { ForumResponse, ForumTopic } from './modules/forum/forum.model'
+import { ThemeSite } from './modules/theme/theme.model'
+import { User } from './modules/auth/auth.model'
 
-const { 
+dotenv.config()
+
+const {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_DB,
-  POSTGRES_PORT 
+  POSTGRES_PORT
 } =
-  process.env;
-  
+  process.env
+
 const sequelizeOptions: SequelizeOptions = {
   host: 'localhost',
   port: Number(POSTGRES_PORT),
@@ -16,22 +22,26 @@ const sequelizeOptions: SequelizeOptions = {
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
   dialect: 'postgres',
-};
+  models: [
+    LeaderBoard,
+    ForumTopic,
+    ForumResponse,
+    ThemeSite,
+    User,
+  ]
+}
 
-export const sequelize = new Sequelize(sequelizeOptions);
-
-// Инициализируем модели
-export const Theme = sequelize.define('Theme', themeModel, { timestamps: false });
+export const sequelize = new Sequelize(sequelizeOptions)
 
 // Подключение к БД
 export const dbConnect = async () => {
   try {
-      // Проверка аутентификации в БД
-      await sequelize.authenticate();
-      // Синхронизация БД
-      await sequelize.sync();
-      console.log('Connection has been established successfully.');
+    // Проверка аутентификации в БД
+    await sequelize.authenticate()
+    // Синхронизация БД
+    await sequelize.sync({ force: false })
+    console.log('Connection has been established successfully.')
   } catch (error) {
-      console.error('Unable to connect to the database:', error);
+    console.error('Unable to connect to the database:', error)
   }
 }
