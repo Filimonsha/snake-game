@@ -3,7 +3,7 @@ import { createApi } from '@reduxjs/toolkit/dist/query/react';
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://ya-praktikum.tech/api/v2/',
+  baseUrl: 'http://localhost:3001/api/v1/',
   credentials: 'include',
   mode: 'cors'
 })

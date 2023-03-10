@@ -16,9 +16,17 @@ const FormSignIn = () => {
   const [signIn] = useSignInMutation()
   const navigate = useNavigate()
 
-  const handleSubmit = (data: UserShortInfo) => {
-    signIn(data)
-    return navigate('/game')
+  const handleSubmit = async (data: UserShortInfo) => {
+    try {
+      const result: any = await signIn(data)
+      if ('data' in result) {
+        return navigate('/game')
+      } else if ('error' in result) {
+        return alert(result.error.data.reason)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
