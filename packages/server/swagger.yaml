@@ -1,0 +1,335 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Swagger API
+  description: snake game
+servers:
+  - url: http://localhost:3001/api/v1/
+tags:
+  - name: Auth
+    description: ''
+  - name: User
+    description: ''
+  - name: Theme
+    description: ''
+  - name: LeaderBoard
+    description: ''
+  - name: Forum
+    description: ''
+paths:
+  /auth/signup:
+    post:
+      summary: 'Sing up (create user)'
+      tags: [Auth]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                second_name:
+                  type: string
+                login:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                phone:
+                  type: string
+      responses:
+        200:
+          description: object with user id
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+              example:
+                id: 1
+  /auth/signin:
+    post:
+      summary: 'Sing in (authorize user)'
+      tags: [Auth]
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - login
+                - password
+              properties:
+                login:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: object with user id
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+              example:
+                id: 1
+  /auth/logout:
+    post:
+      summary: 'Log out (unauthorize user)'
+      tags: [Auth]
+      responses:
+        200:
+          description: Ok
+  /auth/user:
+    get:
+      summary: 'Get authenticated user info'
+      tags: [Auth]
+      responses:
+        200:
+          description: User info
+          content: 
+            application/json:
+              example:
+                id: 1
+                first_name: John
+                second_name: Doe
+                display_name: John Doe
+                login: john
+                email: my@email.com
+                phone: "+79223332211"
+                avatar: "/path/to/avatar.jpg"
+    /user/profile:
+    put:
+      summary: 'Update profile data'
+      tags: [User]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                second_name:
+                  type: string
+                display_name:
+                  type: string
+                login:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+      responses:
+        200:
+          description: User info
+          content: 
+            application/json:
+              example:
+                id: 1
+                first_name: John
+                second_name: Doe
+                display_name: John Doe
+                login: john
+                email: my@email.com
+                phone: "+79223332211"
+                avatar: "/path/to/avatar.jpg"
+  /user/password:
+    put:
+      summary: 'Update profile password'
+      tags: [User]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_password:
+                  type: string
+                new_password:
+                  type: string
+      responses:
+        200:
+          description: Ok
+  /user/avatar:
+    put:
+      summary: 'Uploads a file'
+      tags: [User]
+      description: 'Avatar'
+      consumes:
+        - multipart/form-data
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: User info
+          content:
+            application/json:
+              example:
+                id: 1
+                first_name: John
+                second_name: Doe
+                display_name: John Doe
+                login: john
+                email: my@email.com
+                phone: "+79223332211"
+                avatar: "/path/to/avatar.jpg"
+  /theme:
+    get:
+      summary: Get a user's theme
+      tags: [Theme]
+      responses:
+        200:
+          description: Success
+    post:
+      summary: Post a user's theme
+      tags: [Theme]
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - theme
+              properties:
+                theme:
+                  type: string
+      responses:
+        200:
+          description: Success
+    put:
+      summary: Put a user's theme
+      tags: [Theme]
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - theme
+              properties:
+                theme:
+                  type: string
+      responses:
+        200:
+          description: Success
+  /leaderboard:
+    get:
+      summary: массив всех пользователей (фильтр по очкам)
+      tags: [LeaderBoard]
+      responses:
+        200:
+          description: Success
+  /leaderboard/{idUser}:
+    get:
+      summary: получение очков пользователя
+      tags: [LeaderBoard]
+      parameters:
+        - name: idUser
+          in: path
+          description: User ID
+          required: true
+          type: number
+      responses:
+        200:
+          description: Success
+    post:
+      summary: запись очков пользователя (здесь проверка - записывается всегда наибольшее кол-во очков)
+      tags: [LeaderBoard]
+      parameters:
+        - name: idUser
+          in: path
+          description: User ID
+          required: true
+          type: number
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - point
+              properties:
+                point:
+                  type: number
+      responses:
+        200:
+          description: Success
+  /forum:
+    get:
+      summary: список всех топиков
+      tags: [Forum]
+      responses:
+        200:
+          description: Success
+    post:
+      summary: создание топика
+      tags: [Forum]
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - title
+                - creatorUserId
+              properties:
+                title:
+                  type: string
+                creatorUserId:
+                  type: number
+      responses:
+        200:
+          description: Success
+  /forum/{topicId}/responses:
+    get:
+      summary: список всех ответов
+      tags: [Forum]
+      parameters:
+        - name: topicId
+          in: path
+          description: User ID
+          required: true
+          type: number
+      responses:
+        200:
+          description: Success
+    post:
+      summary: запись ответа в топик
+      tags: [Forum]
+      parameters:
+        - name: topicId
+          in: path
+          description: User ID
+          required: true
+          type: number
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - text
+                - idUser
+              properties:
+                text:
+                  type: string
+                idUser:
+                  type: number
+      responses:
+        200:
+          description: Success

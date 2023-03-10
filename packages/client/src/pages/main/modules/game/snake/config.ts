@@ -84,4 +84,4 @@ class Config {
   }
 }
 
-export default new Config(await listOptimize(viewImgBg), await objectOptimize(viewImgFoods), await objectOptimize(viewImgSnake))
+export default new Config(listOptimize(viewImgBg), objectOptimize(viewImgFoods), objectOptimize(viewImgSnake))

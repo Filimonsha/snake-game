@@ -5,13 +5,13 @@
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0 4px 20px 0 $yellow-shadow;
-  
+
   .formTitle {
     margin-bottom: 30px;
     text-align: center;
     color: $deep-green;
   }
-  
+
   .formSubmit {
     background-color: $yellow;
     border: none;
@@ -19,7 +19,7 @@
     padding: 12px 37px;
     line-height: 1;
     color: $deep-green;
-    
+
     &:hover {
       background-color: $deep-green;
       color: $white;
@@ -49,12 +49,12 @@
       color: $white;
     }
   }
-  
+
   .formLink {
     font-size: 14px;
     color: $deep-green;
     text-decoration: none;
-    
+
     &:hover {
       color: $yellow-hover;
       text-decoration: underline;

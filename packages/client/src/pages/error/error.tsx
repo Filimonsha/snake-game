@@ -16,7 +16,7 @@ const ErrorPage: React.FC<IErrorPage> = ({ title, code }) => (
       <p className={styles.errorPageCode}>
         {code}
       </p>
-      <Link 
+      <Link
         to={MAIN_ROUTE}
         className={styles.errorPageLink}
       >
