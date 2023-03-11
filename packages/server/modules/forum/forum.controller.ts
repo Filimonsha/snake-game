@@ -11,7 +11,7 @@ export const getTopicsList = async (_req: Request, res: Response) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ errors: 'Error' })
+      .json({ reason: `${err}` })
   }
 }
 
@@ -29,7 +29,7 @@ export const getResponsesList = async (req: Request, res: Response) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ errors: 'Error' })
+      .json({ reason: `${err}` })
   }
 }
 
@@ -47,7 +47,7 @@ export const createTopic = async (req: Request, res: Response) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ errors: 'Error' })
+      .json({ reason: `${err}` })
   }
 }
 
@@ -68,6 +68,6 @@ export const createResponse = async (req: Request, res: Response) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ errors: 'Error' })
+      .json({ reason: `${err}` })
   }
 }

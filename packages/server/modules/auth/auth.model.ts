@@ -24,19 +24,18 @@ export class User extends Model<TUserFull> {
   @Column
   second_name!: string
   
-  @AllowNull(true)
   @Column(DataType.STRING(255))
-  display_name: string | null = null
+  display_name!: string | null
   
   @AllowNull(false)
   @Matches(Pattern.Login, { message: Message.Login })
-  @Unique
+  @Unique({ name: 'login', msg: 'Login must be unique'})
   @Column
   login!: string
   
   @AllowNull(false)
   @IsEmail({}, { message: Message.Email })
-  @Unique
+  @Unique({ name: 'email', msg: 'Email must be unique'})
   @Column
   email!: string
   
@@ -46,12 +45,12 @@ export class User extends Model<TUserFull> {
   
   @AllowNull(false)
   @Matches(Pattern.Phone, { message: Message.Phone })
-  @Unique
+  @Unique({ name: 'phone', msg: 'Phone must be unique'})
   @Column
   phone!: string
 
   @Column(DataType.STRING)
-  avatar: string | null = null;
+  avatar!: string | null;
   
   @BeforeSave
   static async validateChange (user: User) {
