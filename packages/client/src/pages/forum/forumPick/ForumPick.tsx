@@ -17,7 +17,7 @@ const ForumPick = () => {
 
   useEffect(() => {
     (async () => {
-      fetch(`http://localhost:3001/api/v1/forum`).then((a)=>{return a.json()}).then(a => console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", a));
+      fetch(`http://localhost:3001/api/v1/forum`).then((a)=>{return a.json()}).then(a => console.log(a));
   })()
     document.title="Forum"
     setForumList(MOCK_ARRAY)
