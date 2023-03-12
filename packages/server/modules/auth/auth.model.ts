@@ -24,9 +24,8 @@ export class User extends Model<TUserFull> {
   @Column
   second_name!: string
   
-  @AllowNull(true)
   @Column(DataType.STRING(255))
-  display_name: string | null = null
+  display_name!: string | null
   
   @AllowNull(false)
   @Matches(Pattern.Login, { message: Message.Login })
@@ -51,7 +50,7 @@ export class User extends Model<TUserFull> {
   phone!: string
 
   @Column(DataType.STRING)
-  avatar: string | null = null;
+  avatar!: string | null;
   
   @BeforeSave
   static async validateChange (user: User) {

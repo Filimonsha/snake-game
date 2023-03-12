@@ -286,12 +286,9 @@ paths:
               type: object
               required:
                 - title
-                - creatorUserId
               properties:
                 title:
                   type: string
-                creatorUserId:
-                  type: number
       responses:
         200:
           description: Success
@@ -302,7 +299,7 @@ paths:
       parameters:
         - name: topicId
           in: path
-          description: User ID
+          description: Topic ID
           required: true
           type: number
       responses:
@@ -314,7 +311,7 @@ paths:
       parameters:
         - name: topicId
           in: path
-          description: User ID
+          description: Topic ID
           required: true
           type: number
       requestBody:
@@ -324,12 +321,9 @@ paths:
               type: object
               required:
                 - text
-                - idUser
               properties:
                 text:
                   type: string
-                idUser:
-                  type: number
       responses:
         200:
           description: Success
