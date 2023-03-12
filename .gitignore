@@ -1,6 +1,10 @@
+.DS_Store
 node_modules/
 .env
 .idea
 .vscode
 dist
 tmp
+
+resources/
+!resources/.keep

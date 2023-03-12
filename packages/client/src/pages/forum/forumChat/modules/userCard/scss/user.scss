@@ -1,0 +1,44 @@
+@import '../../../../../../const/globals.scss';
+
+.userName {
+	display: block;
+	text-align: center;
+	font-size: min(4vw, 17px);
+	margin-block: 5px;
+}
+
+.userInfo {
+	height: 160px;
+	grid-area: user;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-color: $deep-green;
+	border-radius: 20px;
+	padding: 15px 20px;
+	margin: auto;
+}
+
+.userAnswer {
+	background-color: #EEEEEE;
+	border: 1px solid $deep-green;
+	display: block;
+	grid-area: answer;
+	padding: $gap10;
+}
+
+textarea.userAnswer {
+	@extend %textArea;
+}
+
+.avatar {
+	display: block;
+	background-color: $grey;
+	aspect-ratio: 1/1;
+	height: min(15vw, 100px);
+	border-radius: 50%;
+}
+
+.comment {
+	font-size: min(4vw, 17px);
+}

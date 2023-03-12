@@ -1,0 +1,74 @@
+@import '../../../../const/globals.scss';
+
+.profile {
+  background-color: $deep-green;
+}
+
+.profileCircle {
+  background: radial-gradient(rgba($background-circle, 0.25), transparent);
+}
+
+.container {
+  height: 100vh;
+  width: 70vw;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  width: 50%;
+  margin: auto;
+}
+
+.formAvatar {
+  width: 130px;
+  height: 130px;
+  border: none;
+  background-color: $grey;
+  border-radius: 50%;
+  align-self: center;
+
+  &:hover {
+    background-color: #000;
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}
+
+.formBody {
+  padding: 50px 0;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.avatarImg {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+}
+
+.buttonSave,
+.buttonCancel {
+  width: 100px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  border: none;
+  &:hover {
+    background-color: $deep-green;
+    color: $white;
+  }
+}
+
+.buttonSave {
+  background-color: $yellow;
+}
+
+.buttonCancel {
+  background: $white;
+  color: $deep-green;
+}

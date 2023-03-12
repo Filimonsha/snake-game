@@ -1,0 +1,21 @@
+@import '../../const/globals.scss';
+
+.inputLabel {
+  color: $deep-green;
+  margin-left: 5px;
+}
+
+.inputControl {
+  border-radius: 10px;
+  padding-left: 10px;
+  border-color: $deep-green;
+
+  &:focus {
+    border-color: $deep-green;
+    box-shadow: 0 0 0 0.25rem $yellow-shadow;
+  }
+}
+
+.inputFeedback {
+  padding-left: 15px;
+}
