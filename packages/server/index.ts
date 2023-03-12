@@ -18,7 +18,7 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 const port = Number(process.env.SERVER_PORT) || 3001
 const API_ROUTE = '/api/v1'
 
-app.use(cors({ origin: '*', credentials: true }))
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 
 // parse cookies
 app.use(cookieParser())

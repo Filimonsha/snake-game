@@ -7,10 +7,7 @@ import {
   VALIDATION_SCHEMA,
   FORM_TYPE
 } from './data'
-import { useLogoutMutation, useSignUpMutation } from '../../../../store/api/yadnex/auth/authApi'
-import { useEffect, useState } from 'react'
-import { useGetThemeMutation } from '../../../../store/api/backend/theme/themeApi'
-import { UserFullInfo } from '../../../../types/auth'
+import { useSignUpMutation } from '../../../../store/api/yadnex/auth/authApi'
 
 
 interface ISignUpFormData {
@@ -24,26 +21,23 @@ interface ISignUpFormData {
 }
 
 const FormSignUp = () => {
-  const [signUp,{isSuccess,data}] = useSignUpMutation()
-  const [getTheme] = useGetThemeMutation()
-  const [logout] = useLogoutMutation()
-  const handleSubmit = (data: ISignUpFormData) => {
-    logout();
-    signUp({
-      login: data.login,
-      email: data.email,
-      first_name: data.firstName,
-      second_name: data.lastName,
-      password: data.password,
-      phone: data.phone
-    });
-    delete data.passwordRepeat
-  }
-  useEffect(()=>{
-    if (isSuccess && data){
-      getTheme({userId:data.id})
+  const [signUp] = useSignUpMutation()
+  const handleSubmit = async (data: ISignUpFormData) => {
+    try {
+      await signUp({
+        login: data.login,
+        email: data.email,
+        first_name: data.firstName,
+        second_name: data.lastName,
+        password: data.password,
+        phone: data.phone
+      })
+      delete data.passwordRepeat
+    } catch (e) {
+      console.log(e)
     }
-  },[isSuccess])
+  }
+
   return (
     <Formik
       validationSchema={VALIDATION_SCHEMA}

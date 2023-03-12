@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Formik } from 'formik'
 import { EntranceForm } from '../../../../modules/entranceForm'
 import {
@@ -7,29 +8,27 @@ import {
   VALIDATION_SCHEMA,
   FORM_TYPE
 } from './data'
-import { useGetUserInfoQuery, useLogoutMutation, useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
+import { useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
 import { UserShortInfo } from '../../../../types/auth'
-import { Alert } from 'react-bootstrap'
-import { useEffect } from 'react'
-import { useGetThemeMutation } from '../../../../store/api/backend/theme/themeApi'
 import { onOauth } from '../../../../store/api/yadnex/auth/Oauth'
 
-
 const FormSignIn = () => {
-  const [signIn, { isError, isSuccess }] = useSignInMutation()
-  const [getTheme] = useGetThemeMutation()
-  const [logout] = useLogoutMutation()
-  const {data:userData} = useGetUserInfoQuery(undefined,{skip:!isSuccess})
-  const handleSubmit = (data: UserShortInfo) => {
-    logout()
-    signIn(data)
+  const [signIn] = useSignInMutation()
+  const navigate = useNavigate()
+
+  const handleSubmit = async (data: UserShortInfo) => {
+    try {
+      const result: any = await signIn(data)
+      if ('data' in result) {
+        return navigate('/game')
+      } else if ('error' in result) {
+        return alert(result.error.data.reason)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
-  useEffect(() => {
-    if (userData) {
-      getTheme({userId:userData.id})
-    }
-  },[userData])
   return (
     <Formik
       validationSchema={VALIDATION_SCHEMA}
@@ -45,23 +44,18 @@ const FormSignIn = () => {
            errors,
            touched
          }) => (
-          <>
-            <EntranceForm
-              handleSubmit={handleSubmit}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              values={values}
-              errors={errors}
-              touched={touched}
-              inputsData={INPUTS_DATA}
-              formData={FORM_DATA}
-            />
-            {
-              isError && <Alert variant='danger'>
-                Неверный логин или пароль
-              </Alert>
-            }
-          </>
+          <EntranceForm
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            handleOauth={onOauth}
+            values={values}
+            errors={errors}
+            touched={touched}
+            inputsData={INPUTS_DATA}
+            formData={FORM_DATA}
+            formType={FORM_TYPE}
+          />
         )
       }
     </Formik>
