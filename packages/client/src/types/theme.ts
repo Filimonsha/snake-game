@@ -1,12 +1,14 @@
-export type ThemesList = 'light' | 'dark';
-
+export enum ThemeTypes {
+  DARK = "dark",
+  LIGHT = "light",
+}
 export type Theme = {
-  theme: ThemesList,
+  theme: ThemeTypes,
 }
 
 export type User = {
   userId: number,
 }
 
-export type ThemeRequest = Theme & User;
+export type ThemeRequest = Theme;
 export type ThemeResponse = ThemeRequest & {id: number};

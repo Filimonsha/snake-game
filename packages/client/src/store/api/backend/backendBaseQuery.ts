@@ -5,10 +5,11 @@ import { SERVER_BASE, SERVER_PORT, SERVER_API } from '../../../const/route';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: `${SERVER_BASE}${SERVER_PORT}${SERVER_API}`,
-  mode: 'cors'
+  mode: 'cors',
+  credentials:'include'
 })
 
-const tagTypes: Array<string> = ['backend']
+const tagTypes: Array<string> = ['backend','theme']
 const reducerPath = 'backendApi'
 
 const backendApi = createApi({

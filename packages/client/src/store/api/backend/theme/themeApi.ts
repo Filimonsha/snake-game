@@ -1,35 +1,27 @@
 import backendApi from '../backendBaseQuery';
-import { User, ThemeRequest, ThemeResponse } from '../../../../types/theme';
+import { ThemeRequest, ThemeResponse } from '../../../../types/theme';
 
-const getThemeEndpoint = (endpoint: string | number = '') => `theme/${endpoint}`;
+const getThemeEndpoint = (endpoint: string | number = '') => `theme${endpoint}`;
 
 export const themeApi = backendApi.injectEndpoints({
   endpoints: builder => ({
-    getTheme: builder.mutation<ThemeResponse, User>({
-      query: arg => ({
-        url: getThemeEndpoint(arg.userId),
-        method: 'GET',
-      })
-    }),
-    createTheme: builder.mutation<ThemeResponse, ThemeRequest>({
-      query: arg => ({
-        url: getThemeEndpoint(arg.userId),
-        method: 'POST',
-        body: arg.theme,
-      })
+    getTheme: builder.query<ThemeResponse, void>({
+      query: () => getThemeEndpoint(""),
+      providesTags:['theme']
     }),
     updateTheme: builder.mutation<ThemeResponse, ThemeRequest>({
-      query: arg => ({
-        url: getThemeEndpoint(arg.userId),
+      query: ({theme}) => ({
+        url: getThemeEndpoint(""),
         method: 'PUT',
-        body: arg.theme,
-      })
+        body: { theme },
+      }),
+      invalidatesTags:['theme']
     }),
   })
 })
 
 export const {
-  useGetThemeMutation,
+  useGetThemeQuery,
   useCreateThemeMutation,
   useUpdateThemeMutation
 } = themeApi
