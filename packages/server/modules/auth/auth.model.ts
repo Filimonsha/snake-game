@@ -57,7 +57,12 @@ export class User extends Model<TUserFull> {
     
     const validationErrors = await validate(user);
     if (validationErrors.length) {
-      throw new Error('Some fields are not valid');
+      const errors = validationErrors.reduce((acc, cur) => {
+        acc += `${cur?.constraints?.matches}. `
+        return acc;
+      }, '')
+      
+      throw new Error(errors);
     }
     
     if (user.changed('password')) {
