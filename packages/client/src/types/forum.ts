@@ -2,7 +2,11 @@ export type ForumComment = {
   id: string, 
   idUser: string, 
   topicId: string, 
-  text: string
+  text: string,
+  userData: {
+    login: string,
+    avatar: null | string
+  }
 }
 
 export type ForumCommentResponse = Array<ForumComment>;

@@ -34,9 +34,8 @@ textarea.userAnswer {
 .avatar {
 	display: block;
 	background-color: $grey;
-	aspect-ratio: 1/1;
 	height: min(15vw, 100px);
-	border-radius: 50%;
+	border-radius: 10px;
 }
 
 .comment {

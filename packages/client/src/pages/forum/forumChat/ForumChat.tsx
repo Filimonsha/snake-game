@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import styles from './scss/forumChat.module.scss';
 import UserCard from './modules/userCard/userCard';
 import { useGetTopicsQuery, useLazyGetCommentQuery } from '../../../store/api/yadnex/forum/forumApi';
-
-interface IChatList { id: string, idUser: string, topicId: string, text: string}
+import { ForumComment } from '../../../types/forum';
 
 const ForumChat = () => {
-  const [forumChat, setChatList] = useState<IChatList[]>([]);
+  const [forumChat, setChatList] = useState<ForumComment[]>([]);
   const [forumTitle, setForumTitle] = useState<string>("");
   const navigate = useNavigate();
 
@@ -20,7 +19,11 @@ const ForumChat = () => {
   useEffect(() => {
     if (!queriedTopics) return
     const topicTitle = queriedTopics.find((topic) => topic.id.toString() === topicId.toString())?.title
-    if (topicTitle) setForumTitle(topicTitle)
+    if (!topicTitle) {
+      navigate(-1)
+      return
+    }
+    setForumTitle(topicTitle)
   }, [queriedTopics])
 
   useEffect(() => {
@@ -47,7 +50,7 @@ const ForumChat = () => {
             {
               !forumChat.length ? 
               <p className={styles.noAnswers}>There are no comments yet</p> : 
-              forumChat.map(message => <UserCard comment={message.text} key={message.id}/>)
+              forumChat.map(message => <UserCard comment={message.text} avatar={message.userData?.avatar} userName={message.userData?.login} key={message.id}/>)
             }
             <UserCard isPostCard={true} chatChange={chatChange}/>
             </ul>
