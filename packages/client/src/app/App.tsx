@@ -10,6 +10,7 @@ import { LeaderBoard } from '../pages/main/modules/leaderBoard'
 import { Profile } from '../pages/main/modules/profile'
 import { Game } from '../pages/main/modules/game'
 import { ErrorPage } from '../pages/error'
+import { Toast } from '../components/toast'
 import {
   FORUM_ROUTE,
   MAIN_ROUTE,
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <Provider store={store}>
+      <Toast userTheme='light' />
       <BrowserRouter>
         <Routes>
           <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
