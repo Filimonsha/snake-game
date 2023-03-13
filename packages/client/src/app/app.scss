@@ -1,1 +1,38 @@
-@import './variables.scss';
+@import '../const/globals.scss';
+
+:root{
+    --primary: #{$deep-green};
+    --secondary: #{$yellow};
+    --secondary-o25: #{$yellow}40;
+    --secondary-o70: #{$yellow}B3;
+    --shadow-color: #{$yellow-shadow};
+    --hover-color: #{$yellow-hover};
+    --settings-color: #{$pink};
+    --settings-background-color: #{$pink-light};
+    --start-button-shadow: #{$green-light};
+    --fs-button: #{$green-neutral};
+    --background-color: #{$white};
+    --background-color-dark: #{$grey};
+    --main-background-color: #{$deep-dark-green};
+    --curcle-color: #{$background-circle}40;
+    --text-color: #{$text-color};
+    --text-color-white: #{$white};
+}
+
+:root.dark{
+    --primary: #{$dark-purple};
+    --secondary: #{$magento};
+    --secondary-o25: #{$magento}40;
+    --secondary-o70: #{$magento}B3;
+    --shadow-color: #{$magento};
+    --hover-color: #{$dark-purple};
+    --settings-color: #{$magento};
+    --settings-background-color: #{$dark-purple};
+    --start-button-shadow: #{$magento}40;
+    --fs-button: #{$dark-purple};
+    --background-color: #{$dark-purple};
+    --background-color-dark: #{$grey};
+    --main-background-color: #{$dark-purple};
+    --curcle-color: #{$magento}40;
+    --text-color: #{$white};
+}

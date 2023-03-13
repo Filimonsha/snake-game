@@ -7,11 +7,9 @@ const ThemeToggler = () => {
   const { data } = useGetThemeQuery()
 
   const [updateTheme] = useUpdateThemeMutation()
-  // фетчим тему
 
   const toggleTheme = () => {
     if (data) {
-      console.log(data,"data")
       if (data.theme === ThemeTypes.DARK) {
         updateTheme({ theme: ThemeTypes.LIGHT })
       } else {

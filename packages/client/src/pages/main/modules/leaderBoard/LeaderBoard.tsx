@@ -6,7 +6,7 @@ import dummyData from './dummy.json'
 import { TopPlayerCard } from './components/TopPlayerCard'
 import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
 import { Header } from '../../../../modules/header'
-import avatar from '../../../../assets/img/avatar.png'
+import defaultAvatar from '../../../../assets/img/default-avatar.png'
 
 interface IDataRow {
   rank: number;
@@ -30,7 +30,7 @@ const LeaderBoard: React.FC = () => {
     },
     {
       name: 'Avatar',
-      cell: row => <LeaderBoardAvatar avatar={row.avatar ? row.avatar : avatar}/>,
+      cell: row => <LeaderBoardAvatar avatar={row.avatar ? row.avatar : defaultAvatar}/>,
       sortable: false,
     },
     {
@@ -47,7 +47,7 @@ const LeaderBoard: React.FC = () => {
 
   useEffect(() => {
     const topPlayers = dummyData.sort((a, b) => b.score - a.score).slice(0, 3)
-    topPlayers.forEach(player => player.avatar = (player.avatar ? player.avatar : avatar))
+    topPlayers.forEach(player => player.avatar = (player.avatar ? player.avatar : defaultAvatar))
     setTopPlayersData(topPlayers)
   }, [dummyData])
 

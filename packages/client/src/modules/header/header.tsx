@@ -13,6 +13,7 @@ import {
   LEADERBOARD_ROUTE,
   GAME_ROUTE
 } from '../../const/route'
+import { RESOURCES_HOST } from '../../const/host'
 
 
 const Header = () => {
@@ -27,7 +28,7 @@ const Header = () => {
   }, [data])
 
   const toggleShowProfile = () => {
-    isProfileShown ? setIsProfileShown(false) : setIsProfileShown(true)
+    setIsProfileShown(!isProfileShown)
   }
   
   const profile = (
@@ -36,12 +37,18 @@ const Header = () => {
     </div> 
   )
   
+  const avatarSrc = user.avatar ? 
+    (RESOURCES_HOST + user.avatar) 
+    : DEFAULT_USER_DATA.avatar;
+  
   const avatar = (
     <div className={styles.headerAvatar}>
       <img
-        src={user.avatar || DEFAULT_USER_DATA.avatar}
+        src={avatarSrc}
         alt='avatar'
-        className={styles.headerAvatarImg}>
+        className={styles.headerAvatarImg}
+        crossOrigin="anonymous"
+      >
       </img>
     </div>
   )
