@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import styles from './leaderBoard.module.scss'
 import Container from 'react-bootstrap/Container'
 import DataTable, { TableColumn } from 'react-data-table-component'
-import dummyData from './dummy.json'
 import { TopPlayerCard } from './components/TopPlayerCard'
 import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
+import { useGetLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
 
 interface IDataRow {
   rank: number;
@@ -19,7 +19,7 @@ export interface IData extends IDataRow {
 
 const LeaderBoard: React.FC = () => {
   const [topPlayersData, setTopPlayersData] = useState<IData[]>([]);
-  const data = dummyData;
+  const [data, setData] = useState<IDataRow[]>([]);
   const columns: TableColumn<IDataRow>[] = [
     {
       name: 'Rank',
@@ -43,10 +43,23 @@ const LeaderBoard: React.FC = () => {
     },
   ];
 
+  const {data: queryData} = useGetLeaderboardQuery();
+
   useEffect(() => {
-    const topPlayers = dummyData.sort((a, b) => b.score - a.score).slice(0, 3);
+    const normalizedData = queryData?.map((dataPart, partIndex) => {
+      return {
+        rank: partIndex,
+        score: dataPart.score,
+        user: dataPart.userData.login,
+        avatar: dataPart.userData.avatar,
+        id: dataPart.userId
+      };
+    })
+    if (!normalizedData) return
+    setData(normalizedData)
+    const topPlayers = normalizedData.sort((a, b) => b.score - a.score).slice(0, 3);
     setTopPlayersData(topPlayers);
-  }, [dummyData])
+  }, [queryData])
 
   return (
     <div className={styles.board}>
