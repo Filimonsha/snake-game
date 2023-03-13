@@ -14,7 +14,7 @@ interface IDataRow {
 }
 
 export interface IData extends IDataRow {
-  id: number | string;
+  id: number;
 }
 
 const LeaderBoard: React.FC = () => {
