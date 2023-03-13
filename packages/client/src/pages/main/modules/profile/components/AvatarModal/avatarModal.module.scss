@@ -5,16 +5,13 @@
   justify-content: space-between;
 }
 
-.buttonGroup {
-  display: flex;
-  gap: 10px;
-}
-
 .buttonDanger {
   border-radius: 20px;
+  padding-inline: 30px;
 }
 
 .buttonSave, .buttonCancel {
+  padding-inline: 50px;
   border: 1px solid transparent;
   border-radius: 20px;
 

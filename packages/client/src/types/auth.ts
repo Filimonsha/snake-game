@@ -10,5 +10,12 @@ export type UserFullInfo = {
   email: string,
   password: string,
   phone: string,
-  avatar?:string
+  avatar?:string | null,
+}
+
+export type UserProfileInfo = Omit<UserFullInfo, 'password'>
+
+export type PasswordChange = {
+  old_password: string,
+  new_password: string
 }

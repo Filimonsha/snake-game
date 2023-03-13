@@ -24,7 +24,7 @@ export const getLeaderList = async (_req: Request, res: Response) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ reason: err })
+      .json({ reason: `${err}` })
   }
 }
 
@@ -49,7 +49,7 @@ export const getPointUser = async (req: TUserRequest, res: Response) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ reason: err })
+      .json({ reason: `${err}` })
   }
 }
 
@@ -79,6 +79,6 @@ export const writePointUser = async (req: TUserRequest, res: Response) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ reason: err })
+      .json({ reason: `${err}` })
   }
 }

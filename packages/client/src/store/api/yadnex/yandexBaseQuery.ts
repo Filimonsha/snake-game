@@ -5,7 +5,7 @@ import { createApi } from '@reduxjs/toolkit/dist/query/react';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://localhost:3001/api/v1/',
   credentials: 'include',
-  mode: 'cors'
+  mode: 'cors',
 })
 
 const tagTypes: Array<string> = []

@@ -20,6 +20,7 @@ import {
   PROFILE_ROUTE,
   GAME_ROUTE,
   ERROR_ROUTE } from '../const/route'
+
 import RequireAuth from '../utils/requireAuth'
 
 function App() {
