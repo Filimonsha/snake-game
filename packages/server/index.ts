@@ -43,9 +43,11 @@ async function startServer() {
 
   let vite: ViteDevServer | undefined
 
-  const distPath = path.dirname(require.resolve('client/dist/index.html'))
-  const ssrClientPath = require.resolve('client/dist-ssr/ssr.cjs')
-  const srcPath = path.dirname(require.resolve('client'))
+  const resolve = (p: string) => path.resolve(__dirname, process.env.PATH_STATIC + p);
+
+  const distPath = resolve('/dist')
+  const ssrClientPath = resolve('/dist-ssr/ssr.cjs')
+  const srcPath = resolve('/')
 
   const getStyleSheets = async () => {
     try {
@@ -75,6 +77,7 @@ async function startServer() {
 
   if (!isDev()) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
+    app.use('/snakeGame', express.static(path.resolve(distPath, 'snakeGame')))
   }
 
   const styleSheets = getStyleSheets()
