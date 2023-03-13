@@ -2,32 +2,34 @@ import React, {useEffect, useState} from 'react';
 import styles from './forumPick.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from "./modules/modal/modal";
+import { useLazyGetTopicsQuery } from '../../../store/api/yadnex/forum/forumApi';
 
 interface IForumList {id: string, title: string}
 
 const ForumPick = () => {
   const [isModalHidden, setIsModalHidden] = useState<boolean>(true);
-  const [forumList, setForumList] = useState<IForumList[]>([]);
+  const [forumList, setForumList] = useState<IForumList[] | undefined>([]);
   const navigate = useNavigate();
 
   function showModalEvent() {
     setIsModalHidden(false)
   }
+  const [trigger, result] = useLazyGetTopicsQuery();
 
   useEffect(() => {
-    (async () => {
-      await fetch(`http://localhost:3001/api/v1/auth/user`).then(a => {console.log(a); return a.json()}).then(a => {
-      //setForumList(a)
-      console.log(a)
-    });
-    })()
+    trigger()
     document.title="Forum"
   }, [])
+
+  useEffect(() => {
+    if (result.data) setForumList(result.data)
+  }, [result])
 
   return (
     <div className={styles.forumListContainer}>
       <div className={styles.forumCircle}>
-        {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden}/>}
+        
+        {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden} topicChange={() => {trigger()}}/>}
         <div className={styles.forumList}>
           <div className={styles.header}>
             <div className={styles.headerContent}>
@@ -37,10 +39,10 @@ const ForumPick = () => {
             <div onClick={showModalEvent} className={styles.addLabel}></div>
           </div>
           {
-            !forumList.length ? 
+            !forumList?.length ? 
             <span className={styles.noChats}>There are no forums yet</span> : 
-            forumList.map(forum => (
-              <Link to={forum.id} className={styles.link} key={forum.id}>
+            forumList?.map(forum => (
+              <Link to={`${forum.id}`} className={styles.link} key={forum.id}>
                 <p>
                   {forum.title}
                 </p>

@@ -36,7 +36,7 @@ dbConnect()
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // avatars
-app.use('/resources', express.static('resources'));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 
 // routes
 app.use(`${API_ROUTE}/leaderboard`, leaderBoardRoutes)

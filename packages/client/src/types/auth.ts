@@ -10,5 +10,6 @@ export type UserFullInfo = {
   email: string,
   password: string,
   phone: string,
-  avatar?:string
+  avatar?:string,
+  id?: string
 }
