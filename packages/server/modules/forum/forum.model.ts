@@ -1,4 +1,5 @@
 import { AllowNull, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript'
+import { User } from '../auth/auth.model'
 
 export type TForumTopic = {
   id?: number
@@ -20,6 +21,7 @@ export class ForumTopic extends Model<TForumTopic> {
   title!: string
 
   @AllowNull(false)
+  @ForeignKey(() => User)
   @Column
   creatorUserId!: number
 }
