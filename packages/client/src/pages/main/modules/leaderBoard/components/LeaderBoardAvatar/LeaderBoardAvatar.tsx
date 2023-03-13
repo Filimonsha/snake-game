@@ -4,7 +4,10 @@ import { AVATAR_PLACEHOLDER } from './constants'
 
 const LeaderBoardAvatar: React.FC<{ avatar: string }> = ({ avatar }): JSX.Element => {
   return(
-    <img className={styles.table_img} src={avatar || AVATAR_PLACEHOLDER} />
+    <img className={styles.table_img} 
+      src={avatar || AVATAR_PLACEHOLDER}
+      crossOrigin='anonymous'
+    />
   )
 }
 

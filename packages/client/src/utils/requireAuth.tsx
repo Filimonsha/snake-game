@@ -14,7 +14,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     </div>)
 }
 
-export default function RequireAuth({ children }: { children: JSX.Element }) {
+const  RequireAuth = ({ children }: { children: JSX.Element }) => {
   const location = useLocation()
   const navigate = useNavigate()
 
@@ -33,3 +33,5 @@ export default function RequireAuth({ children }: { children: JSX.Element }) {
   return isLogged === 'success' ? children : null
 
 }
+
+export default RequireAuth
