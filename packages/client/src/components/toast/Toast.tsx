@@ -1,5 +1,5 @@
-import { ToastContainer, ToastContainerProps } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, ToastContainerProps } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface IToast extends ToastContainerProps {
   userTheme: 'light' | 'dark'
@@ -19,7 +19,7 @@ const Toast: React.FC<IToast> = ({userTheme}) => {
       pauseOnHover={false}
       theme={userTheme}
     />
-  );
-};
+  )
+}
 
-export default Toast;
+export default Toast

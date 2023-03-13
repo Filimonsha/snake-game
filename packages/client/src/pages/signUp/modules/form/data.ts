@@ -14,13 +14,13 @@ export const INPUTS_DATA = [
   {
     label: 'First name',
     placeholder: 'Your first name',
-    inputName: 'first_name',
+    inputName: 'firstName',
     type: 'text',
   },
   {
     label: 'Last name',
     placeholder: 'Your last name',
-    inputName: 'last_name',
+    inputName: 'lastName',
     type: 'text',
   },
   {
