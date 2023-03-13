@@ -15,7 +15,7 @@
 	border-radius: 10px;
 	height: 270px;
 	width: min(500px, 100% - 20px);
-	background-color: $white;
+	background-color: var(--background-color);
 	grid-template-rows: 2fr 5fr 3fr;
 	grid-template-columns: repeat(2, 1fr);
 	display: grid;
@@ -30,10 +30,9 @@
 		grid-row-start: 3;
 		grid-column-start: 2;
 		@extend %button;
-		background-color: $deep-green;
-
+		background-color: var(--primary);
 		&:focus {
-			box-shadow: 0 2px 10px 0 rgba($deep-green, 0.7);
+			box-shadow: 0 2px 10px 0 rgba(var(--primary), 0.7);
 		}
 	}
 
@@ -43,7 +42,7 @@
 		grid-column-end: 3;
 		margin-inline: 20px;
 		@extend %textArea;
-		border: 1px solid $deep-green;
+		border: 1px solid var(--primary);
 		padding: 5px;
 	}
 
@@ -53,6 +52,6 @@
 		grid-column-start: 1;
 		grid-column-end: 3;
 		align-self: center;
-		color: $deep-green;
+		color: var(--primary);
 	}
 }

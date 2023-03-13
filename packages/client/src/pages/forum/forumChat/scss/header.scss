@@ -1,10 +1,8 @@
-@import '../../../../const/globals.scss';
-
 .header {
 	font-size: clamp(7px, 2.4vw, 20px);
-	color: $white;
+	color: var(--background-color);
 	padding: 15px 0;
-	border-bottom: 1px solid $yellow;
+	border-bottom: 1px solid var(--secondary);
 }
 
 .headerContent {
