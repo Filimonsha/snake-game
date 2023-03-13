@@ -252,37 +252,25 @@ paths:
       responses:
         200:
           description: Success
-  /leaderboard/{idUser}:
+  /leaderboard/user:
     get:
       summary: получение очков пользователя
       tags: [LeaderBoard]
-      parameters:
-        - name: idUser
-          in: path
-          description: User ID
-          required: true
-          type: number
       responses:
         200:
           description: Success
     post:
       summary: запись очков пользователя (здесь проверка - записывается всегда наибольшее кол-во очков)
       tags: [LeaderBoard]
-      parameters:
-        - name: idUser
-          in: path
-          description: User ID
-          required: true
-          type: number
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               type: object
               required:
-                - point
+                - score
               properties:
-                point:
+                score:
                   type: number
       responses:
         200:
@@ -304,12 +292,9 @@ paths:
               type: object
               required:
                 - title
-                - creatorUserId
               properties:
                 title:
                   type: string
-                creatorUserId:
-                  type: number
       responses:
         200:
           description: Success
@@ -320,7 +305,7 @@ paths:
       parameters:
         - name: topicId
           in: path
-          description: User ID
+          description: Topic ID
           required: true
           type: number
       responses:
@@ -332,7 +317,7 @@ paths:
       parameters:
         - name: topicId
           in: path
-          description: User ID
+          description: Topic ID
           required: true
           type: number
       requestBody:
@@ -342,12 +327,9 @@ paths:
               type: object
               required:
                 - text
-                - idUser
               properties:
                 text:
                   type: string
-                idUser:
-                  type: number
       responses:
         200:
           description: Success

@@ -1,10 +1,31 @@
 import type { Request, Response } from 'express'
 import { ForumResponse, ForumTopic } from './forum.model'
+import { User } from '../auth/auth.model'
+import type { TUserRequest } from '../../types/user'
+
+ForumResponse.belongsTo(User, {
+  foreignKey: 'idUser',
+  targetKey: 'id',
+  as: 'userData'
+});
+
+ForumTopic.belongsTo(User, {
+  foreignKey: 'creatorUserId',
+  targetKey: 'id',
+  as: 'creatorUserData'
+});
+
 
 export const getTopicsList = async (_req: Request, res: Response) => {
   try {
     const forumTopics = await ForumTopic.findAll({
-      order: [['createdAt', 'DESC']]
+      order: [['createdAt', 'DESC']],
+      include: [{
+        model: User,
+        as: 'creatorUserData',
+        attributes: ['login', 'avatar']
+      }]
+      
     })
 
     return res.json(forumTopics)
@@ -16,13 +37,19 @@ export const getTopicsList = async (_req: Request, res: Response) => {
 }
 
 export const getResponsesList = async (req: Request, res: Response) => {
+  
   try {
     const { topicId } = req.params
     const numberTopicId = Number(topicId)
 
     const forumResponses = await ForumResponse.findAll({
       where: { topicId: numberTopicId },
-      order: [['createdAt', 'ASC']]
+      order: [['createdAt', 'ASC']],
+      include: [{
+        model: User,
+        as: 'userData',
+        attributes: ['login', 'avatar']
+      }]
     })
 
     return res.json(forumResponses)
@@ -33,17 +60,24 @@ export const getResponsesList = async (req: Request, res: Response) => {
   }
 }
 
-export const createTopic = async (req: Request, res: Response) => {
+export const createTopic = async (req: TUserRequest, res: Response) => {
   try {
-    const { title, creatorUserId } = req.body
-    const numberCreatorUserId = Number(creatorUserId)
+    const { title } = req.body
+    
+    if (!req.user) {
+      throw new Error('User not found')
+    }
+    
+    const {id: creatorUserId, login, avatar } = req.user
 
     const forumTopic = await ForumTopic.create({
       title,
-      creatorUserId:numberCreatorUserId
+      creatorUserId
     })
+    
+    const forumTopicResponse = { ...forumTopic.dataValues, creatorUserData: { login, avatar }}
 
-    return res.status(201).json(forumTopic)
+    return res.status(201).json(forumTopicResponse)
   } catch (err) {
     return res
       .status(500)
@@ -51,20 +85,29 @@ export const createTopic = async (req: Request, res: Response) => {
   }
 }
 
-export const createResponse = async (req: Request, res: Response) => {
+export const createResponse = async (req: TUserRequest, res: Response) => {
   try {
     const { topicId } = req.params
-    const { text, idUser } = req.body
-    const numberIdUser = Number(idUser)
+    const { text } = req.body
+    
     const numberTopicId = Number(topicId)
+    
+    if (!req.user) {
+      throw new Error('User not found')
+    }
+    
+    const { id, login, avatar } = req.user
 
     const forumResponse = await ForumResponse.create({
       text,
       topicId: numberTopicId,
-      idUser: numberIdUser
+      idUser: id
     })
+    
+    const updatedResponse = { ...forumResponse.dataValues, userData: { login, avatar }}
+    
 
-    return res.status(201).json(forumResponse)
+    return res.status(201).json(updatedResponse)
   } catch (err) {
     return res
       .status(500)
