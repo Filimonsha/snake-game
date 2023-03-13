@@ -34,7 +34,7 @@ const FormSignUp = () => {
       })
       delete data.passwordRepeat
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   }
 
