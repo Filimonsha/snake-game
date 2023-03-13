@@ -3,7 +3,10 @@ import styles from './leaderBoardAvatar.module.scss'
 
 const LeaderBoardAvatar: React.FC<{ avatar: string }> = ({ avatar }): JSX.Element => {
   return(
-    <img className={styles.table_img} src={avatar || ''} />
+    <img className={styles.table_img} 
+      src={avatar || AVATAR_PLACEHOLDER}
+      crossOrigin='anonymous'
+    />
   )
 }
 

@@ -7,7 +7,10 @@ const TopPlayerCard: React.FC<IData> = ({ id, avatar, user, score }) => {
   
   return (
     <Card className={styles.card} key={id}>
-      <Card.Img className={styles.cardImg} src={avatar} />
+      <Card.Img 
+        className={styles.cardImg} 
+        src={avatar}
+        crossOrigin='anonymous'/>
       <Card.Body>
         <Card.Title>{user}</Card.Title>
         <Card.Text>{score}</Card.Text>
