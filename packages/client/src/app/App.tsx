@@ -10,6 +10,7 @@ import { LeaderBoard } from '../pages/main/modules/leaderBoard'
 import { Profile } from '../pages/main/modules/profile'
 import { Game } from '../pages/main/modules/game'
 import { ErrorPage } from '../pages/error'
+import { Toast } from '../components/toast'
 import {
   FORUM_ROUTE,
   MAIN_ROUTE,
@@ -19,39 +20,23 @@ import {
   PROFILE_ROUTE,
   GAME_ROUTE,
   ERROR_ROUTE } from '../const/route'
-
-function RequireAuth({ children }: { children: JSX.Element }) {
-  // Когда будем подключать аунтификацию - будет использоваться обертка, для проверки авторизован ли пользователь,
-  // если нет, то кидать на страницу авторизации.
-
-  // let auth = useAuth()
-  // let location = useLocation()
-
-  // if (!auth.user) {
-  // Redirect them to the /login page, but save the current location they were
-  // trying to go to when they were redirected. This allows us to send them
-  // along to that page after they login, which is a nicer user experience
-  // than dropping them off on the home page.
-  // return <Navigate to='/login' state={{ from: location }} replace />
-  // }
-
-  return children
-}
+import RequireAuth from '../utils/requireAuth'
 
 function App() {
 
   return (
     <Provider store={store}>
+      <Toast userTheme='light' />
       <BrowserRouter>
         <Routes>
           <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
           <Route path={SIGN_UP_ROUTE} element={<SignUp />} />
-          <Route path={MAIN_ROUTE} element={<RequireAuth><Main /></RequireAuth>} />
-          <Route path={FORUM_ROUTE} element={<ForumPick/>}/>
-			    <Route path={FORUM_ROUTE + "/*"} element={<ForumChat/>}/>
-          <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
-          <Route path={PROFILE_ROUTE} element={<Profile />} />
-          <Route path={GAME_ROUTE} element={<Game />} />
+          <Route path={MAIN_ROUTE} element={<Main />} />
+          <Route path={FORUM_ROUTE} element={<RequireAuth><ForumPick /></RequireAuth>}/>
+			    <Route path={FORUM_ROUTE + "/*"} element={<RequireAuth><ForumChat /></RequireAuth>}/>
+          <Route path={LEADERBOARD_ROUTE} element={<RequireAuth><LeaderBoard /></RequireAuth>} />
+          <Route path={PROFILE_ROUTE} element={<RequireAuth><Profile /></RequireAuth>} />
+          <Route path={GAME_ROUTE} element={<RequireAuth><Game /></RequireAuth>} />
           <Route path={ERROR_ROUTE} element={<ErrorPage title='Connection error' code='500'/>} />
           <Route path='*' element={<ErrorPage title='Page not found' code='404'/>} />
         </Routes>

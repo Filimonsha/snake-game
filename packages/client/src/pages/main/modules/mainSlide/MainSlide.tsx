@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import styles from './mainSlide.module.scss'
 import logoUrl from '../../../../assets/img/logo.svg'
 import mainTextUrl from '../../../../assets/img/main-text.svg'
-import { SIGN_IN_ROUTE } from '../../../../const/route'
+import { GAME_ROUTE, SIGN_IN_ROUTE } from '../../../../const/route'
 import { useOauthMutation } from '../../../../store/api/yadnex/auth/Oauth'
 
 const {
@@ -19,11 +19,13 @@ const {
 const MainSlide = () => {
   const [searchParams] = useSearchParams()
   const [signInWithOauth] = useOauthMutation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const code = searchParams.get(`code`)
     if (!code) return
     signInWithOauth(code)
+    return navigate(GAME_ROUTE)
   }, [])
 
   return (

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Formik } from 'formik'
 import { EntranceForm } from '../../../../modules/entranceForm'
 import {
@@ -10,12 +11,24 @@ import {
 import { useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
 import { UserShortInfo } from '../../../../types/auth'
 import { onOauth } from '../../../../store/api/yadnex/auth/Oauth'
-
+import { GAME_ROUTE } from '../../../../const/route'
+import { toast } from 'react-toastify';
 
 const FormSignIn = () => {
   const [signIn] = useSignInMutation()
-  const handleSubmit = (data: UserShortInfo) => {
-    signIn(data)
+  const navigate = useNavigate()
+
+  const handleSubmit = async (data: UserShortInfo) => {
+    try {
+      const result: any = await signIn(data)
+      if (result.data) {
+        return navigate(GAME_ROUTE)
+      } else if (result.error) {
+        toast.error('Invalid login or password')
+      }
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (
