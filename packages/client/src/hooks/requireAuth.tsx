@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from './useAuth'
 import { SIGN_IN_ROUTE } from '../const/route'
 
-export default function RequireAuth({ children }: { children: JSX.Element }) {
+export const RequireAuth = ({ children }: { children: JSX.Element }) =>{
   const location = useLocation()
   const navigate = useNavigate()
   
@@ -19,3 +19,5 @@ export default function RequireAuth({ children }: { children: JSX.Element }) {
     return null
   }
 }
+
+export default RequireAuth;
