@@ -13,7 +13,10 @@ export const authApi = yandexApi.injectEndpoints({
       })
     }),
 
-    signUp: builder.mutation<{ id: number }, UserFullInfo>({
+
+    signUp: builder.mutation<{
+      id: number
+    }, Omit<UserFullInfo, 'id'>>({
       query: arg => ({
         url: getAuthEndpoint('signup'),
         method: 'POST',
@@ -40,5 +43,6 @@ export const authApi = yandexApi.injectEndpoints({
 export const {
   useSignInMutation,
   useSignUpMutation,
+  useLogoutMutation,
   useGetUserInfoQuery
 } = authApi

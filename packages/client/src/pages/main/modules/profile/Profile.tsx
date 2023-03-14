@@ -15,12 +15,11 @@ import { useChangeProfileMutation } from '../../../../store/api/yadnex/profile/p
 import { toast } from 'react-toastify'
 import defaultAvatar from '../../../../assets/img/default-avatar.png';
 
-
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserProfileInfo>(DEFAULT_USER_DATA)
   const [isAvatarShown, setIsAvatarShown] = useState<boolean>(false);
-  const { data } = useGetUserInfoQuery()
-  
+  const {data} = useGetUserInfoQuery()
+
   useEffect(() => {
     if (data) {
       setUser(data)
@@ -29,6 +28,7 @@ const Profile: React.FC = () => {
   
   const [changeProfile] = useChangeProfileMutation();
   
+
 
   const handleSubmit = async (userData: UserProfileInfo) => {
     try {

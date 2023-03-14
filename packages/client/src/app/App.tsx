@@ -19,9 +19,10 @@ import {
   LEADERBOARD_ROUTE,
   PROFILE_ROUTE,
   GAME_ROUTE,
-  ERROR_ROUTE } from '../const/route'
-
+  ERROR_ROUTE
+} from '../const/route'
 import RequireAuth from '../utils/requireAuth'
+import './app.scss'
 
 function App() {
 

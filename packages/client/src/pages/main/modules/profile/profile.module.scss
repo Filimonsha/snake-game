@@ -8,6 +8,11 @@
 .profileCircle {
   min-height: 100vh;
   background: radial-gradient(rgba($background-circle, 0.25), transparent);
+  background-color: var(--primary);
+}
+
+.profileCircle {
+  background: radial-gradient(var(--curcle-color), transparent);
 }
 
 .container {
@@ -44,7 +49,7 @@
   width: 130px;
   height: 130px;
   border: none;
-  background-color: $grey;
+  background-color: var(--background-color-dark);
   border-radius: 50%;
   align-self: center;
 
@@ -79,16 +84,16 @@
   border: none;
   color: $deep-green;
   &:hover {
-    background-color: $deep-green;
-    color: $white;
+    background-color: var(--primary);
+    color: var(--background-color);
   }
 }
 
 .buttonSave {
-  background-color: $yellow;
+  background-color: var(--secondary);
 }
 
 .buttonCancel {
-  background: $white;
-  color: $deep-green;
+  background: var(--background-color);
+  color: var(--primary);
 }

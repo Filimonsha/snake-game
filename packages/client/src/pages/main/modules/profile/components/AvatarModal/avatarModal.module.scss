@@ -16,16 +16,16 @@
   border-radius: 20px;
 
   &:hover {
-    background-color: $white;
-    border: 1px solid $deep-green;
-    color: $deep-green;
+    background-color: var(--background-color);
+    border: 1px solid var(--primary);
+    color: var(--primary);
   }
 }
 
 .buttonSave {
-  background-color: $yellow;
+  background-color: var(--secondary);
 }
 
 .buttonCancel {
-  background-color: $deep-green;
+  background-color: var(--primary);
 }
