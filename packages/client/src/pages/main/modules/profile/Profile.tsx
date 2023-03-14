@@ -10,7 +10,6 @@ import { DEFAULT_USER_DATA } from './constants'
 import { useGetUserInfoQuery } from '../../../../store/api/yadnex/auth/authApi'
 import { UserFullInfo } from '../../../../types/auth'
 import { useNavigate } from 'react-router-dom'
-import { GAME_ROUTE } from '../../../../const/route'
 
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserFullInfo>(DEFAULT_USER_DATA)
@@ -29,7 +28,7 @@ const Profile: React.FC = () => {
   }
 
   const handleCancel = () => {
-    return navigate(GAME_ROUTE)
+    return navigate(-1)
   }
 
   const handleAvatarChange = () => {

@@ -22,6 +22,5 @@ export const themeApi = backendApi.injectEndpoints({
 
 export const {
   useGetThemeQuery,
-  useCreateThemeMutation,
   useUpdateThemeMutation
 } = themeApi

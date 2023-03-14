@@ -27,8 +27,12 @@ const Header = () => {
     }
   }, [data])
 
-  const toggleShowProfile = () => {
-    setIsProfileShown(!isProfileShown)
+  const showProfile = () => {
+    setIsProfileShown(true)
+  }
+
+  const hideProfile = () => {
+    setIsProfileShown(false)
   }
   
   const profile = (
@@ -85,7 +89,8 @@ const Header = () => {
       </nav>
       <div 
         className={styles.profileContainer}
-        onClick={toggleShowProfile}
+        onMouseEnter={showProfile}
+        onMouseLeave={hideProfile}
       >
         { isProfileShown && isSuccess ? profile : null }
         { isSuccess ? avatar : loginLink }

@@ -1,5 +1,4 @@
 @import '../globals.scss';
-@import '../../../const/globals.scss';
 
 body {
 	margin: 0;
@@ -35,7 +34,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	font-size: 20px;
-	color: var(--background-color);
+	color: var(--white);
 	padding: 15px 0;
 	border-bottom: 1px solid var(--secondary);
 }
@@ -72,7 +71,7 @@ body {
 .link {
 	display: flex;
 	padding: 15px 0;
-	color: var(--text-color);
+	color: var(--white);
 	text-decoration: none;
 	cursor: pointer;
 	font-size: 20px;
