@@ -83,8 +83,6 @@ export const getAuthUserInfo = async (req: TUserRequest, res: Response) => {
         .status(404)
         .json({ reason: 'User not found' });
     }
-    
-    console.log(currentUser)
     const userInfo = getUserProfileData(currentUser.dataValues);
     
     return res
