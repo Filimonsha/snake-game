@@ -2,14 +2,14 @@
   {
     "id": 1,
     "rank": 1,
-    "avatar": "https://picsum.photos/200/300",
+    "avatar": "./vite.svg",
     "user": "Kira",
     "score": 56000
   },
   {
     "id": 2,
     "rank": 2,
-    "avatar": "https://avatars.dicebear.com/api/adventurer-neutral/mail%40ashallendesign.co.uk.svg",
+    "avatar": "",
 
     "user": "Beetlejuice",
     "score": 53000
@@ -17,7 +17,7 @@
   {
     "id": 3,
     "rank": 3,
-    "avatar": "https://picsum.photos/200",
+    "avatar": "",
     
     "user": "Ghostbuster",
     "score": 50000
@@ -46,7 +46,7 @@
   {
     "id": 7,
     "rank": 7,
-    "avatar": "https://placekitten.com/250/250",
+    "avatar": "",
     "user": "Meow",
     "score": 1000
   },

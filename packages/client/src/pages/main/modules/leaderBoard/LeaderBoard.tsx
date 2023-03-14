@@ -5,6 +5,8 @@ import DataTable, { TableColumn } from 'react-data-table-component'
 import { TopPlayerCard } from './components/TopPlayerCard'
 import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
 import { useGetLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
+import { Header } from '../../../../modules/header'
+import defaultAvatar from '../../../../assets/img/default-avatar.png'
 
 interface IDataRow {
   rank: number;
@@ -18,7 +20,7 @@ export interface IData extends IDataRow {
 }
 
 const LeaderBoard: React.FC = () => {
-  const [topPlayersData, setTopPlayersData] = useState<IData[]>([]);
+  const [topPlayersData, setTopPlayersData] = useState<IData[]>([])
   const [data, setData] = useState<IDataRow[]>([]);
   const columns: TableColumn<IDataRow>[] = [
     {
@@ -28,7 +30,7 @@ const LeaderBoard: React.FC = () => {
     },
     {
       name: 'Avatar',
-      cell: row => <LeaderBoardAvatar avatar={row.avatar}/>,
+      cell: row => <LeaderBoardAvatar avatar={row.avatar ? row.avatar : defaultAvatar}/>,
       sortable: false,
     },
     {
@@ -41,7 +43,7 @@ const LeaderBoard: React.FC = () => {
       selector: row => row.score,
       sortable: true,
     },
-  ];
+  ]
 
   const {data: queryData} = useGetLeaderboardQuery();
 
@@ -58,12 +60,16 @@ const LeaderBoard: React.FC = () => {
     if (!normalizedData) return
     setData(normalizedData)
     const topPlayers = normalizedData.sort((a, b) => b.score - a.score).slice(0, 3);
+    topPlayers.forEach(player => player.avatar = (player.avatar ? player.avatar : defaultAvatar))
     setTopPlayersData(topPlayers);
   }, [queryData])
 
   return (
     <div className={styles.board}>
       <div className={styles.boardCircle}>
+        <div className={styles.headerContainer}>
+          <Header />
+        </div>
         <Container className={`p-5 d-flex flex-column ${styles.container}`}>
           <div className={styles.wrapperTop}>
             <h1 className='mb-3'>Top Players</h1>
