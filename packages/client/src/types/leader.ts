@@ -1,19 +1,25 @@
-export type UserScore = {
+type UserData = {
+  login: string,
+  avarar: string | null,
+}
+
+export type UserScoreResponse = {
+  idUser: number,
   score: number,
-  userId: number,
-  userName: string
+  createdAt: string,
+  updatedAt: string,
+  userData: UserData,
 }
 
-export type UserScoreData = {
-  data: UserScore,
-  ratingFieldName: "score" | "matches" | "time",
-  teamName: string
+export type ScoreDataResponse = {
+  idUser: number,
+  score: number,
+  createdAt: string,
+  updatedAt: string,
 }
 
-export type LeaderboardRequest = {
-  ratingFieldName: "score" | "matches" | "time",
-  cursor: number,
-  limit: number
+export type UserScoreRequest = {
+  score: number,
 }
 
-export type LeaderboardResponse = Array<{ data: UserScore }>;
+export type LeaderboardResponse = Array<Response>;

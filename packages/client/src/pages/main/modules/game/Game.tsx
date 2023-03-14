@@ -4,6 +4,10 @@ import { GameSnake } from './snake'
 import gameStyles from './game.module.scss'
 import { ScreenStart } from './screenStart'
 import { FullscreenView } from '../../../../components/fullscreenView'
+import { 
+  useGetUserScoreQuery,
+  useSetUserScoreMutation
+} from '../../../../store/api/yadnex/leader/leaderApi'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
@@ -11,6 +15,9 @@ const Game: React.FC = () => {
   const [scoreMax, setScoreMax] = useState<number>(0)
   const [game, setGame] = useState<GameSnake | null>(null)
   const [gameStartVisible, setGameStartVisible] = useState<boolean>(true)
+  
+  const { data: scoreData } = useGetUserScoreQuery()
+  const [setUserScore] = useSetUserScoreMutation()
 
 
   useEffect(() => {
@@ -24,7 +31,11 @@ const Game: React.FC = () => {
 
     game?.eventStop(() => {
       setGameStartVisible(true)
-      if (score > scoreMax) setScoreMax(score)
+      if (scoreData && score > scoreData.score) {
+        setUserScore({ score })
+      } else if (score > scoreMax) {
+        setScoreMax(score)
+      }
     })
 
     game?.settings({
@@ -37,6 +48,8 @@ const Game: React.FC = () => {
     game?.start()
     setGameStartVisible(false)
   }
+  
+  const maxScoreToShow = scoreData ? scoreData.score : scoreMax
 
   return (
     <FullscreenView>
@@ -55,7 +68,7 @@ const Game: React.FC = () => {
                   <div className={gameStyles.scoreIcon}>
                     <img src='snakeGame/cup.svg' alt='cup' />
                   </div>
-                  <div className={gameStyles.scoreCounterCount}>{scoreMax}</div>
+                  <div className={gameStyles.scoreCounterCount}>{scoreData?.score}</div>
                 </div>
               </div>
             }
@@ -63,7 +76,7 @@ const Game: React.FC = () => {
           <div className={gameStyles.snakeGamePlay}>
             {gameStartVisible &&
               <div className={gameStyles.screenPlay}>
-                <ScreenStart fnStart={startGame} score={score} scoreMax={scoreMax} />
+                <ScreenStart fnStart={startGame} score={score} scoreMax={maxScoreToShow} />
               </div>
             }
             <div ref={blockCanvasGame} className={gameStyles.snakeGameCanvas}></div>

@@ -7,7 +7,6 @@ const  RequireAuth = ({ children }: { children: JSX.Element }) => {
   const navigate = useNavigate()
   
   const isLogged = useAuth()
-  console.log(isLogged)
 
   if (isLogged === 'loading') {
     return <h2>Loading</h2>
