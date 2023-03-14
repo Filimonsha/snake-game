@@ -9,6 +9,7 @@ import {
   useSetUserScoreMutation
 } from '../../../../store/api/yadnex/leader/leaderApi'
 import { handleDayScore, checkDayScore } from '../../../../utils/handleLocalScore'
+import { notifyNewRecord } from '../../../../utils/notifications'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
@@ -38,6 +39,7 @@ const Game: React.FC = () => {
       
       if (scoreData && score > scoreData.score) {
         setUserScore({ score })
+        notifyNewRecord();
       } else if (score > scoreMax) {
         setScoreMax(score)
       }
