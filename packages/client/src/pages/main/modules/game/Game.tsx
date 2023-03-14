@@ -8,11 +8,15 @@ import {
   useGetUserScoreQuery,
   useSetUserScoreMutation
 } from '../../../../store/api/yadnex/leader/leaderApi'
+import { handleDayScore, checkDayScore } from '../../../../utils/handleLocalScore'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
+  
   const [score, setScore] = useState<number>(0)
   const [scoreMax, setScoreMax] = useState<number>(0)
+  const [dayScore, setDayScore] = useState<number>(checkDayScore())
+  
   const [game, setGame] = useState<GameSnake | null>(null)
   const [gameStartVisible, setGameStartVisible] = useState<boolean>(true)
   
@@ -31,11 +35,15 @@ const Game: React.FC = () => {
 
     game?.eventStop(() => {
       setGameStartVisible(true)
+      
       if (scoreData && score > scoreData.score) {
         setUserScore({ score })
       } else if (score > scoreMax) {
         setScoreMax(score)
       }
+      
+      const currentDayScore = handleDayScore(score);
+      setDayScore(currentDayScore);
     })
 
     game?.settings({
@@ -76,7 +84,12 @@ const Game: React.FC = () => {
           <div className={gameStyles.snakeGamePlay}>
             {gameStartVisible &&
               <div className={gameStyles.screenPlay}>
-                <ScreenStart fnStart={startGame} score={score} scoreMax={maxScoreToShow} />
+                <ScreenStart 
+                  fnStart={startGame} 
+                  score={score} 
+                  scoreMax={maxScoreToShow} 
+                  dayScore={dayScore}
+                />
               </div>
             }
             <div ref={blockCanvasGame} className={gameStyles.snakeGameCanvas}></div>
