@@ -1,8 +1,8 @@
 .errorPage {
-  background-color: #24440F;
-  color: #FFF;
+  background-color: var(--primary);
+  color: var(--background-color);
   min-height: 100vh;
-  background-image: radial-gradient(rgba(#FFC300, 0.25), transparent);
+  background-image: radial-gradient(var(--secondary-o25), transparent);
 }
 
 .errorPageContainer {
@@ -33,17 +33,17 @@
     height: 20px;
     width: 100%;
     content: '';
-    background-color: #FFC300;
+    background-color: var(--secondary);
     animation: 1s grow 1 ease-in-out;
   }
 }
 
 .errorPageLink {
-  color: #FFF;
+  color: var(--background-color);
   font-size: 20px;
   
   &:hover {
-    color: #FFC300;
+    color: var(--secondary);
   }
 }
 
