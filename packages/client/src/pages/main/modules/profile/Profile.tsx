@@ -38,8 +38,8 @@ const Profile: React.FC = () => {
       } else {
         throw new Error('Cannot update profile');
       }
-    } catch(err) {
-      toast.error(`${err}`);
+    } catch {
+      toast.error('Cannot update profile');
     }
   };
 

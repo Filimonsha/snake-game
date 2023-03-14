@@ -32,8 +32,8 @@ const PasswordForm: React.FC = () => {
       } else {
         throw new Error('Cannot update password');
       }
-    } catch(error) {
-      toast.error(`${error}`);
+    } catch {
+      toast.error('Cannot update password');
     }
   };
 

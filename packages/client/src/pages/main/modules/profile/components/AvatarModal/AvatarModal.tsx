@@ -49,8 +49,8 @@ const AvatarModal: React.FC<IProps> = ({ isShown, handleClose }) => {
         throw new Error('Cannot update avatar')
       }
       
-    } catch (error) {
-      toast.error(`${error}`);
+    } catch {
+      toast.error('Cannot update avatar');
     }
   }
   
@@ -65,8 +65,8 @@ const AvatarModal: React.FC<IProps> = ({ isShown, handleClose }) => {
         throw new Error('Cannot delete avatar')
       }
       
-    } catch (error) {
-      toast.error(`${error}`);
+    } catch {
+      toast.error('Cannot delete avatar');
     }
   }
 
