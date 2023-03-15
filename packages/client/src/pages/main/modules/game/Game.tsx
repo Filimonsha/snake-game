@@ -85,7 +85,7 @@ const Game: React.FC = () => {
                         <div className={gameStyles.scoreIcon}>
                           <img src='snakeGame/cup.svg' alt='cup' />
                         </div>
-                        <div className={gameStyles.scoreCounterCount}>{scoreData?.score}</div>
+                        <div className={gameStyles.scoreCounterCount}>{maxScoreToShow}</div>
                       </div>
                     </div>
                   }
