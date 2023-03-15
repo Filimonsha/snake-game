@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './leaderBoardAvatar.module.scss'
-import { AVATAR_PLACEHOLDER } from './constants'
 
 const LeaderBoardAvatar: React.FC<{ avatar: string }> = ({ avatar }): JSX.Element => {
   return(

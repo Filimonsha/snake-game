@@ -74,7 +74,7 @@ export const updatePassword = async (req: TUserRequest, res: Response) => {
     if (!isPasswordValid) {
       return res
         .status(400)
-        .json({ error: 'Invalid old password' });
+        .json({ reason: 'Invalid old password' });
     }
 
     user.password = new_password;
@@ -111,6 +111,37 @@ export const updateAvatar = async (req: TUserRequest, res: Response) => {
     const userData = getUserProfileData(user.dataValues);
 
     return res.status(201).json(userData);
+    
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ reason: `${error}`})
+  }
+}
+
+export const deleteAvatar = async (req: TUserRequest, res: Response) => {
+  try {
+    
+    if (!req.user) {
+      return res
+      .status(404)
+      .json({ reason: 'Not logged in or user not found'})
+    }
+    
+    const { id } = req.user.dataValues
+    
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ reason: 'User not found' });
+    }
+
+    user.avatar = null;
+    await user.save();
+    const userData = getUserProfileData(user.dataValues);
+
+    return res.status(200).json(userData);
     
   } catch (error) {
     return res
