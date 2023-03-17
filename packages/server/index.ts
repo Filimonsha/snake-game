@@ -26,9 +26,6 @@ async function startServer() {
   const port = Number(process.env.SERVER_PORT) || 3001
   const API_ROUTE = '/api/v1'
 
-
-  app.use(cors({ origin: '*', credentials: true }))
-
   // parse cookies
   app.use(cookieParser())
 
@@ -82,6 +79,7 @@ async function startServer() {
 
   const styleSheets = getStyleSheets()
 
+  app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'], credentials: true }))
 
   // swagger
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
