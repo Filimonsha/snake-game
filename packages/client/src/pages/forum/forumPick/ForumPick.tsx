@@ -53,9 +53,9 @@ const ForumPick = () => {
                 </Link>
               )
             )}
-            </main>
-          </div>
+          </main>
         </div>
+      </div>
     </div>
   )
 }

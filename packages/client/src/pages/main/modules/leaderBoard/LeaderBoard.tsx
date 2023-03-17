@@ -60,6 +60,7 @@ const LeaderBoard: React.FC = () => {
     if (!normalizedData) return
     setData(normalizedData)
     const topPlayers = normalizedData.sort((a, b) => b.score - a.score).slice(0, 3);
+    topPlayers.forEach(player => player.avatar = (player.avatar ? player.avatar : defaultAvatar))
     setTopPlayersData(topPlayers);
   }, [queryData])
 
