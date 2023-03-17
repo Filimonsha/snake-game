@@ -1,19 +1,12 @@
-export type UserScore = {
+export type UserScoreFullInfo = {
   score: number,
-  userId: number,
-  userName: string
+  idUser: number,
+  userData: {
+    login: string,
+    avatar: string
+  }
 }
 
-export type UserScoreData = {
-  data: UserScore,
-  ratingFieldName: "score" | "matches" | "time",
-  teamName: string
-}
-
-export type LeaderboardRequest = {
-  ratingFieldName: "score" | "matches" | "time",
-  cursor: number,
-  limit: number
-}
-
-export type LeaderboardResponse = Array<{ data: UserScore }>;
+export type UserScoreShortInfo = Omit<UserScoreFullInfo, "userData">
+  
+export type LeaderboardResponse = Array<UserScoreFullInfo>;
