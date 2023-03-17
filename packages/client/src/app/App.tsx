@@ -32,12 +32,12 @@ function App() {
       <Routes>
         <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
         <Route path={SIGN_UP_ROUTE} element={<SignUp />} />
-        <Route path={MAIN_ROUTE} element={<RequireAuth><Main /></RequireAuth>} />
-        <Route path={FORUM_ROUTE} element={<ForumPick />} />
-        <Route path={FORUM_ROUTE + '/*'} element={<ForumChat />} />
-        <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
-        <Route path={PROFILE_ROUTE} element={<Profile />} />
-        <Route path={GAME_ROUTE} element={<Suspense fallback={<div>Loading...</div>}><Game /></Suspense>} />
+        <Route path={MAIN_ROUTE} element={<Main />} />
+        <Route path={FORUM_ROUTE} element={<RequireAuth><ForumPick /></RequireAuth>} />
+        <Route path={FORUM_ROUTE + '/*'} element={<RequireAuth><ForumChat /></RequireAuth>} />
+        <Route path={LEADERBOARD_ROUTE} element={<RequireAuth><LeaderBoard /></RequireAuth>} />
+        <Route path={PROFILE_ROUTE} element={<RequireAuth><Profile /></RequireAuth>} />
+        <Route path={GAME_ROUTE} element={<RequireAuth><Suspense fallback={<div>Loading...</div>}><Game /></Suspense></RequireAuth>} />
         <Route path={ERROR_ROUTE} element={<ErrorPage title='Connection error' code='500' />} />
         <Route path='*' element={<ErrorPage title='Page not found' code='404' />} />
       </Routes>
