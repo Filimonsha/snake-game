@@ -28,18 +28,14 @@ const Profile: React.FC = () => {
   
   const [changeProfile] = useChangeProfileMutation();
   
-
-
   const handleSubmit = async (userData: UserProfileInfo) => {
     try {
-      const res = await changeProfile(userData);
-      if ('data' in res) {
+      const response = await changeProfile(userData);
+      if ('data' in response) {
         toast.success('Profile has been updated');
-      } else {
-        throw new Error('Cannot update profile');
       }
-    } catch {
-      toast.error('Cannot update profile');
+    } catch(e) {
+      console.error(e)
     }
   };
 

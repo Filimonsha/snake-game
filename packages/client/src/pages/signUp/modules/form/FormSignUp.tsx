@@ -31,8 +31,7 @@ const FormSignUp = () => {
         second_name: data.lastName,
         password: data.password,
         phone: data.phone
-      })
-      delete data.passwordRepeat
+      });
     } catch (e) {
       console.error(e)
     }

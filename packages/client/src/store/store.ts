@@ -3,6 +3,7 @@ import globalConfigurationSlice from './slice/globalConfigurationSlice'
 import gameConfigurationSlice from './slice/gameConfigurationSlice'
 import yandexApi from './api/yadnex/yandexBaseQuery'
 import backendApi from './api/backend/backendBaseQuery'
+import { rtkQueryErrorLogger } from './middlewares'
 
 
 const reducer = combineReducers({
@@ -15,6 +16,7 @@ const reducer = combineReducers({
 export const store = configureStore({
   reducer,
   middleware: getDefaultMiddleware => getDefaultMiddleware()
+    .concat(rtkQueryErrorLogger)
     .concat(yandexApi.middleware)
     .concat(backendApi.middleware)
 })
