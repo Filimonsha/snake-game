@@ -28,7 +28,6 @@ const ForumPick = () => {
   return (
     <div className={styles.forumListContainer}>
       <div className={styles.forumCircle}>
-        
         {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden} topicChange={() => {trigger()}}/>}
         <div className={styles.forumList}>
           <div className={styles.header}>
