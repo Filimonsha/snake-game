@@ -6,13 +6,13 @@ class Food {
   private canvas: CanvasRenderingContext2D
   public x: number
   public y: number
-  private config: typeof Config
+  private config: Config
   private foodZoom: { offset: number; width: number }
   private food: TViewImg | null
 
-  constructor(canvas: CanvasRenderingContext2D) {
+  constructor(config: Config, canvas: CanvasRenderingContext2D) {
     this.canvas = canvas
-    this.config = Config
+    this.config = config
     this.x = 0
     this.y = 0
     this.food = null

@@ -3,27 +3,34 @@ import CanvasBackground from './canvasBackground'
 import CanvasGame from './canvasGame'
 import Score from './score'
 import Snake from './snake'
-import Config, { IUpdateConfig } from './config'
+import Config, { IUpdateConfig, viewImgBg, viewImgFoods, viewImgSnake } from './config'
 import GameEvents from './gameEvents'
+import { listOptimize, objectOptimize } from './optimize'
+
+
 
 class Game {
   private canvasBackground: CanvasBackground
   private canvasGame: CanvasGame
   public score: Score
-  public config: typeof Config
+  public config: Config
   private events: typeof GameEvents
   private readonly food: Food
   private readonly snake: Snake
   private loopGame: null | ReturnType<typeof setInterval>
 
   constructor(blockGame: HTMLDivElement) {
-    this.canvasGame = new CanvasGame(blockGame)
-    this.canvasBackground = new CanvasBackground(blockGame)
+    blockGame.innerHTML = ''
+
+    this.config = new Config(listOptimize(viewImgBg), objectOptimize(viewImgFoods), objectOptimize(viewImgSnake))
+
+    this.canvasGame = new CanvasGame(this.config, blockGame)
+    this.canvasBackground = new CanvasBackground(this.config, blockGame)
     this.score = new Score()
-    this.food = new Food(this.canvasGame.context)
-    this.snake = new Snake(this.canvasGame.context, this.score, this.food, this)
+    this.food = new Food(this.config, this.canvasGame.context)
+    this.snake = new Snake(this.config, this.canvasGame.context, this.score, this.food, this)
     this.events = GameEvents
-    this.config = Config
+
     this.loopGame = null
 
     // отрисовка игрового поля
