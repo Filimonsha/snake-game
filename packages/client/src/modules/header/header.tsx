@@ -20,7 +20,7 @@ const Header = () => {
   const [user, setUser] = useState<UserFullInfo>(DEFAULT_USER_DATA)
   const [isProfileShown, setIsProfileShown] = useState<boolean>(false)
   const { data, isSuccess } = useGetUserInfoQuery()
-  
+
   useEffect(() => {
     if (data) {
       setUser(data)
@@ -30,21 +30,21 @@ const Header = () => {
   const toggleShowProfile = () => {
     setIsProfileShown(!isProfileShown)
   }
-  
+
   const profile = (
     <div className={styles.profile}>
       <ProfileSettings userName={user.first_name}/>
-    </div> 
+    </div>
   )
-  
-  const avatarSrc = user.avatar ? 
-    (RESOURCES_HOST + user.avatar) 
+
+  const avatarSrc = user.avatar ?
+    (RESOURCES_HOST + user.avatar)
     : DEFAULT_USER_DATA.avatar;
-  
+
   const avatar = (
     <div className={styles.headerAvatar}>
       <img
-        src={avatarSrc}
+        src={avatarSrc as string}
         alt='avatar'
         className={styles.headerAvatarImg}
         crossOrigin="anonymous"
@@ -52,13 +52,13 @@ const Header = () => {
       </img>
     </div>
   )
-  
+
   const loginLink = (
     <Link to={SIGN_IN_ROUTE} className={styles.link}>
       Log in
-    </Link> 
+    </Link>
   )
-  
+
   return (
     <header className={styles.header}>
       <Link
@@ -83,7 +83,7 @@ const Header = () => {
           Forum
         </Link>
       </nav>
-      <div 
+      <div
         className={styles.profileContainer}
         onClick={toggleShowProfile}
       >
