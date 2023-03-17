@@ -67,7 +67,8 @@ async function startServer() {
       server: { 
         middlewareMode: true,
         cors: {
-          credentials: true, origin: 'http://localhost:3000'
+          credentials: true, 
+          origin: 'http://localhost:3000'
         }},
       root: srcPath,
       appType: 'custom'
