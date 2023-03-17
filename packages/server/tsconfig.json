@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "composite": true,
     "target": "es2019",
     "module": "commonjs",
@@ -16,7 +17,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",

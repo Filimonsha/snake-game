@@ -5,6 +5,7 @@ import gameStyles from './game.module.scss'
 import { ScreenStart } from './screenStart'
 import { FullscreenView } from '../../../../components/fullscreenView'
 import { useAddUserToLeaderboardMutation, useGetUserLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
+import { Header } from '../../../../modules/header'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
@@ -46,38 +47,47 @@ const Game: React.FC = () => {
   }
 
   return (
-    <FullscreenView>
-      <Container className={gameStyles.snakeGameWrap}>
-        <div className={gameStyles.snakeGame}>
-          <div className={gameStyles.snakeGameHeader}>
-            {!gameStartVisible &&
-              <div className={gameStyles.score}>
-                <div className={gameStyles.scoreCounter}>
-                  <div className={gameStyles.scoreIcon}>
-                    <img src='snakeGame/coin.svg' alt='coin' />
-                  </div>
-                  <div className={gameStyles.scoreCounterCount}>{score}</div>
+    <>
+      <div className={gameStyles.board}>    
+        <div className={gameStyles.boardCircle}>
+          <div className={gameStyles.headerContainer}>
+            <Header />
+          </div>
+          <FullscreenView>
+            <Container className={gameStyles.snakeGameWrap}>
+              <div className={gameStyles.snakeGame}>
+                <div className={gameStyles.snakeGameHeader}>
+                  {!gameStartVisible &&
+                    <div className={gameStyles.score}>
+                      <div className={gameStyles.scoreCounter}>
+                        <div className={gameStyles.scoreIcon}>
+                          <img src='snakeGame/coin.svg' alt='coin' />
+                        </div>
+                        <div className={gameStyles.scoreCounterCount}>{score}</div>
+                      </div>
+                      <div className={gameStyles.scoreCounter}>
+                        <div className={gameStyles.scoreIcon}>
+                          <img src='snakeGame/cup.svg' alt='cup' />
+                        </div>
+                        <div className={gameStyles.scoreCounterCount}>{scoreMax}</div>
+                      </div>
+                    </div>
+                  }
                 </div>
-                <div className={gameStyles.scoreCounter}>
-                  <div className={gameStyles.scoreIcon}>
-                    <img src='snakeGame/cup.svg' alt='cup' />
-                  </div>
-                  <div className={gameStyles.scoreCounterCount}>{scoreMax}</div>
+                <div className={gameStyles.snakeGamePlay}>
+                  {gameStartVisible &&
+                    <div className={gameStyles.screenPlay}>
+                      <ScreenStart fnStart={startGame} score={score} scoreMax={scoreMax} />
+                    </div>
+                  }
+                  <div ref={blockCanvasGame} className={gameStyles.snakeGameCanvas}></div>
                 </div>
               </div>
-            }
-          </div>
-          <div className={gameStyles.snakeGamePlay}>
-            {gameStartVisible &&
-              <div className={gameStyles.screenPlay}>
-                <ScreenStart fnStart={startGame} score={score} scoreMax={scoreMax} />
-              </div>
-            }
-            <div ref={blockCanvasGame} className={gameStyles.snakeGameCanvas}></div>
-          </div>
+            </Container>
+          </FullscreenView>
         </div>
-      </Container>
-    </FullscreenView>
+      </div>
+    </>
   )
 }
 

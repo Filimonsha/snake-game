@@ -25,5 +25,5 @@ export type TopicsFullInfo = Array<Topic>;
 
 export type topicMutation = { 
   title: string, 
-  creatorUserId: string 
+  creatorUserId: number 
 }

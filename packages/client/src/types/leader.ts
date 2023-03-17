@@ -1,6 +1,6 @@
 export type UserScoreFullInfo = {
   score: number,
-  userId: number,
+  idUser: number,
   userData: {
     login: string,
     avatar: string

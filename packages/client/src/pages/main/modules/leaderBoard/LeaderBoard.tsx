@@ -5,6 +5,8 @@ import DataTable, { TableColumn } from 'react-data-table-component'
 import { TopPlayerCard } from './components/TopPlayerCard'
 import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
 import { useGetLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
+import defaultAvatar from '../../../../assets/img/default-avatar.png'
+import { Header } from '../../../../modules/header'
 
 interface IDataRow {
   rank: number;
@@ -28,7 +30,7 @@ const LeaderBoard: React.FC = () => {
     },
     {
       name: 'Avatar',
-      cell: row => <LeaderBoardAvatar avatar={row.avatar}/>,
+      cell: row => <LeaderBoardAvatar avatar={row.avatar ? row.avatar : defaultAvatar}/>,
       sortable: false,
     },
     {
@@ -41,7 +43,7 @@ const LeaderBoard: React.FC = () => {
       selector: row => row.score,
       sortable: true,
     },
-  ];
+  ]
 
   const {data: queryData} = useGetLeaderboardQuery();
 
@@ -52,7 +54,7 @@ const LeaderBoard: React.FC = () => {
         score: dataPart.score,
         user: dataPart.userData.login,
         avatar: dataPart.userData.avatar,
-        id: dataPart.userId
+        id: dataPart.idUser
       };
     })
     if (!normalizedData) return
@@ -64,11 +66,14 @@ const LeaderBoard: React.FC = () => {
   return (
     <div className={styles.board}>
       <div className={styles.boardCircle}>
+        <div className={styles.headerContainer}>
+          <Header />
+        </div>
         <Container className={`p-5 d-flex flex-column ${styles.container}`}>
           <div className={styles.wrapperTop}>
             <h1 className='mb-3'>Top Players</h1>
             <div className='d-flex justify-content-evenly mb-3'>
-              {topPlayersData && topPlayersData.map(data => <TopPlayerCard key={data.id} {...data}/>)} 
+              {topPlayersData && topPlayersData.map(data => {return <TopPlayerCard key={data.id} {...data}/>})} 
             </div>
           </div>
           <div className={styles.wrapperBottom}>

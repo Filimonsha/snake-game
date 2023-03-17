@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build:ssr": "tsc && vite build --config ssr.config.ts",
+    "build:client": "tsc && vite build --config vite.config.ts",
+    "build": "yarn build:ssr && yarn build:client",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -22,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.0",
+    "react-toastify": "^9.1.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

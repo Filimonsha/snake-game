@@ -16,7 +16,7 @@ export type TOrientation = 'up' | 'right' | 'down' | 'left'
 class Snake {
   snakeListPosition: TSnakePosition[]
   private canvas: CanvasRenderingContext2D
-  private config: typeof Config
+  private config: Config
   private score: Score
   private food: Food
   private game: Game
@@ -28,9 +28,9 @@ class Snake {
 
   private orientation: TOrientation
 
-  constructor(canvas: CanvasRenderingContext2D, score: Score, food: Food, game: Game) {
+  constructor(config: Config, canvas: CanvasRenderingContext2D, score: Score, food: Food, game: Game) {
     this.canvas = canvas
-    this.config = Config
+    this.config = config
     this.score = score
     this.food = food
     this.game = game
@@ -52,7 +52,7 @@ class Snake {
 
     // отслеживание клавиш
     this.control()
-    
+
     this.preventScroll = this.preventScroll.bind(this);
   }
 
@@ -166,8 +166,8 @@ class Snake {
       this.canvas.clearRect(item.x, item.y, this.config.gridCellWidth, this.config.gridCellWidth)
     })
   }
-  
-  
+
+
   // запрет на скролл страницы при управлении змейкой
   private preventScroll(e: KeyboardEvent) {
     const keys = ['KeyW', 'KeyD', 'KeyS', 'KeyA',

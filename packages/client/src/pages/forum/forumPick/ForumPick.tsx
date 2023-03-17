@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './forumPick.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from "./modules/modal/modal";
 import { useLazyGetTopicsQuery } from '../../../store/api/yadnex/forum/forumApi';
+import { Header } from '../../../modules/header';
 
 interface IForumList {id: string, title: string}
 
@@ -26,30 +27,35 @@ const ForumPick = () => {
   }, [result])
 
   return (
-    <div className={styles.forumListContainer}>
+    <div className={styles.forum}>
       <div className={styles.forumCircle}>
-        {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden} topicChange={() => {trigger()}}/>}
-        <div className={styles.forumList}>
-          <div className={styles.header}>
-            <div className={styles.headerContent}>
-              <div className={styles.backButton} onClick={() => navigate(-1)}></div>
-              All Discussions
-            </div>
-            <div onClick={showModalEvent} className={styles.addLabel}></div>
-          </div>
-          {
-            !forumList?.length ? 
-            <span className={styles.noChats}>There are no forums yet</span> : 
-            forumList?.map(forum => (
-              <Link to={`${forum.id}`} className={styles.link} key={forum.id}>
-                <p>
-                  {forum.title}
-                </p>
-              </Link>
-            )
-          )}
+        <div className={styles.headerContainer}>
+          <Header />
         </div>
-      </div>
+        <div>
+          {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden} topicChange={() => {trigger()}}/>}
+          <main className={styles.forumList}>
+            <div className={styles.header}>
+              <div className={styles.headerContent}>
+                <div className={styles.backButton} onClick={() => navigate(-1)}></div>
+                All Discussions
+              </div>
+              <div onClick={showModalEvent} className={styles.addLabel}></div>
+            </div>
+            {
+              !forumList?.length ? 
+              <span className={styles.noChats}>There are no forums yet</span> : 
+              forumList?.map(forum => (
+                <Link to={`${forum.id}`} className={styles.link} key={forum.id}>
+                  <p>
+                    {forum.title}
+                  </p>
+                </Link>
+              )
+            )}
+            </main>
+          </div>
+        </div>
     </div>
   )
 }
