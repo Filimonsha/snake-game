@@ -19,9 +19,9 @@ import * as path from 'path'
 dotenv.config()
 
 const isDev = () => process.env.NODE_ENV === 'development'
+const app = express()
 
 async function startServer() {
-  const app = express()
   const swaggerDocument = YAML.load('./swagger.yaml')
   const port = Number(process.env.SERVER_PORT) || 3001
   const API_ROUTE = '/api/v1'
@@ -64,7 +64,12 @@ async function startServer() {
 
   if (isDev()) {
     vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: { 
+        middlewareMode: true,
+        cors: {
+          credentials: true, 
+          origin: 'http://localhost:3000'
+        }},
       root: srcPath,
       appType: 'custom'
     })
@@ -75,11 +80,11 @@ async function startServer() {
   if (!isDev()) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
     app.use('/snakeGame', express.static(path.resolve(distPath, 'snakeGame')))
+
+    app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'], credentials: true }))
   }
 
   const styleSheets = getStyleSheets()
-
-  app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'], credentials: true }))
 
   // swagger
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))

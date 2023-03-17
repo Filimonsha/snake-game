@@ -1,5 +1,3 @@
-import { listOptimize, objectOptimize } from './optimize'
-
 export type TViewImg = HTMLImageElement
 
 type TViewImgObject = {

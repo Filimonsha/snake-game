@@ -4,6 +4,7 @@ import { GameSnake } from './snake'
 import gameStyles from './game.module.scss'
 import { ScreenStart } from './screenStart'
 import { FullscreenView } from '../../../../components/fullscreenView'
+import { useAddUserToLeaderboardMutation, useGetUserLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
 import { Header } from '../../../../modules/header'
 
 const Game: React.FC = () => {
@@ -12,11 +13,16 @@ const Game: React.FC = () => {
   const [scoreMax, setScoreMax] = useState<number>(0)
   const [game, setGame] = useState<GameSnake | null>(null)
   const [gameStartVisible, setGameStartVisible] = useState<boolean>(true)
-
+  const leaderBoardMutation = useAddUserToLeaderboardMutation();
+  const {data: leaderBoardResponse} = useGetUserLeaderboardQuery();
 
   useEffect(() => {
     if (blockCanvasGame.current) setGame(new GameSnake(blockCanvasGame.current))
   }, [])
+
+  useEffect(() => {
+    setScoreMax(leaderBoardResponse ? leaderBoardResponse.score : 0)
+  }, [leaderBoardResponse])
 
   useEffect(() => {
     game?.eventScore((score) => {
@@ -25,6 +31,7 @@ const Game: React.FC = () => {
 
     game?.eventStop(() => {
       setGameStartVisible(true)
+      leaderBoardMutation[0]({score})
       if (score > scoreMax) setScoreMax(score)
     })
 

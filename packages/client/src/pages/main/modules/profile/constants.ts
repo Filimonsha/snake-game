@@ -1,5 +1,7 @@
+import defaultAvatar from "../../../../assets/img/default-avatar.png"
+
 export const DEFAULT_USER_DATA = {
-  avatar: null,
+  avatar: defaultAvatar,
   first_name: '',
   second_name: '',
   login: '',
