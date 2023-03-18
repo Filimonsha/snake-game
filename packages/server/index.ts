@@ -15,6 +15,7 @@ import type { ViteDevServer } from 'vite'
 import { createServer as createViteServer } from 'vite'
 import { promises as fs } from 'fs'
 import * as path from 'path'
+import { cspMiddleware } from './middlewares/cspMiddleware'
 
 dotenv.config()
 
@@ -26,6 +27,9 @@ async function startServer() {
   const port = Number(process.env.SERVER_PORT) || 3001
   const API_ROUTE = '/api/v1'
 
+  // content security policy
+  app.use(cspMiddleware())
+  
   // parse cookies
   app.use(cookieParser())
 
@@ -99,7 +103,7 @@ async function startServer() {
   app.use(`${API_ROUTE}/auth`, authRoutes)
   app.use(`${API_ROUTE}/user`, userRoutes)
 
-  app.use('*', async (req, res, next) => {
+  app.use('*', async (req: any, res, next) => {
     const url = req.originalUrl
 
     try {
@@ -131,6 +135,7 @@ async function startServer() {
       const html = template
         .replace(`<!--ssr-styles-->`, cssAssets)
         .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace(/<script/g, `<script nonce='${req.nonce}'`)
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {

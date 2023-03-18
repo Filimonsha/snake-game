@@ -16,6 +16,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
