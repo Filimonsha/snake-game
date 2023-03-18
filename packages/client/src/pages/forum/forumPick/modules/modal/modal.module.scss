@@ -1,7 +1,7 @@
 @import '../../../globals.scss';
 
 .modalWrapper {
-	display: flex;    
+	display: flex;
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -15,7 +15,7 @@
 	border-radius: 10px;
 	height: 270px;
 	width: min(500px, 100% - 20px);
-	background-color: var(--background-color-dark);
+	background-color: var(--modal-bg);
 	grid-template-rows: 2fr 5fr 3fr;
 	grid-template-columns: repeat(2, 1fr);
 	display: grid;
@@ -24,7 +24,7 @@
 		grid-row-start: 3;
 		grid-column-start: 1;
 		@extend %button;
-		color: var(--text-color);
+		color: var(--white);
 		background-color: var(--secondary);
 	}
 
@@ -49,8 +49,14 @@
 		grid-column-end: 3;
 		margin-inline: 20px;
 		@extend %textArea;
-		border: 1px solid var(--primary);
-		padding: 5px;
+		border: 1px solid var(--secondary);
+		padding: 5px 10px;
+		color: var(--small-text-color);
+		background-color: var(--small-text-bg);
+		
+		&:focus {
+			outline: 2px solid var(--secondary);
+		}
 	}
 
 	.title {
@@ -59,6 +65,6 @@
 		grid-column-start: 1;
 		grid-column-end: 3;
 		align-self: center;
-		color: var(--primary);
+		color: var(--secondary);
 	}
 }

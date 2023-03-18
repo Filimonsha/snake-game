@@ -17,6 +17,9 @@
     --curcle-color: #{$background-circle}40;
     --text-color: #{$text-color};
     --white: #{$white};
+    --small-text-bg: #{$grey};
+    --small-text-color: #{$dark-grey};
+    --modal-bg: #{$grey};
 }
 
 :root.dark{
@@ -36,4 +39,7 @@
     --curcle-color: #{$magento}40;
     --text-color: #{$dark-purple};
     --white: #{$white};
+    --small-text-bg: #{$dark-purple};
+    --small-text-color: #{$white};
+    --modal-bg: #{$light-purple};
 }

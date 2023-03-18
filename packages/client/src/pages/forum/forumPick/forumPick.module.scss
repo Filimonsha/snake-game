@@ -46,6 +46,8 @@ body {
 
 .backButton {
 	background-image: url('../../../assets/img/backButton.svg');
+	border-radius: 50%;
+	background-color: var(--secondary);
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
@@ -53,6 +55,8 @@ body {
 
 .addLabel {
 	background-image: url('../../../assets/img/addButton.svg');
+	border-radius: 50%;
+	background-color: var(--secondary);
 	width: 32px;
 	height: 32px;
 	cursor: pointer;

@@ -30,4 +30,9 @@ h1, h2 {
 
 .table {
   box-shadow: 0px -6px 12px 0px var(--shadow-color);
+  
+  & div {
+    background-color: var(--small-text-bg);
+    color: var(--small-text-color);
+  }
 }

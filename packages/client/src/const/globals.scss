@@ -12,8 +12,15 @@ $deep-dark-green: #163600;
 $background-circle: #EAEA8C;
 $text-color: #24440F;
 $dark-purple: #130a35;
+$light-purple: #271f49;
 $magento: #ED4B6D;
+$dark-grey: #333333;
 
 $dark-green: rgba(57, 103, 9, 77%);
 $light-dark: rgb(19 40 10 / 30%);
 $dark: rgba(129, 175, 25, 0);
+
+#custom-switch {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+}
