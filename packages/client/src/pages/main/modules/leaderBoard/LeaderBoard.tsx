@@ -7,6 +7,7 @@ import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
 import { useGetLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
 import defaultAvatar from '../../../../assets/img/default-avatar.png'
 import { Header } from '../../../../modules/header'
+import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
 
 interface IDataRow {
   rank: number;
@@ -94,4 +95,4 @@ const LeaderBoard: React.FC = () => {
   )
 }
 
-export default LeaderBoard
+export default withErrorBoundary(LeaderBoard);

@@ -6,6 +6,7 @@ import { ScreenStart } from './screenStart'
 import { FullscreenView } from '../../../../components/fullscreenView'
 import { useAddUserToLeaderboardMutation, useGetUserLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
 import { Header } from '../../../../modules/header'
+import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
@@ -91,4 +92,4 @@ const Game: React.FC = () => {
   )
 }
 
-export default Game
+export default withErrorBoundary(Game);
