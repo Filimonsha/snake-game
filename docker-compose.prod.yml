@@ -1,95 +1,103 @@
 version: "3.9"
 
 services:
-    client:
-        container_name: prakticum-client
-        image: prakticum-client
-        build:
-            context: .
-            dockerfile: Dockerfile.client
-            args:
-              CLIENT_PORT: ${CLIENT_PORT}
-        restart: always
-        environment:
-          - CLIENT_PORT=${CLIENT_PORT}
-          - SERVER_PORT=${SERVER_PORT}
-        volumes:
-          - client:/app/client
-        networks:
-          - snake
+  client:
+    container_name: prakticum-client
+    image: prakticum-client
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+      args:
+        CLIENT_PORT: ${CLIENT_PORT}
+    restart: always
+    environment:
+      - CLIENT_PORT=${CLIENT_PORT}
+      - SERVER_PORT=${SERVER_PORT}
+    volumes:
+      - client:/app/client
+    networks:
+      - snake
 
-    server:
-        container_name: prakticum-server
-        image: prackicum-server
-        build:
-            context: .
-            dockerfile: Dockerfile.server
-            args:
-              SERVER_PORT: ${SERVER_PORT}
-        restart: always
-        ports:
-            - "${SERVER_PORT}:${SERVER_PORT}"
-        env_file:
-          - .env
-        environment:
-          SERVER_PORT: ${SERVER_PORT}
-          PATH_STATIC: './client'
-          POSTGRES_HOST: 'prakticum-postgres'
-        volumes:
-          - client:/app/client
-        command: sh -c "node index.js"
-        depends_on:
-          postgres:
-            condition: service_healthy
-        networks:
-          - snake
+  server:
+    container_name: prakticum-server
+    image: prackicum-server
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+      args:
+        SERVER_PORT: ${SERVER_PORT}
+    restart: always
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    env_file:
+      - .env
+    environment:
+      SERVER_PORT: ${SERVER_PORT}
+      PATH_STATIC: './client'
+      POSTGRES_HOST: 'prakticum-postgres'
+    volumes:
+      - client:/app/client
+    command: sh -c "node index.js"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - snake
 
-    postgres:
-      container_name: prakticum-postgres
-      image: postgres:14
-      ports:
-        - "${POSTGRES_PORT}:${POSTGRES_PORT}"
-      healthcheck:
-        test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-        interval: 10s
-        timeout: 5s
-        retries: 5
-      environment:
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_DB: ${POSTGRES_DB}
-      volumes:
-        - ./tmp/pgdata:/var/lib/postgresql/data
-      networks:
-        - snake
+  postgres:
+    container_name: prakticum-postgres
+    image: postgres:14
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./tmp/pgdata:/var/lib/postgresql/data
+    networks:
+      - snake
 
-    nginx:
-      container_name: prakticum-nginx
-      image: nginx:latest
-      ports:
-        - "80:80"
-        - "443:443"
-      volumes:
-        - ./nginx.conf:/etc/nginx/nginx.conf
-        - ./certbot/conf:/etc/letsencrypt
-        - ./certbot/www:/var/www/certbot
-      depends_on:
-        - certbot
-      networks:
-        - snake
+  certbot:
+    container_name: prakticum-certbot
+    image: coreycothrum/certbot:v0.1.0
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      DOMAIN_EMAIL: ${DOMAIN_EMAIL}
+    restart: always
+    volumes:
+      - CERTBOT_CERTS:/etc/letsencrypt:rw
+      - CERTBOT_WEBROOT:/var/www/certbot:rw
+    networks:
+      - snake
 
-    certbot:
-      container_name: prakticum-certbot
-      image: certbot/certbot:latest
-      entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot certonly --webroot --webroot-path=/var/www/certbot --email your-email@example.com --agree-tos --no-eff-email -d ${DOMAIN_NAME}; sleep 12h & wait $${!}; done;'"
-      volumes:
-        - ./certbot/conf:/etc/letsencrypt
-        - ./certbot/www:/var/www/certbot
-      networks:
-        - snake
+  nginx:
+    container_name: prakticum-nginx
+    image: coreycothrum/nginx:v0.1.0
+    depends_on:
+      - certbot
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
+    ports:
+      - '80:80'
+      - '443:443'
+    restart: always
+    volumes:
+      - CERTBOT_CERTS:/etc/letsencrypt:ro
+      - CERTBOT_WEBROOT:/var/www/certbot:ro
+      - ./nginx.conf:/etc/nginx/templates/default.locations.template
+    networks:
+      - snake
 
 volumes:
   client:
+  CERTBOT_CERTS:
+  CERTBOT_WEBROOT:
 
 networks:
   snake:
