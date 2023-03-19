@@ -31,6 +31,10 @@ const Game: React.FC = () => {
   }, [])
 
   useEffect(() => {
+    setScoreMax(scoreData ? scoreData.score : 0)
+  }, [scoreData])
+
+  useEffect(() => {
     game?.eventScore((score) => {
       setScore(score)
     })

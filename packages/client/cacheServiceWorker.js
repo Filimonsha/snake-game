@@ -107,7 +107,7 @@ const getFromCache = async (request, cacheName) => {
 
 const cacheData = async (request, cacheName, timeout) => {
   try {
-    if (request.method === 'POST' || request.method === 'PUT') {
+    if (request.method !== 'GET') {
       const response = await fetch(request);
       return response;
     }

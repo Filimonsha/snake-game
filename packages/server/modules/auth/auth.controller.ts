@@ -76,7 +76,14 @@ export const getAuthUserInfo = async (req: TUserRequest, res: Response) => {
       .json({ reason: 'User not found' });
     }
     
-    const userInfo = getUserProfileData(user);
+    
+    const currentUser = await User.findByPk(user.id);
+    if (!currentUser) {
+      return res
+        .status(404)
+        .json({ reason: 'User not found' });
+    }
+    const userInfo = getUserProfileData(currentUser.dataValues);
     
     return res
       .status(200)

@@ -1,6 +1,6 @@
 type UserData = {
   login: string,
-  avarar: string | null,
+  avatar: string | null,
 }
 
 export type UserScoreResponse = {
@@ -22,4 +22,4 @@ export type UserScoreRequest = {
   score: number,
 }
 
-export type LeaderboardResponse = Array<Response>;
+export type LeaderboardResponse = Array<UserScoreResponse>;

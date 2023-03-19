@@ -10,13 +10,6 @@ const getLeaderEndpoint = (endpoint: string) => `leaderboard/${endpoint}`
 export const leaderApi = yandexApi.injectEndpoints({
   endpoints: builder => ({
     
-    getAllUsersLeaderboard: builder.mutation<LeaderboardResponse, void>({
-      query: () => ({
-        url: getLeaderEndpoint(''),
-        method: 'GET',
-      })
-    }),
-    
     getUserScore: builder.query<ScoreDataResponse, void>({
       query: () => ({
         url: getLeaderEndpoint('user'),
@@ -33,13 +26,16 @@ export const leaderApi = yandexApi.injectEndpoints({
       }),
       invalidatesTags: [{ type: 'MaxScore'}],
     }),
-
+    
+    getLeaderboard: builder.query<LeaderboardResponse, void>({
+      query: () => getLeaderEndpoint(''),
+    })
 
   })
 })
 
 export const {
   useSetUserScoreMutation,
-  useGetAllUsersLeaderboardMutation,
-  useGetUserScoreQuery
+  useGetUserScoreQuery,
+  useGetLeaderboardQuery
 } = leaderApi
