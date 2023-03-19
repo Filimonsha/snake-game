@@ -14,22 +14,12 @@ import {
   GAME_ROUTE
 } from '../../const/route'
 import { RESOURCES_HOST } from '../../const/host'
-import { useGetThemeQuery } from '../../store/api/backend/theme/themeApi'
 
 
 const Header = () => {
   const [user, setUser] = useState<UserFullInfo>(DEFAULT_USER_DATA)
   const [isProfileShown, setIsProfileShown] = useState<boolean>(false)
   const { data, isSuccess } = useGetUserInfoQuery()
-  const { data: themeData } = useGetThemeQuery()
-  
-  const setTheme = () => {
-    if (themeData) document.documentElement.className = themeData.theme;
-  }
-  
-  useEffect(() => {
-    setTheme();
-  }, [themeData])
 
   useEffect(() => {
     if (data) {

@@ -9,8 +9,8 @@ const ProfileSettings: React.FC<{ userName: string}> = ({ userName }) => {
   const [logout] = useLogoutMutation()
   const navigate = useNavigate()
 
-  const onLogout = () => {
-    logout()
+  const onLogout = async () => {
+    await logout()
     navigate(MAIN_ROUTE)
     navigate(0)
   }
