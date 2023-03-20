@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc --p ./tsconfig.prod.json && cpy \"./swagger.yaml\" \"./dist\"",
+    "build": "rm -rf ./dist && tsc --p ./tsconfig.prod.json && cpy \"./swagger.yaml\" \"./dist\"",
     "preview": "node ./dist/index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "lint": "eslint .",
@@ -23,6 +23,7 @@
     "dotenv": "^16.0.2",
     "eslint-config-prettier": "^8.5.0",
     "express": "^4.18.1",
+    "express-csp-header": "^5.1.0",
     "jsonwebtoken": "^9.0.0",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.9.0",

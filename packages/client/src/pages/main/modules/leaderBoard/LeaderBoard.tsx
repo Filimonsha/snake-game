@@ -7,13 +7,14 @@ import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
 import { useGetLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
 import defaultAvatar from '../../../../assets/img/default-avatar.png'
 import { Header } from '../../../../modules/header'
+import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
 import { RESOURCES_HOST } from '../../../../const/host'
 
 interface IDataRow {
   rank: number;
-  avatar: string;
-  user: string;
+  avatar: string | null;
   score: number;
+  user: string;
 }
 
 export interface IData extends IDataRow {
@@ -22,8 +23,8 @@ export interface IData extends IDataRow {
 
 const LeaderBoard: React.FC = () => {
   const [topPlayersData, setTopPlayersData] = useState<IData[]>([]);
-  const [data, setData] = useState<IDataRow[]>([]);
-  const columns: TableColumn<IDataRow>[] = [
+  const [data, setData] = useState<IData[]>([]);
+  const columns: TableColumn<IData>[] = [
     {
       name: 'Rank',
       selector: row => row.rank,
@@ -95,4 +96,4 @@ const LeaderBoard: React.FC = () => {
   )
 }
 
-export default LeaderBoard
+export default withErrorBoundary(LeaderBoard);
