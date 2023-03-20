@@ -14,6 +14,7 @@ import { RESOURCES_HOST } from '../../../../const/host'
 import { useChangeProfileMutation } from '../../../../store/api/yadnex/profile/profileApi'
 import { toast } from 'react-toastify'
 import defaultAvatar from '../../../../assets/img/default-avatar.png';
+import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
 
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserProfileInfo>(DEFAULT_USER_DATA)
@@ -27,7 +28,7 @@ const Profile: React.FC = () => {
   }, [user, data])
   
   const [changeProfile] = useChangeProfileMutation();
-  
+
   const handleSubmit = async (userData: UserProfileInfo) => {
     try {
       const response = await changeProfile(userData);
@@ -142,4 +143,4 @@ const Profile: React.FC = () => {
     </div>
 )}
 
-export default Profile
+export default withErrorBoundary(Profile);

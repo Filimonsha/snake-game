@@ -4,6 +4,7 @@ import styles from './scss/forumChat.module.scss';
 import UserCard from './modules/userCard/userCard';
 import { useGetTopicsQuery, useLazyGetCommentQuery } from '../../../store/api/yadnex/forum/forumApi';
 import { ForumComment } from '../../../types/forum';
+import { withErrorBoundary } from '../../../modules/errorBoundary/withErrorBoundary';
 
 const ForumChat = () => {
   const [forumChat, setChatList] = useState<ForumComment[]>([]);
@@ -61,4 +62,4 @@ const ForumChat = () => {
   )
 }
 
-export default ForumChat
+export default withErrorBoundary(ForumChat);

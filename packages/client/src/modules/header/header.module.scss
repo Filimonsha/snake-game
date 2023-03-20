@@ -1,6 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   padding-bottom: 40px;
 }
@@ -31,6 +32,7 @@
   flex-grow: 1;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 30px;
   font-size: 25px;
   text-transform: uppercase;
