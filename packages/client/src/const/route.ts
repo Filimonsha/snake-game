@@ -7,6 +7,6 @@ export const PROFILE_ROUTE = '/profile'
 export const GAME_ROUTE = '/game'
 export const ERROR_ROUTE = '/error'
 
-export const SERVER_BASE = 'http://localhost:'
-export const SERVER_PORT = 3001
+export const SERVER_BASE = 'https://england-snake-21.ya-praktikum.tech'
+export const SERVER_PORT = ''
 export const SERVER_API = '/api/v1/'

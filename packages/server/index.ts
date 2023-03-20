@@ -30,7 +30,7 @@ async function startServer() {
 
   // content security policy
   app.use(cspMiddleware())
-  
+
   // parse cookies
   app.use(cookieParser())
 
@@ -45,7 +45,7 @@ async function startServer() {
 
   let vite: ViteDevServer | undefined
 
-  const resolve = (p: string) => path.resolve(__dirname, process.env.PATH_STATIC + p);
+  const resolve = (p: string) => path.resolve(__dirname, process.env.PATH_STATIC + p)
 
   const distPath = resolve('/dist')
   const ssrClientPath = resolve('/dist-ssr/ssr.cjs')
@@ -69,12 +69,13 @@ async function startServer() {
 
   if (isDev()) {
     vite = await createViteServer({
-      server: { 
+      server: {
         middlewareMode: true,
         cors: {
-          credentials: true, 
+          credentials: true,
           origin: 'http://localhost:3000'
-        }},
+        }
+      },
       root: srcPath,
       appType: 'custom'
     })
@@ -86,7 +87,14 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
     app.use('/snakeGame', express.static(path.resolve(distPath, 'snakeGame')))
 
-    app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'], credentials: true }))
+    app.use(cors({
+      origin:
+        [
+          'http://localhost:3000',
+          'http://localhost:3001',
+          'https://england-snake-21.ya-praktikum.tech'
+        ], credentials: true
+    }))
   }
 
   const styleSheets = getStyleSheets()
@@ -103,7 +111,7 @@ async function startServer() {
   app.use(`${API_ROUTE}/theme`, themeRoutes)
   app.use(`${API_ROUTE}/auth`, authRoutes)
   app.use(`${API_ROUTE}/user`, userRoutes)
-app.use(`${API_ROUTE}/oauth`, oauthRoutes)
+  app.use(`${API_ROUTE}/oauth`, oauthRoutes)
 
   app.use('*', async (req: any, res, next) => {
     const url = req.originalUrl

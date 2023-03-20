@@ -4,7 +4,7 @@ info:
   title: Swagger API
   description: snake game
 servers:
-  - url: http://localhost:3001/api/v1/
+  - url: https://england-snake-21.ya-praktikum.tech/api/v1/
 tags:
   - name: Auth
     description: ''
@@ -44,7 +44,7 @@ paths:
       responses:
         200:
           description: object with user id
-          content: 
+          content:
             application/json:
               schema:
                 type: object
@@ -73,7 +73,7 @@ paths:
       responses:
         200:
           description: object with user id
-          content: 
+          content:
             application/json:
               schema:
                 type: object
@@ -96,7 +96,7 @@ paths:
       responses:
         200:
           description: User info
-          content: 
+          content:
             application/json:
               example:
                 id: 1
@@ -132,7 +132,7 @@ paths:
       responses:
         200:
           description: User info
-          content: 
+          content:
             application/json:
               example:
                 id: 1
@@ -349,18 +349,18 @@ paths:
               code:
                 type: string
               redirect_uri:
-                type: string  
+                type: string
           description: Oauth data
       responses:
         200:
           description: Ok
         400:
           description: Bad Request (No such redirect_uri or wrong code)
-          content: 
+          content:
             application/json:
               example:
                 reason: string
-        401: 
+        401:
           description: Unauthorized
         500:
           description: Unexpected error
@@ -375,13 +375,13 @@ paths:
       responses:
         200:
           description: Yandex client id
-          content: 
+          content:
             application/json:
               example:
                 service_id: string
         400:
           description: Bad Request (No such redirect_uri registered)
-          content: 
+          content:
             application/json:
               example:
                 reason: string

@@ -4,7 +4,7 @@ const REDIRECT_URI = `http://localhost:3000`
 const OAUTH_URL = `http://localhost:3001/api/v1/oauth/yandex`
 
 export const onOauth = async () => {
-  const { service_id } = await fetch(`http://localhost:3001/api/v1/oauth/yandex/service-id?redirect_uri=${REDIRECT_URI}`)
+  const { service_id } = await fetch(`https://england-snake-21.ya-praktikum.tech/api/v1/oauth/yandex/service-id?redirect_uri=${REDIRECT_URI}`)
     .then(response => response.json())
     .then(data => data)
     .catch((error) => console.error(error));
