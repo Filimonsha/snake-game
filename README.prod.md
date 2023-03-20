@@ -15,7 +15,7 @@ docker-compose -f docker-compose.prod.yml build
 ```
 
 ```bash 
-docker compose run  --rm --entrypoint generate_self_signed_certs.sh certbot
+docker-compose -f docker-compose.prod.yml run --rm --entrypoint generate_self_signed_certs.sh certbot
 ```
 
 ```bash 
@@ -23,14 +23,14 @@ docker-compose -f docker-compose.prod.yml up -d
 ```
 
 ```bash 
-docker compose exec certbot request_certs.sh
+docker-compose -f docker-compose.prod.yml exec certbot request_certs.sh
 ```
 
 ```bash 
-docker compose logs -f
+docker-compose -f docker-compose.prod.yml logs -f
 ```
 
 ```bash 
-docker compose exec nginx nginx -s reload
+docker-compose -f docker-compose.prod.yml exec nginx nginx -s reload
 ```
 
