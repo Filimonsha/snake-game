@@ -8,6 +8,8 @@ servers:
 tags:
   - name: Auth
     description: ''
+  - name: Oauth
+    description: ''
   - name: User
     description: ''
   - name: Theme
@@ -333,3 +335,55 @@ paths:
       responses:
         200:
           description: Success
+  /oauth/yandex:
+    post:
+      summary: 'Sign in with yandex'
+      tags: [Oauth]
+      parameters:
+        - in: body
+          name: OauthSignInRequest
+          required: true
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+              redirect_uri:
+                type: string  
+          description: Oauth data
+      responses:
+        200:
+          description: Ok
+        400:
+          description: Bad Request (No such redirect_uri or wrong code)
+          content: 
+            application/json:
+              example:
+                reason: string
+        401: 
+          description: Unauthorized
+        500:
+          description: Unexpected error
+  /oauth/yandex/service-id:
+    get:
+      summary: 'Get service id'
+      tags: [Oauth]
+      parameters:
+        - in: query
+          name: redirect_uri
+          description: Redirect uri that you are using for oauth
+      responses:
+        200:
+          description: Yandex client id
+          content: 
+            application/json:
+              example:
+                service_id: string
+        400:
+          description: Bad Request (No such redirect_uri registered)
+          content: 
+            application/json:
+              example:
+                reason: string
+        500:
+          description: Unexpected error

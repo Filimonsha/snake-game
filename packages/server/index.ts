@@ -9,6 +9,7 @@ import { forumRoutes } from './modules/forum/forum.routes'
 import { themeRoutes } from './modules/theme/theme.routes'
 import { authRoutes } from './modules/auth/auth.routes'
 import { userRoutes } from './modules/user/user.routes'
+import { oauthRoutes } from './modules/oauth/oauth.routes'
 import swaggerUi from 'swagger-ui-express'
 import YAML from 'yamljs'
 import type { ViteDevServer } from 'vite'
@@ -102,6 +103,7 @@ async function startServer() {
   app.use(`${API_ROUTE}/theme`, themeRoutes)
   app.use(`${API_ROUTE}/auth`, authRoutes)
   app.use(`${API_ROUTE}/user`, userRoutes)
+app.use(`${API_ROUTE}/oauth`, oauthRoutes)
 
   app.use('*', async (req: any, res, next) => {
     const url = req.originalUrl

@@ -22,8 +22,12 @@ const MainSlide = () => {
   useEffect(() => {
     const code = searchParams.get(`code`)
     if (!code) return
-    signInWithOauth(code)
-    return navigate(GAME_ROUTE)
+    const login = async () => {
+      await signInWithOauth(code)
+      return navigate(GAME_ROUTE)
+    }
+    
+    login()
   }, [])
 
   return (
