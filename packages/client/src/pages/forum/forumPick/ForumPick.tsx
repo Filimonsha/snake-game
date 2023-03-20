@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Modal from "./modules/modal/modal";
 import { useLazyGetTopicsQuery } from '../../../store/api/yadnex/forum/forumApi';
 import { Header } from '../../../modules/header';
+import { withErrorBoundary } from '../../../modules/errorBoundary/withErrorBoundary';
 
 interface IForumList {id: string, title: string}
 
@@ -60,4 +61,4 @@ const ForumPick = () => {
   )
 }
 
-export default ForumPick
+export default withErrorBoundary(ForumPick);
