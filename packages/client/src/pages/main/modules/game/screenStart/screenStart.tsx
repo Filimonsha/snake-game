@@ -8,11 +8,12 @@ interface IScreenStart {
   fnStart: () => void
   score: number
   scoreMax: number
+  dayScore: number
 }
 
 const { toggleGameSound } = gameConfigurationActions;
 
-const ScreenStart: React.FC<IScreenStart> = ({ fnStart, score, scoreMax }) => {
+const ScreenStart: React.FC<IScreenStart> = ({ fnStart, score, scoreMax, dayScore }) => {
   const [settingsVisible, setSettingsVisible] = useState<boolean>(false)
   
   const isGameSound = useTypedSelector(state => state.gameConfigurations.isGameSound);
@@ -44,6 +45,12 @@ const ScreenStart: React.FC<IScreenStart> = ({ fnStart, score, scoreMax }) => {
                   <img src='snakeGame/coin.svg' alt='coin' />
                 </div>
                 <div className={screenStartStyles.scoreCounterCount}>{score}</div>
+              </div>
+              <div className={screenStartStyles.scoreCounter}>
+                <div className={screenStartStyles.scoreIcon}>
+                  <img src='snakeGame/cup-daily.svg' alt='cup daily' />
+                </div>
+                <div className={screenStartStyles.scoreCounterCount}>{dayScore}</div>
               </div>
               <div className={screenStartStyles.scoreCounter}>
                 <div className={screenStartStyles.scoreIcon}>

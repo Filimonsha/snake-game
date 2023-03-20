@@ -1,24 +1,32 @@
 import yandexApi from '../yandexBaseQuery'
-import { LeaderboardResponse, UserScoreShortInfo } from '../../../../types/leader'
+import { 
+  UserScoreRequest,
+  ScoreDataResponse,
+  LeaderboardResponse
+} from '../../../../types/leader'
 
 const getLeaderEndpoint = (endpoint: string) => `leaderboard/${endpoint}`
 
 export const leaderApi = yandexApi.injectEndpoints({
   endpoints: builder => ({
-
-    addUserToLeaderboard: builder.mutation<void, {score: number} >({
+    
+    getUserScore: builder.query<ScoreDataResponse, void>({
+      query: () => ({
+        url: getLeaderEndpoint('user'),
+        method: 'GET',
+      }),
+      providesTags: [{ type: 'MaxScore'}]
+    }),
+    
+    setUserScore: builder.mutation<ScoreDataResponse, UserScoreRequest>({
       query: arg => ({
         url: getLeaderEndpoint('user'),
         method: 'POST',
         body: arg
-      })
+      }),
+      invalidatesTags: [{ type: 'MaxScore'}],
     }),
-
     
-    getUserLeaderboard: builder.query<UserScoreShortInfo, void>({
-      query: () => getLeaderEndpoint('user')
-    }),
-
     getLeaderboard: builder.query<LeaderboardResponse, void>({
       query: () => getLeaderEndpoint(''),
     })
@@ -27,7 +35,7 @@ export const leaderApi = yandexApi.injectEndpoints({
 })
 
 export const {
-  useGetLeaderboardQuery,
-  useGetUserLeaderboardQuery,
-  useAddUserToLeaderboardMutation
+  useSetUserScoreMutation,
+  useGetUserScoreQuery,
+  useGetLeaderboardQuery
 } = leaderApi

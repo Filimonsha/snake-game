@@ -4,26 +4,36 @@ import { GameSnake } from './snake'
 import gameStyles from './game.module.scss'
 import { ScreenStart } from './screenStart'
 import { FullscreenView } from '../../../../components/fullscreenView'
-import { useAddUserToLeaderboardMutation, useGetUserLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
+import { 
+  useGetUserScoreQuery,
+  useSetUserScoreMutation
+} from '../../../../store/api/yadnex/leader/leaderApi'
+import { handleDayScore, checkDayScore } from '../../../../utils/handleLocalScore'
+import { notifyNewRecord } from '../../../../utils/notifications'
 import { Header } from '../../../../modules/header'
 import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
+  
   const [score, setScore] = useState<number>(0)
   const [scoreMax, setScoreMax] = useState<number>(0)
+  const [dayScore, setDayScore] = useState<number>(checkDayScore())
+  
   const [game, setGame] = useState<GameSnake | null>(null)
   const [gameStartVisible, setGameStartVisible] = useState<boolean>(true)
-  const leaderBoardMutation = useAddUserToLeaderboardMutation();
-  const {data: leaderBoardResponse} = useGetUserLeaderboardQuery();
+  
+  const { data: scoreData } = useGetUserScoreQuery()
+  const [setUserScore] = useSetUserScoreMutation()
+
 
   useEffect(() => {
     if (blockCanvasGame.current) setGame(new GameSnake(blockCanvasGame.current))
   }, [])
 
   useEffect(() => {
-    setScoreMax(leaderBoardResponse ? leaderBoardResponse.score : 0)
-  }, [leaderBoardResponse])
+    setScoreMax(scoreData ? scoreData.score : 0)
+  }, [scoreData])
 
   useEffect(() => {
     game?.eventScore((score) => {
@@ -32,8 +42,16 @@ const Game: React.FC = () => {
 
     game?.eventStop(() => {
       setGameStartVisible(true)
-      leaderBoardMutation[0]({score})
-      if (score > scoreMax) setScoreMax(score)
+      
+      if (scoreData && score > scoreData.score) {
+        setUserScore({ score })
+        notifyNewRecord();
+      } else if (score > scoreMax) {
+        setScoreMax(score)
+      }
+      
+      const currentDayScore = handleDayScore(score);
+      setDayScore(currentDayScore);
     })
 
     game?.settings({
@@ -46,6 +64,8 @@ const Game: React.FC = () => {
     game?.start()
     setGameStartVisible(false)
   }
+  
+  const maxScoreToShow = scoreData ? scoreData.score : scoreMax
 
   return (
     <>
@@ -70,7 +90,7 @@ const Game: React.FC = () => {
                         <div className={gameStyles.scoreIcon}>
                           <img src='snakeGame/cup.svg' alt='cup' />
                         </div>
-                        <div className={gameStyles.scoreCounterCount}>{scoreMax}</div>
+                        <div className={gameStyles.scoreCounterCount}>{maxScoreToShow}</div>
                       </div>
                     </div>
                   }
@@ -78,7 +98,12 @@ const Game: React.FC = () => {
                 <div className={gameStyles.snakeGamePlay}>
                   {gameStartVisible &&
                     <div className={gameStyles.screenPlay}>
-                      <ScreenStart fnStart={startGame} score={score} scoreMax={scoreMax} />
+                      <ScreenStart 
+                        fnStart={startGame} 
+                        score={score} 
+                        scoreMax={maxScoreToShow} 
+                        dayScore={dayScore}
+                    />
                     </div>
                   }
                   <div ref={blockCanvasGame} className={gameStyles.snakeGameCanvas}></div>
