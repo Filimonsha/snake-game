@@ -7,12 +7,13 @@ import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
 import { useGetLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
 import defaultAvatar from '../../../../assets/img/default-avatar.png'
 import { Header } from '../../../../modules/header'
+import { RESOURCES_HOST } from '../../../../const/host'
 
 interface IDataRow {
   rank: number;
-  avatar: string;
-  user: string;
+  avatar: string | null;
   score: number;
+  user: string;
 }
 
 export interface IData extends IDataRow {
@@ -21,8 +22,8 @@ export interface IData extends IDataRow {
 
 const LeaderBoard: React.FC = () => {
   const [topPlayersData, setTopPlayersData] = useState<IData[]>([]);
-  const [data, setData] = useState<IDataRow[]>([]);
-  const columns: TableColumn<IDataRow>[] = [
+  const [data, setData] = useState<IData[]>([]);
+  const columns: TableColumn<IData>[] = [
     {
       name: 'Rank',
       selector: row => row.rank,
@@ -60,7 +61,7 @@ const LeaderBoard: React.FC = () => {
     if (!normalizedData) return
     setData(normalizedData)
     const topPlayers = normalizedData.sort((a, b) => b.score - a.score).slice(0, 3);
-    topPlayers.forEach(player => player.avatar = (player.avatar ? player.avatar : defaultAvatar))
+    topPlayers.forEach(player => player.avatar = (player.avatar ? RESOURCES_HOST + player.avatar : defaultAvatar))
     setTopPlayersData(topPlayers);
   }, [queryData])
 
