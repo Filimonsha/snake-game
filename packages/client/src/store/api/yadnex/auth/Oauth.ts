@@ -1,6 +1,6 @@
 import yandexApi from '../yandexBaseQuery'
 
-const REDIRECT_URI = process.env.REDIRECT_URI
+const REDIRECT_URI = `http://localhost:3000`
 const OAUTH_URL = `https://ya-praktikum.tech/api/v2/oauth/yandex`
 
 export const onOauth = async () => {
