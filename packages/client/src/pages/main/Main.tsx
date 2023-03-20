@@ -1,4 +1,5 @@
 import { MainSlide } from './modules/mainSlide';
+import { withErrorBoundary } from '../../modules/errorBoundary/withErrorBoundary';
 
 const Main = () => {
   return (
@@ -6,4 +7,4 @@ const Main = () => {
   )
 }
 
-export default Main
+export default withErrorBoundary(Main);

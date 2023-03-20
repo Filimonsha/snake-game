@@ -11,6 +11,7 @@ import {
 import { handleDayScore, checkDayScore } from '../../../../utils/handleLocalScore'
 import { notifyNewRecord } from '../../../../utils/notifications'
 import { Header } from '../../../../modules/header'
+import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
@@ -116,4 +117,4 @@ const Game: React.FC = () => {
   )
 }
 
-export default Game
+export default withErrorBoundary(Game);
