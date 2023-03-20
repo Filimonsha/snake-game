@@ -51,7 +51,7 @@ const Pages = () => {
         <Route path={FORUM_ROUTE + '/*'} element={<ForumChat />} />
         <Route path={LEADERBOARD_ROUTE} element={<LeaderBoard />} />
         <Route path={PROFILE_ROUTE} element={<Profile />} />
-        <Route path={GAME_ROUTE} element={<Suspense fallback={<div>Loading...</div>}><Game /></Suspense>} />
+        <Route path={GAME_ROUTE} element={<Suspense><Game /></Suspense>} />
       </Route>
       <Route element={<ProtectedRoutes condition='loggedOut'/>} >
         <Route path={SIGN_IN_ROUTE} element={<SignIn />} />
