@@ -10,6 +10,10 @@ https://github.com/coreycothrum/nginx_certbot_docker_compose
 docker-compose -f docker-compose.prod.yml down
 ```
 
+```bash
+docker-compose -f docker-compose.prod.yml build
+```
+
 ```bash 
 docker compose run  --rm --entrypoint generate_self_signed_certs.sh certbot
 ```
