@@ -4,10 +4,10 @@ export const cspMiddleware = () => (
   expressCspHeader({
     directives: {
         'default-src': [SELF, 'ws://localhost:24678', 'http://localhost:24678/'],
-        'script-src': [NONCE],
+        'script-src': [NONCE, SELF],
         'style-src': [SELF, INLINE],
         'object-src': [NONE],
-        'img-src': [SELF],
+        'img-src': [SELF, INLINE],
         'worker-src': [SELF]
     }
   })
