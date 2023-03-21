@@ -32,6 +32,7 @@
 	padding-inline: $gap10;
 	padding-block: $gap10;
 	margin-bottom: $gap10;
-	background-color: var(--background-color-dark);
+	background-color: var(--small-text-bg);
+	color: var(--small-text-color);
 	border-radius: 5px;
 }
