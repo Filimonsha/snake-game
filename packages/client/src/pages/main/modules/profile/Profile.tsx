@@ -15,6 +15,7 @@ import { useChangeProfileMutation } from '../../../../store/api/yadnex/profile/p
 import { toast } from 'react-toastify'
 import defaultAvatar from '../../../../assets/img/default-avatar.png';
 import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
+import { Header } from '../../../../modules/header'
 
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserProfileInfo>(DEFAULT_USER_DATA)
@@ -51,6 +52,9 @@ const Profile: React.FC = () => {
   return (
     <div className={styles.profile}>
       <div className={styles.profileCircle}>
+        <div className={styles.headerContainer}>
+          <Header />
+        </div>
         <div className={styles.wrapper}>
           <Container className={styles.container}>
             <Formik

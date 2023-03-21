@@ -13,6 +13,11 @@
   background: radial-gradient(var(--curcle-color), transparent);
 }
 
+.headerContainer {
+  padding-inline: 50px;
+  padding-top: 50px;
+}
+
 .container {
   width: 70vw;
   margin-bottom: 60px;
@@ -28,7 +33,7 @@
 }
 
 .wrapper {
-  padding-block: 50px;
+  padding-bottom: 50px;
 }
 
 .form {
