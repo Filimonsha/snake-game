@@ -17,8 +17,9 @@ const Routes = {
 
 export const authRoutes = [
   Routes.Profile,
-  Routes.Game, 
-  Routes.Leaderboard, 
-  Routes.Forum]
+  Routes.Game,
+  Routes.Leaderboard,
+  Routes.Forum,
+]
 
 export const redirectRoute = Routes.SignIn
