@@ -3,6 +3,8 @@ info:
   version: 1.0.0
   title: Swagger API
   description: snake game
+servers:
+  - url: /api/v1/
 tags:
   - name: Auth
     description: ''
