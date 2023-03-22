@@ -27,7 +27,7 @@ const LeaderBoard: React.FC = () => {
   const columns: TableColumn<IData>[] = [
     {
       name: 'Rank',
-      selector: row => row.rank,
+      selector: row => row.rank as number + 1,
       sortable: true,
     },
     {

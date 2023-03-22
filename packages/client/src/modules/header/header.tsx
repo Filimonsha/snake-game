@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import logoUrl from '../../assets/img/logo.svg'
 import { ProfileSettings } from '../profileSettings'
 import { DEFAULT_USER_DATA } from '../../pages/main/modules/profile/constants'
+import defaultAvatar from '../../assets/img/default-avatar.png'
 import { UserFullInfo } from '../../types/auth'
 import { useEffect, useState } from 'react'
 import { useGetUserInfoQuery } from '../../store/api/yadnex/auth/authApi'
@@ -43,7 +44,7 @@ const Header = () => {
 
   const avatarSrc = user.avatar ?
     (RESOURCES_HOST + user.avatar)
-    : DEFAULT_USER_DATA.avatar;
+    : defaultAvatar;
 
   const avatar = (
     <div className={styles.headerAvatar}>
