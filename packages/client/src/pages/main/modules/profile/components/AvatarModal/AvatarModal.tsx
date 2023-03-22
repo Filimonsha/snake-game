@@ -72,11 +72,11 @@ const AvatarModal: React.FC<IProps> = ({ isShown, handleClose }) => {
 
   return(
     <>
-      <Modal show={isShown} onHide={handleClose}>
-        <Modal.Header closeButton>
+      <Modal show={isShown} onHide={handleClose} className={styles.modalBg}>
+        <Modal.Header closeButton className={styles.modalHeader}>
           <Modal.Title>Set your avatar</Modal.Title>
         </Modal.Header>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.modalForm}>
           <Modal.Body>
             <input
               ref={avatarRef}

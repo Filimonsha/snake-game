@@ -19,6 +19,7 @@ import { SignIn } from '../../pages/signIn'
 import { SignUp } from '../../pages/signUp'
 import { lazy, Suspense } from 'react'
 import { useAuth } from '../../utils/useAuth'
+import { Loader } from '../loader'
 
 const Game = lazy(() => import('../../pages/main/modules/game/Game'))
 
@@ -31,7 +32,7 @@ const ProtectedRoutes: React.FC<IProtectedRoute> = ({ condition }) => {
   const isLogged = useAuth()
 
   if (isLogged === 'loading') {
-    return <h2>Loading</h2>
+    return <Loader />
   }
 
   if (condition === 'loggedIn') {

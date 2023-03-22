@@ -7,7 +7,7 @@ export const cspMiddleware = () => (
         'script-src': [NONCE, SELF],
         'style-src': [SELF, INLINE],
         'object-src': [NONE],
-        'img-src': [SELF, INLINE],
+        'img-src': ['*', 'data:', SELF, INLINE],
         'worker-src': [SELF]
     }
   })
