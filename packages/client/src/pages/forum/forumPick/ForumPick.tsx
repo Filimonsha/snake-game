@@ -20,7 +20,6 @@ const ForumPick = () => {
 
   useEffect(() => {
     trigger()
-    document.title="Forum"
   }, [])
 
   useEffect(() => {

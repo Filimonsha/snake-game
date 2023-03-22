@@ -32,7 +32,6 @@ const ForumChat = () => {
   }, [result])
 
   useEffect(() => {
-    document.title = "Forum"
     chatChange()
   }, [])
 
