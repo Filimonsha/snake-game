@@ -22,8 +22,11 @@ import { useAuth } from '../../utils/useAuth'
 
 const Game = lazy(() => import('../../pages/main/modules/game/Game'))
 
+interface IProtectedRoute {
+  condition: 'loggedIn' | 'loggedOut'
+}
 
-const ProtectedRoutes: React.FC<{condition: string}> = ({ condition }) => {
+const ProtectedRoutes: React.FC<IProtectedRoute> = ({ condition }) => {
   const location = useLocation()
   const isLogged = useAuth()
 
