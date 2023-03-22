@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react'
 import styles from './leaderBoard.module.scss'
 import Container from 'react-bootstrap/Container'
 import DataTable, { TableColumn } from 'react-data-table-component'
-import dummyData from './dummy.json'
 import { TopPlayerCard } from './components/TopPlayerCard'
 import { LeaderBoardAvatar } from './components/LeaderBoardAvatar'
+import { useGetLeaderboardQuery } from '../../../../store/api/yadnex/leader/leaderApi'
+import defaultAvatar from '../../../../assets/img/default-avatar.png'
+import { Header } from '../../../../modules/header'
+import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
+import { RESOURCES_HOST } from '../../../../const/host'
 
 interface IDataRow {
   rank: number;
-  avatar: string;
-  user: string;
+  avatar: string | null;
   score: number;
+  user: string;
 }
 
 export interface IData extends IDataRow {
@@ -19,16 +23,16 @@ export interface IData extends IDataRow {
 
 const LeaderBoard: React.FC = () => {
   const [topPlayersData, setTopPlayersData] = useState<IData[]>([]);
-  const data = dummyData;
-  const columns: TableColumn<IDataRow>[] = [
+  const [data, setData] = useState<IData[]>([]);
+  const columns: TableColumn<IData>[] = [
     {
       name: 'Rank',
-      selector: row => row.rank,
+      selector: row => row.rank as number + 1,
       sortable: true,
     },
     {
       name: 'Avatar',
-      cell: row => <LeaderBoardAvatar avatar={row.avatar}/>,
+      cell: row => <LeaderBoardAvatar avatar={row.avatar ? row.avatar : defaultAvatar}/>,
       sortable: false,
     },
     {
@@ -41,21 +45,38 @@ const LeaderBoard: React.FC = () => {
       selector: row => row.score,
       sortable: true,
     },
-  ];
+  ]
+
+  const {data: queryData} = useGetLeaderboardQuery();
 
   useEffect(() => {
-    const topPlayers = dummyData.sort((a, b) => b.score - a.score).slice(0, 3);
+    const normalizedData = queryData?.map((dataPart, partIndex) => {
+      return {
+        rank: partIndex,
+        score: dataPart.score,
+        user: dataPart.userData.login,
+        avatar: dataPart.userData.avatar,
+        id: dataPart.idUser
+      };
+    })
+    if (!normalizedData) return
+    setData(normalizedData)
+    const topPlayers = normalizedData.slice(0, 3);
+    topPlayers.forEach(player => player.avatar = (player.avatar ? RESOURCES_HOST + player.avatar : defaultAvatar))
     setTopPlayersData(topPlayers);
-  }, [dummyData])
+  }, [queryData])
 
   return (
     <div className={styles.board}>
       <div className={styles.boardCircle}>
+        <div className={styles.headerContainer}>
+          <Header />
+        </div>
         <Container className={`p-5 d-flex flex-column ${styles.container}`}>
           <div className={styles.wrapperTop}>
             <h1 className='mb-3'>Top Players</h1>
             <div className='d-flex justify-content-evenly mb-3'>
-              {topPlayersData && topPlayersData.map(data => <TopPlayerCard key={data.id} {...data}/>)} 
+              {topPlayersData && topPlayersData.map(data => <TopPlayerCard key={data.id} {...data}/> )} 
             </div>
           </div>
           <div className={styles.wrapperBottom}>
@@ -75,4 +96,4 @@ const LeaderBoard: React.FC = () => {
   )
 }
 
-export default LeaderBoard
+export default withErrorBoundary(LeaderBoard);

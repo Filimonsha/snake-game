@@ -1,5 +1,6 @@
 import { FormSignUp } from './modules/form';
 import { EntranceLayout } from '../../layout/entrance';
+import { withErrorBoundary } from '../../modules/errorBoundary/withErrorBoundary';
 
 const SignUp = () => {
   return (
@@ -9,4 +10,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp;
+export default withErrorBoundary(SignUp);

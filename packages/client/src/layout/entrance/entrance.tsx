@@ -15,10 +15,10 @@ const EntranceLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <div className={entrance}>
       <header className={entranceHeader}>
-        <Link to={MAIN_ROUTE} title='На главную страницу'>
+        <Link to={MAIN_ROUTE} title='To main page'>
           <img
             src={logoUrl}
-            alt="Логотип Snake Game"
+            alt="Snake Game logo"
             height='80'
             width='200'
           />

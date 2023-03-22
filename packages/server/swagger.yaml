@@ -4,9 +4,11 @@ info:
   title: Swagger API
   description: snake game
 servers:
-  - url: http://localhost:3001/api/v1/
+  - url: /api/v1/
 tags:
   - name: Auth
+    description: ''
+  - name: Oauth
     description: ''
   - name: User
     description: ''
@@ -42,7 +44,7 @@ paths:
       responses:
         200:
           description: object with user id
-          content: 
+          content:
             application/json:
               schema:
                 type: object
@@ -71,7 +73,7 @@ paths:
       responses:
         200:
           description: object with user id
-          content: 
+          content:
             application/json:
               schema:
                 type: object
@@ -94,7 +96,7 @@ paths:
       responses:
         200:
           description: User info
-          content: 
+          content:
             application/json:
               example:
                 id: 1
@@ -105,7 +107,7 @@ paths:
                 email: my@email.com
                 phone: "+79223332211"
                 avatar: "/path/to/avatar.jpg"
-    /user/profile:
+  /user/profile:
     put:
       summary: 'Update profile data'
       tags: [User]
@@ -130,7 +132,7 @@ paths:
       responses:
         200:
           description: User info
-          content: 
+          content:
             application/json:
               example:
                 id: 1
@@ -188,6 +190,24 @@ paths:
                 email: my@email.com
                 phone: "+79223332211"
                 avatar: "/path/to/avatar.jpg"
+    delete:
+      summary: 'Deletes avatar'
+      tags: [User]
+      description: 'Avatar'
+      responses:
+        200:
+          description: User info
+          content:
+            application/json:
+              example:
+                id: 1
+                first_name: John
+                second_name: Doe
+                display_name: John Doe
+                login: john
+                email: my@email.com
+                phone: "+79223332211"
+                avatar: null
   /theme:
     get:
       summary: Get a user's theme
@@ -234,37 +254,25 @@ paths:
       responses:
         200:
           description: Success
-  /leaderboard/{idUser}:
+  /leaderboard/user:
     get:
       summary: получение очков пользователя
       tags: [LeaderBoard]
-      parameters:
-        - name: idUser
-          in: path
-          description: User ID
-          required: true
-          type: number
       responses:
         200:
           description: Success
     post:
       summary: запись очков пользователя (здесь проверка - записывается всегда наибольшее кол-во очков)
       tags: [LeaderBoard]
-      parameters:
-        - name: idUser
-          in: path
-          description: User ID
-          required: true
-          type: number
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               type: object
               required:
-                - point
+                - score
               properties:
-                point:
+                score:
                   type: number
       responses:
         200:
@@ -286,12 +294,9 @@ paths:
               type: object
               required:
                 - title
-                - creatorUserId
               properties:
                 title:
                   type: string
-                creatorUserId:
-                  type: number
       responses:
         200:
           description: Success
@@ -302,7 +307,7 @@ paths:
       parameters:
         - name: topicId
           in: path
-          description: User ID
+          description: Topic ID
           required: true
           type: number
       responses:
@@ -314,7 +319,7 @@ paths:
       parameters:
         - name: topicId
           in: path
-          description: User ID
+          description: Topic ID
           required: true
           type: number
       requestBody:
@@ -324,12 +329,61 @@ paths:
               type: object
               required:
                 - text
-                - idUser
               properties:
                 text:
                   type: string
-                idUser:
-                  type: number
       responses:
         200:
           description: Success
+  /oauth/yandex:
+    post:
+      summary: 'Sign in with yandex'
+      tags: [Oauth]
+      parameters:
+        - in: body
+          name: OauthSignInRequest
+          required: true
+          schema:
+            type: object
+            properties:
+              code:
+                type: string
+              redirect_uri:
+                type: string
+          description: Oauth data
+      responses:
+        200:
+          description: Ok
+        400:
+          description: Bad Request (No such redirect_uri or wrong code)
+          content:
+            application/json:
+              example:
+                reason: string
+        401:
+          description: Unauthorized
+        500:
+          description: Unexpected error
+  /oauth/yandex/service-id:
+    get:
+      summary: 'Get service id'
+      tags: [Oauth]
+      parameters:
+        - in: query
+          name: redirect_uri
+          description: Redirect uri that you are using for oauth
+      responses:
+        200:
+          description: Yandex client id
+          content:
+            application/json:
+              example:
+                service_id: string
+        400:
+          description: Bad Request (No such redirect_uri registered)
+          content:
+            application/json:
+              example:
+                reason: string
+        500:
+          description: Unexpected error

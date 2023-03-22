@@ -4,18 +4,36 @@ import { GameSnake } from './snake'
 import gameStyles from './game.module.scss'
 import { ScreenStart } from './screenStart'
 import { FullscreenView } from '../../../../components/fullscreenView'
+import { 
+  useGetUserScoreQuery,
+  useSetUserScoreMutation
+} from '../../../../store/api/yadnex/leader/leaderApi'
+import { handleDayScore, checkDayScore } from '../../../../utils/handleLocalScore'
+import { notifyNewRecord } from '../../../../utils/notifications'
+import { Header } from '../../../../modules/header'
+import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
 
 const Game: React.FC = () => {
   const blockCanvasGame = useRef<HTMLDivElement>(null)
+  
   const [score, setScore] = useState<number>(0)
   const [scoreMax, setScoreMax] = useState<number>(0)
+  const [dayScore, setDayScore] = useState<number>(checkDayScore())
+  
   const [game, setGame] = useState<GameSnake | null>(null)
   const [gameStartVisible, setGameStartVisible] = useState<boolean>(true)
+  
+  const { data: scoreData } = useGetUserScoreQuery()
+  const [setUserScore] = useSetUserScoreMutation()
 
 
   useEffect(() => {
     if (blockCanvasGame.current) setGame(new GameSnake(blockCanvasGame.current))
   }, [])
+
+  useEffect(() => {
+    setScoreMax(scoreData ? scoreData.score : 0)
+  }, [scoreData])
 
   useEffect(() => {
     game?.eventScore((score) => {
@@ -24,7 +42,16 @@ const Game: React.FC = () => {
 
     game?.eventStop(() => {
       setGameStartVisible(true)
-      if (score > scoreMax) setScoreMax(score)
+      
+      if (scoreData && score > scoreData.score) {
+        setUserScore({ score })
+        notifyNewRecord();
+      } else if (score > scoreMax) {
+        setScoreMax(score)
+      }
+      
+      const currentDayScore = handleDayScore(score);
+      setDayScore(currentDayScore);
     })
 
     game?.settings({
@@ -37,41 +64,57 @@ const Game: React.FC = () => {
     game?.start()
     setGameStartVisible(false)
   }
+  
+  const maxScoreToShow = scoreData ? scoreData.score : scoreMax
 
   return (
-    <FullscreenView>
-      <Container className={gameStyles.snakeGameWrap}>
-        <div className={gameStyles.snakeGame}>
-          <div className={gameStyles.snakeGameHeader}>
-            {!gameStartVisible &&
-              <div className={gameStyles.score}>
-                <div className={gameStyles.scoreCounter}>
-                  <div className={gameStyles.scoreIcon}>
-                    <img src='snakeGame/coin.svg' alt='coin' />
-                  </div>
-                  <div className={gameStyles.scoreCounterCount}>{score}</div>
+    <>
+      <div className={gameStyles.board}>    
+        <div className={gameStyles.boardCircle}>
+          <div className={gameStyles.headerContainer}>
+            <Header />
+          </div>
+          <FullscreenView>
+            <Container className={gameStyles.snakeGameWrap}>
+              <div className={gameStyles.snakeGame}>
+                <div className={gameStyles.snakeGameHeader}>
+                  {!gameStartVisible &&
+                    <div className={gameStyles.score}>
+                      <div className={gameStyles.scoreCounter}>
+                        <div className={gameStyles.scoreIcon}>
+                          <img src='snakeGame/coin.svg' alt='coin' />
+                        </div>
+                        <div className={gameStyles.scoreCounterCount}>{score}</div>
+                      </div>
+                      <div className={gameStyles.scoreCounter}>
+                        <div className={gameStyles.scoreIcon}>
+                          <img src='snakeGame/cup.svg' alt='cup' />
+                        </div>
+                        <div className={gameStyles.scoreCounterCount}>{maxScoreToShow}</div>
+                      </div>
+                    </div>
+                  }
                 </div>
-                <div className={gameStyles.scoreCounter}>
-                  <div className={gameStyles.scoreIcon}>
-                    <img src='snakeGame/cup.svg' alt='cup' />
-                  </div>
-                  <div className={gameStyles.scoreCounterCount}>{scoreMax}</div>
+                <div className={gameStyles.snakeGamePlay}>
+                  {gameStartVisible &&
+                    <div className={gameStyles.screenPlay}>
+                      <ScreenStart 
+                        fnStart={startGame} 
+                        score={score} 
+                        scoreMax={maxScoreToShow} 
+                        dayScore={dayScore}
+                    />
+                    </div>
+                  }
+                  <div ref={blockCanvasGame} className={gameStyles.snakeGameCanvas}></div>
                 </div>
               </div>
-            }
-          </div>
-          <div className={gameStyles.snakeGamePlay}>
-            {gameStartVisible &&
-              <div className={gameStyles.screenPlay}>
-                <ScreenStart fnStart={startGame} score={score} scoreMax={scoreMax} />
-              </div>
-            }
-            <div ref={blockCanvasGame} className={gameStyles.snakeGameCanvas}></div>
-          </div>
+            </Container>
+          </FullscreenView>
         </div>
-      </Container>
-    </FullscreenView>
+      </div>
+    </>
   )
 }
 
-export default Game
+export default withErrorBoundary(Game);

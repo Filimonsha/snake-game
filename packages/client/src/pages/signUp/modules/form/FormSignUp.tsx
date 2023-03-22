@@ -8,6 +8,8 @@ import {
   FORM_TYPE
 } from './data'
 import { useSignUpMutation } from '../../../../store/api/yadnex/auth/authApi'
+import { MAIN_ROUTE } from '../../../../const/route'
+import { useNavigate } from 'react-router-dom'
 
 
 interface ISignUpFormData {
@@ -21,17 +23,23 @@ interface ISignUpFormData {
 }
 
 const FormSignUp = () => {
+  const navigate = useNavigate()
   const [signUp] = useSignUpMutation()
-  const handleSubmit = (data: ISignUpFormData) => {
-    signUp({
-      login: data.login,
-      email: data.email,
-      first_name: data.firstName,
-      second_name: data.lastName,
-      password: data.password,
-      phone: data.phone
-    })
-    delete data.passwordRepeat
+  const handleSubmit = async (data: ISignUpFormData) => {
+    try {
+      await signUp({
+        login: data.login,
+        email: data.email,
+        first_name: data.firstName,
+        second_name: data.lastName,
+        password: data.password,
+        phone: data.phone
+      }).then((data: any) => {
+        if (data.data.id) return navigate(MAIN_ROUTE)
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (

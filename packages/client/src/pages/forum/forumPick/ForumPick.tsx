@@ -1,52 +1,63 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './forumPick.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { MOCK_ARRAY } from './mockList';
 import Modal from "./modules/modal/modal";
+import { useLazyGetTopicsQuery } from '../../../store/api/yadnex/forum/forumApi';
+import { Header } from '../../../modules/header';
+import { withErrorBoundary } from '../../../modules/errorBoundary/withErrorBoundary';
 
-interface IMockForumList {ID: string, TITLE: string}
+interface IForumList {id: string, title: string}
 
 const ForumPick = () => {
   const [isModalHidden, setIsModalHidden] = useState<boolean>(true);
-  const [forumList, setForumList] = useState<IMockForumList[]>([]);
+  const [forumList, setForumList] = useState<IForumList[] | undefined>([]);
   const navigate = useNavigate();
 
   function showModalEvent() {
     setIsModalHidden(false)
   }
+  const [trigger, result] = useLazyGetTopicsQuery();
 
   useEffect(() => {
-    document.title="Forum"
-    setForumList(MOCK_ARRAY)
+    trigger()
   }, [])
 
+  useEffect(() => {
+    if (result.data) setForumList(result.data)
+  }, [result])
+
   return (
-    <div className={styles.forumListContainer}>
+    <div className={styles.forum}>
       <div className={styles.forumCircle}>
-        {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden}/>}
-        <div className={styles.forumList}>
-          <div className={styles.header}>
-            <div className={styles.headerContent}>
-              <div className={styles.backButton} onClick={() => navigate(-1)}></div>
-              All Discussions
+        <div className={styles.headerContainer}>
+          <Header />
+        </div>
+        <div>
+          {!isModalHidden && <Modal setIsModalHidden={setIsModalHidden} topicChange={() => {trigger()}}/>}
+          <main className={styles.forumList}>
+            <div className={styles.header}>
+              <div className={styles.headerContent}>
+                <div className={styles.backButton} onClick={() => navigate(-1)}></div>
+                All Discussions
+              </div>
+              <div onClick={showModalEvent} className={styles.addLabel}></div>
             </div>
-            <div onClick={showModalEvent} className={styles.addLabel}></div>
-          </div>
-          {
-            !forumList.length ? 
-            <span className={styles.noChats}>There are no forums yet</span> : 
-            forumList.map(forum => (
-              <Link to={forum.ID} className={styles.link} key={forum.ID}>
-                <p>
-                  {forum.TITLE}
-                </p>
-              </Link>
-            )
-          )}
+            {
+              !forumList?.length ? 
+              <span className={styles.noChats}>There are no forums yet</span> : 
+              forumList?.map(forum => (
+                <Link to={`${forum.id}`} className={styles.link} key={forum.id}>
+                  <p>
+                    {forum.title}
+                  </p>
+                </Link>
+              )
+            )}
+          </main>
         </div>
       </div>
     </div>
   )
 }
 
-export default ForumPick
+export default withErrorBoundary(ForumPick);

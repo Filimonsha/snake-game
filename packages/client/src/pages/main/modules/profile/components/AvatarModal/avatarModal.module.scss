@@ -1,34 +1,37 @@
-@import '../../../../../../const/globals.scss';
+.modal {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modalHeader, .modalForm {
+  background: var(--small-text-bg);
+  color: var(--small-text-color);
+}
 
 .footer {
   display: flex;
   justify-content: space-between;
 }
 
-.buttonGroup {
-  display: flex;
-  gap: 10px;
-}
-
 .buttonDanger {
   border-radius: 20px;
-}
-
-.buttonSave, .buttonCancel {
-  border: 1px solid transparent;
-  border-radius: 20px;
-
-  &:hover {
-    background-color: $white;
-    border: 1px solid $deep-green;
-    color: $deep-green;
-  }
+  padding-inline: 30px;
 }
 
 .buttonSave {
-  background-color: $yellow;
+  padding-inline: 50px;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background-color: var(--secondary);
+  color: var(--small-text-color);
+  
+  &:hover {
+    color: var(--small-text-color);
+    background-color: var(--secondary);
+    border-color: transparent;
+    box-shadow: 0 0 5px 0 var(--secondary);
+  }
 }
 
-.buttonCancel {
-  background-color: $deep-green;
-}
+// .buttonCancel {
+//   background-color: var(--primary);
+// }

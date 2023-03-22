@@ -1,12 +1,19 @@
-@import '../../../../../../const/globals.scss';
-
 .card {
   width: 20%;
-  box-shadow: 0px -6px 12px 0px $yellow-shadow;
-
+  box-shadow: 0 0 10px 0 var(--shadow-color);
+  
   border-radius: 20px;
-  background-color: $grey;
+  background-color: var(--small-text-bg);
+  color: var(--small-text-color);
   text-align: center;
+  
+  &:first-child {
+    box-shadow: 0 0 20px 0 var(--shadow-color);
+  }
+  
+  &:nth-child(2) {
+    box-shadow: 0 0 15px 0 var(--shadow-color);
+  }
 
   .cardImg {
     width: 100px;

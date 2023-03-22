@@ -1,10 +1,8 @@
-@import '../../../../const/globals.scss';
-
 .header {
 	font-size: clamp(7px, 2.4vw, 20px);
-	color: $white;
+	color: var(--white);
 	padding: 15px 0;
-	border-bottom: 1px solid $yellow;
+	border-bottom: 1px solid var(--secondary);
 }
 
 .headerContent {
@@ -14,6 +12,8 @@
 
 .backButton {
 	background-image: url('../../../../assets/img/backButton.svg');
+	background-color: var(--secondary);
+	border-radius: 50%;
 	width: 32px;
 	height: 32px;
 	cursor: pointer;

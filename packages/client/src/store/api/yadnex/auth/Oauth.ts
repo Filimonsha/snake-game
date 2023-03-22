@@ -1,12 +1,14 @@
 import yandexApi from '../yandexBaseQuery'
+import { REDIRECT_URI } from '../../../../const/host'
+import { SERVER_API } from '../../../../const/route'
 
-const REDIRECT_URI = `http://localhost:3000`
-const OAUTH_URL = `https://ya-praktikum.tech/api/v2/oauth/yandex`
+const OAUTH_URL = `${SERVER_API}oauth/yandex`
 
 export const onOauth = async () => {
-  const { service_id } = await fetch(`https://ya-praktikum.tech/api/v2/oauth/yandex/service-id?redirect_uri=${REDIRECT_URI}`)
+  const { service_id } = await fetch(`${SERVER_API}oauth/yandex/service-id?redirect_uri=${REDIRECT_URI}`)
     .then(response => response.json())
-    .then(data => data);
+    .then(data => data)
+    .catch((error) => console.error(error));
 
   window.location.replace(
     `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${REDIRECT_URI}`

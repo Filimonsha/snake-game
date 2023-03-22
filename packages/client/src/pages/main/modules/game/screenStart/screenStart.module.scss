@@ -1,5 +1,3 @@
-@import '../../../../../const/globals.scss';
-
 .screenStart {
   position: relative;
   width: 100%;
@@ -39,7 +37,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: $white;
+    color: var(--background-color-dark);
   }
   
   &Item {
@@ -50,8 +48,8 @@
   
   &Button {
     border: none;
-    background-color: $pink;
-    color: $white;
+    background-color: var(--settings-color);
+    color: var(--background-color);
     border-radius: 10px;
     padding-inline: 15px;
     flex-basis: 55px;
@@ -65,11 +63,12 @@
 
 .buttonStart {
   border: none;
-  background: $white;
+  background: var(--background-color-dark);
   padding: 15px;
   min-width: 180px;
   border-radius: 15px;
-  box-shadow: 5px 5px 0px 0px $green-light;
+  color: var(--text-color);
+  box-shadow: 5px 5px 0px 0px var(--start-button-shadow);
 }
 
 .score {
@@ -91,7 +90,7 @@
       margin-left: 15px;
       font-size: 26px;
       font-weight: bold;
-      color: $white;
+      color: var(--white);
     }
   }
 }
@@ -105,12 +104,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid $pink;
-    background: $pink-light;
+    border: 1px solid var(--settings-color);
+    background: var(--settings-background-color);
     border-radius: 15px;
     width: 65px;
     height: 65px;
-    box-shadow: 2px 2px 0px 0px $pink;
+    box-shadow: 2px 2px 0px 0px var(--start-color);
 
     img {
       width: 50px;

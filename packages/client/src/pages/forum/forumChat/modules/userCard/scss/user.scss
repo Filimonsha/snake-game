@@ -1,4 +1,4 @@
-@import '../../../../../../const/globals.scss';
+@import '../../../../globals.scss';
 
 .userName {
 	display: block;
@@ -8,35 +8,37 @@
 }
 
 .userInfo {
-	height: 160px;
 	grid-area: user;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	background-color: $deep-green;
+	background-color: var(--primary);
 	border-radius: 20px;
 	padding: 15px 20px;
-	margin: auto;
 }
 
 .userAnswer {
-	background-color: #EEEEEE;
-	border: 1px solid $deep-green;
+	background-color: var(--small-text-bg);
+	border: 1px solid var(--primary);
+	color: var(--small-text-color);
+	border-radius: 20px;
 	display: block;
 	grid-area: answer;
-	padding: $gap10;
+	padding: 20px;
 }
 
 textarea.userAnswer {
 	@extend %textArea;
+	background-color: var(--small-text-bg);
+	color: var(--small-text-color);
 }
 
 .avatar {
 	display: block;
-	background-color: $grey;
-	aspect-ratio: 1/1;
-	height: min(15vw, 100px);
+	height: 80px;
+	width: 80px;
 	border-radius: 50%;
+	object-fit: cover;
 }
 
 .comment {

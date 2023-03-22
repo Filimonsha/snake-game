@@ -4,15 +4,15 @@ class CanvasBackground {
   private readonly element: HTMLCanvasElement
   public context: CanvasRenderingContext2D
   private gridBg: TViewImg | null
-  private config: typeof Config
+  private config: Config
   private block: HTMLElement
 
-  constructor(block: HTMLElement) {
+  constructor(config:Config, block: HTMLElement) {
     this.block = block
     this.element = document.createElement('canvas')
     this.element.id = 'background-layer'
     this.context = this.element?.getContext('2d') as CanvasRenderingContext2D
-    this.config = Config
+    this.config = config
     this.element.width = this.config.canvasBgWidth
     this.element.height = this.config.canvasBgHeight
     this.gridBg = null

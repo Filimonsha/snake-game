@@ -1,5 +1,3 @@
-import { listOptimize, objectOptimize } from './optimize'
-
 export type TViewImg = HTMLImageElement
 
 type TViewImgObject = {
@@ -19,13 +17,13 @@ export interface IUpdateConfig {
   food?: TFoodSelected
 }
 
-const viewImgSnake = {
+export const viewImgSnake = {
   head: `snakeGame/snake/head.png`,
   body: `snakeGame/snake/body.png`,
   tail: `snakeGame/snake/tail.png`
 }
 
-const viewImgFoods = {
+export const viewImgFoods = {
   apple: `snakeGame/food/apple.svg`,
   banana: `snakeGame/food/banana.svg`,
   cherry: `snakeGame/food/cherry.svg`,
@@ -34,7 +32,7 @@ const viewImgFoods = {
   strawberry: `snakeGame/food/strawberry.svg`
 }
 
-const viewImgBg = [
+export const viewImgBg = [
   `snakeGame/grid/BG-1.png`,
   `snakeGame/grid/BG-2.png`,
   `snakeGame/grid/BG-3.png`,
@@ -84,4 +82,5 @@ class Config {
   }
 }
 
-export default new Config(listOptimize(viewImgBg), objectOptimize(viewImgFoods), objectOptimize(viewImgSnake))
+export default Config
+

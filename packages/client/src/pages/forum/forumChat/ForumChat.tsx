@@ -1,18 +1,38 @@
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './scss/forumChat.module.scss';
-import { MOCK_ARRAY } from './mockChat';
 import UserCard from './modules/userCard/userCard';
-
-interface IMockChatList {ID: string, USER_NAME: string, COMMENT: string}
+import { useGetTopicsQuery, useLazyGetCommentQuery } from '../../../store/api/yadnex/forum/forumApi';
+import { ForumComment } from '../../../types/forum';
+import { withErrorBoundary } from '../../../modules/errorBoundary/withErrorBoundary';
 
 const ForumChat = () => {
-  const [forumList, setForumList] = useState<IMockChatList[]>([]);
+  const [forumChat, setChatList] = useState<ForumComment[]>([]);
+  const [forumTitle, setForumTitle] = useState<string>("");
   const navigate = useNavigate();
 
+  const [trigger, result] = useLazyGetCommentQuery()
+  const {data: queriedTopics} = useGetTopicsQuery()
+
+  const topicId = location.pathname.split("/").at(-1) as string
+  const chatChange = () => { trigger(topicId) }
+
   useEffect(() => {
-    document.title = "Forum";
-    setForumList(MOCK_ARRAY)
+    if (!queriedTopics) return
+    const topicTitle = queriedTopics.find((topic) => topic.id.toString() === topicId.toString())?.title
+    if (!topicTitle) {
+      navigate(-1)
+      return
+    }
+    setForumTitle(topicTitle)
+  }, [queriedTopics])
+
+  useEffect(() => {
+    if (result.data) setChatList(result.data)
+  }, [result])
+
+  useEffect(() => {
+    chatChange()
   }, [])
 
   return (
@@ -22,17 +42,17 @@ const ForumChat = () => {
           <header className={styles.header}>
             <div className={styles.headerContent}>
               <div className={styles.backButton} onClick={() => navigate(-1)} ></div>
-              Forum title
+              {forumTitle}
             </div>
           </header>
           <main className={styles.main}>
             <ul>
             {
-              !forumList.length ? 
+              !forumChat.length ? 
               <p className={styles.noAnswers}>There are no comments yet</p> : 
-              forumList.map(message => <UserCard userName={message.USER_NAME} comment={message.COMMENT} key={message.ID}/>)
+              forumChat.map(message => <UserCard comment={message.text} avatar={message.userData?.avatar} userName={message.userData?.login} key={message.id}/>)
             }
-            <UserCard isPostCard={true}/>
+            <UserCard isPostCard={true} chatChange={chatChange}/>
             </ul>
           </main>
         </div>
@@ -41,4 +61,4 @@ const ForumChat = () => {
   )
 }
 
-export default ForumChat
+export default withErrorBoundary(ForumChat);

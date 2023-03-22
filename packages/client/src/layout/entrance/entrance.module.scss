@@ -1,7 +1,5 @@
-@import '../../const/globals.scss';
-
 .entrance {
-  background-color: $deep-green;
+  background-color: var(--primary);
   padding: 50px;
   min-height: 100vh;
   display: flex;
@@ -20,5 +18,4 @@
     margin-left: auto;
     margin-right: auto;
   }
-
 }

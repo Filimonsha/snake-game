@@ -12,7 +12,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN yarn lerna bootstrap
+RUN yarn bootstrap
 RUN rm -rf /app/packages/server/dist/ && yarn build --scope=server
 
 
@@ -24,4 +24,3 @@ COPY --from=builder /app/packages/server/package.json /app/package.json
 RUN yarn install --production=true
 
 EXPOSE $SERVER_PORT
-CMD [ "node", "/app/index.js" ]

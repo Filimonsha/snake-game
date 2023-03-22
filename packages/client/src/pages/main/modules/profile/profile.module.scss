@@ -1,34 +1,62 @@
-@import '../../../../const/globals.scss';
-
 .profile {
-  background-color: $deep-green;
+  background-color: var(--primary);
+  min-height: 100vh;
 }
 
 .profileCircle {
-  background: radial-gradient(rgba($background-circle, 0.25), transparent);
+  min-height: 100vh;
+  background: radial-gradient(rgba(var(--circle-color), 0.25), transparent);
+  background-color: var(--primary);
+}
+
+.profileCircle {
+  background: radial-gradient(var(--curcle-color), transparent);
+}
+
+.headerContainer {
+  padding-inline: 50px;
+  padding-top: 50px;
 }
 
 .container {
-  height: 100vh;
   width: 70vw;
+  margin-bottom: 60px;
+  
+  &:last-child {
+    margin-bottom: 30px;
+  }
+}
+
+.title {
+  color: var(--secondary);
+  text-align: center;
+}
+
+.wrapper {
+  padding-bottom: 50px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
   width: 50%;
   margin: auto;
+  
+  &:not(:last-child) {
+    padding-bottom: 20px;
+  }
 }
 
 .formAvatar {
   width: 130px;
   height: 130px;
   border: none;
-  background-color: $grey;
+  background-color: var(--background-color-dark);
   border-radius: 50%;
   align-self: center;
+  object-fit: cover;
+
 
   &:hover {
     background-color: #000;
@@ -38,12 +66,13 @@
 }
 
 .formBody {
-  padding: 50px 0;
+  padding: 20px 0;
 }
 
 .formFooter {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  padding-top: 15px;
 }
 
 .avatarImg {
@@ -54,21 +83,22 @@
 
 .buttonSave,
 .buttonCancel {
-  width: 100px;
+  min-width: 100px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   border: none;
+  color: var(--primary);
   &:hover {
-    background-color: $deep-green;
-    color: $white;
+    background-color: var(--primary);
+    color: var(--background-color-dark)
   }
 }
 
 .buttonSave {
-  background-color: $yellow;
+  background-color: var(--secondary);
 }
 
 .buttonCancel {
-  background: $white;
-  color: $deep-green;
+  background: var(--background-color-dark);
+  color: var(--primary);
 }

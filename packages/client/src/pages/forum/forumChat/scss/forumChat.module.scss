@@ -1,4 +1,4 @@
-@import '../../../../const/globals.scss';
+@import '../../globals.scss';
 @import './header.scss';
 @import './main.scss';
 
@@ -10,12 +10,12 @@
 
 .forumWrapper {
 	height: 100vh;
-	background-color: $deep-green;
+	background-color: var(--primary);
 }
 
 .forumCircle {
 	height: 100vh;
-  background: radial-gradient(rgba($background-circle, 0.25), transparent);
+  background: radial-gradient(var(--curcle-color), transparent);
 }
 
 .forum {
@@ -32,6 +32,7 @@
 	padding-inline: $gap10;
 	padding-block: $gap10;
 	margin-bottom: $gap10;
-	background-color: $grey;
+	background-color: var(--small-text-bg);
+	color: var(--small-text-color);
 	border-radius: 5px;
 }
