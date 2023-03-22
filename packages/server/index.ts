@@ -91,7 +91,7 @@ async function startServer() {
         [
           'http://localhost:3000',
           'http://localhost:3001',
-          'https://england-snake-21.ya-praktikum.tech'
+          'https://england-snake-game-21.ya-praktikum.tech'
         ]
       , credentials: true }))
   }
