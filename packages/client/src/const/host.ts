@@ -1,3 +1,3 @@
-export const SERVER_HOST = 'http://localhost:3001'
-export const REDIRECT_URI = 'http://localhost:3000'
+export const SERVER_HOST = 'https://england-snake-21.ya-praktikum.tech'
+export const REDIRECT_URI = SERVER_HOST
 export const RESOURCES_HOST = `${SERVER_HOST}/resources/`
