@@ -17,6 +17,8 @@ import { createServer as createViteServer } from 'vite'
 import { promises as fs } from 'fs'
 import * as path from 'path'
 import { cspMiddleware } from './middlewares/cspMiddleware'
+import { API_ROUTE } from './constants'
+import { redirectMiddleware } from './middlewares/redirectMiddleware'
 
 dotenv.config()
 
@@ -26,7 +28,6 @@ const app = express()
 async function startServer() {
   const swaggerDocument = YAML.load('./swagger.yaml')
   const port = Number(process.env.SERVER_PORT) || 3001
-  const API_ROUTE = '/api/v1'
 
   // content security policy
   app.use(cspMiddleware())
@@ -103,7 +104,8 @@ async function startServer() {
   app.use(`${API_ROUTE}/theme`, themeRoutes)
   app.use(`${API_ROUTE}/auth`, authRoutes)
   app.use(`${API_ROUTE}/user`, userRoutes)
-app.use(`${API_ROUTE}/oauth`, oauthRoutes)
+  app.use(`${API_ROUTE}/oauth`, oauthRoutes)
+  app.use(`*`, redirectMiddleware)
 
   app.use('*', async (req: any, res, next) => {
     const url = req.originalUrl
