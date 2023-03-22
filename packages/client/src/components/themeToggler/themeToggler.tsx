@@ -2,7 +2,6 @@ import styles from './themeToggler.module.scss'
 import { useGetThemeQuery, useUpdateThemeMutation } from '../../store/api/backend/theme/themeApi'
 import { ThemeTypes } from '../../types/theme'
 import Form from 'react-bootstrap/Form'
-import { toast } from 'react-toastify'
 
 
 const ThemeToggler = () => {
@@ -20,7 +19,7 @@ const ThemeToggler = () => {
         document.documentElement.className = ThemeTypes.DARK
       }
     } else {
-      toast.error('Cannot update theme');
+      console.error('Cannot update theme');
     }
   }
 

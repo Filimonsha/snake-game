@@ -12,7 +12,6 @@ import { useSignInMutation } from '../../../../store/api/yadnex/auth/authApi'
 import { UserShortInfo } from '../../../../types/auth'
 import { onOauth } from '../../../../store/api/yadnex/auth/Oauth'
 import { MAIN_ROUTE } from '../../../../const/route'
-import { toast } from 'react-toastify';
 
 const FormSignIn = () => {
   const [signIn] = useSignInMutation()
@@ -24,7 +23,7 @@ const FormSignIn = () => {
       if (result.data) {
         return navigate(MAIN_ROUTE)
       } else if (result.error) {
-        toast.error('Invalid login or password')
+        throw new Error('Invalid login or password');
       }
     } catch (e) {
       console.error(e)
