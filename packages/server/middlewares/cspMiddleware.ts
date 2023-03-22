@@ -1,4 +1,4 @@
-import { expressCspHeader, INLINE, NONCE, NONE, SELF } from 'express-csp-header';
+import { expressCspHeader } from 'express-csp-header';
 
 export const cspMiddleware = () => (
   expressCspHeader({
