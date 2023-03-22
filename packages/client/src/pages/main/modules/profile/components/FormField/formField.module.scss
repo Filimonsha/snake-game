@@ -1,5 +1,3 @@
-@import '../../../../../../const/globals.scss';
-
 .formControl {
   position: relative;
   width: 100%;
@@ -13,14 +11,14 @@
   }
 
   & label {
-    color: var(--text-color-white);
+    color: var(--white);
   }
 
   & input {
     border: none;
     text-align: end;
     background-color: transparent;
-    color: var(--text-color-white);
+    color: var(--white);
 
     &:focus-visible {
       outline: none;

@@ -2,11 +2,12 @@ import styles from './scss/userCard.module.scss';
 import React, {useState} from 'react';
 import { useGetUserInfoQuery } from '../../../../../store/api/yadnex/auth/authApi';
 import { useAddCommentMutation } from '../../../../../store/api/yadnex/forum/forumApi';
+import defaultAvatar from '../../../../../assets/img/default-avatar.png';
+import { RESOURCES_HOST } from '../../../../../const/host';
 
 interface ICardProps {userName?: string, isPostCard?: boolean, comment?: string, name?: string, avatar?: string | null, chatChange?: () => void}
 
 const UserCard: React.FC<ICardProps> = ({userName = "", isPostCard = false, comment = "", avatar = null, chatChange, }) => {
-  const AVATAR_PLACEHOLDER = 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
   const [textState, setTextState] = useState<string>("");
   const {data} = useGetUserInfoQuery()
   const commentQuery = useAddCommentMutation()
@@ -36,6 +37,8 @@ const UserCard: React.FC<ICardProps> = ({userName = "", isPostCard = false, comm
   function changeEvent(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setTextState(e.target.value)
   }
+  
+  const avatarToShow = avatar ? RESOURCES_HOST + avatar : defaultAvatar;
 
   return (
     isPostCard ? 
@@ -47,7 +50,7 @@ const UserCard: React.FC<ICardProps> = ({userName = "", isPostCard = false, comm
     </li> :
     <li className={styles.card}>
       <div className={styles.userInfo}>
-        <img crossOrigin="anonymous" className={styles.avatar} src={avatar || AVATAR_PLACEHOLDER}/>
+        <img crossOrigin="anonymous" className={styles.avatar} src={avatarToShow}/>
         <h2 className={styles.userName}>{userName}</h2>
       </div>
       <div className={styles.userAnswer}>

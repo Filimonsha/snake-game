@@ -16,7 +16,10 @@
     --main-background-color: #{$deep-dark-green};
     --curcle-color: #{$background-circle}40;
     --text-color: #{$text-color};
-    --text-color-white: #{$white};
+    --white: #{$white};
+    --small-text-bg: #{$grey};
+    --small-text-color: #{$dark-grey};
+    --modal-bg: #{$grey};
 }
 
 :root.dark{
@@ -34,5 +37,9 @@
     --background-color-dark: #{$grey};
     --main-background-color: #{$dark-purple};
     --curcle-color: #{$magento}40;
-    --text-color: #{$white};
+    --text-color: #{$dark-purple};
+    --white: #{$white};
+    --small-text-bg: #{$dark-purple};
+    --small-text-color: #{$white};
+    --modal-bg: #{$light-purple};
 }

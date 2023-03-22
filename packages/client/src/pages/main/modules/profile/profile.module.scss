@@ -1,18 +1,21 @@
-@import '../../../../const/globals.scss';
-
 .profile {
-  background-color: $deep-green;
+  background-color: var(--primary);
   min-height: 100vh;
 }
 
 .profileCircle {
   min-height: 100vh;
-  background: radial-gradient(rgba($background-circle, 0.25), transparent);
+  background: radial-gradient(rgba(var(--circle-color), 0.25), transparent);
   background-color: var(--primary);
 }
 
 .profileCircle {
   background: radial-gradient(var(--curcle-color), transparent);
+}
+
+.headerContainer {
+  padding-inline: 50px;
+  padding-top: 50px;
 }
 
 .container {
@@ -25,12 +28,12 @@
 }
 
 .title {
-  color: $yellow;
+  color: var(--secondary);
   text-align: center;
 }
 
 .wrapper {
-  padding-block: 50px;
+  padding-bottom: 50px;
 }
 
 .form {
@@ -82,10 +85,10 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   border: none;
-  color: $deep-green;
+  color: var(--primary);
   &:hover {
     background-color: var(--primary);
-    color: var(--background-color);
+    color: var(--background-color-dark)
   }
 }
 
@@ -94,6 +97,6 @@
 }
 
 .buttonCancel {
-  background: var(--background-color);
+  background: var(--background-color-dark);
   color: var(--primary);
 }

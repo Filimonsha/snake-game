@@ -1,16 +1,20 @@
 import React, { StrictMode } from 'react'
+import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { App } from './app'
+import { store } from './store/store'
 
 const rootElement = document.getElementById('root') as HTMLElement
 
 const app = (
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </StrictMode>
 )
