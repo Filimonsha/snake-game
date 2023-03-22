@@ -1,7 +1,7 @@
 import yandexApi from '../yandexBaseQuery'
 
 const REDIRECT_URI = `http://localhost:3000`
-const OAUTH_URL = `http://localhost:3001/api/v1/oauth/yandex`
+const OAUTH_URL = `https://ya-praktikum.tech/api/v2/oauth/yandex`
 
 export const onOauth = async () => {
   const { service_id } = await fetch(`http://localhost:3001/api/v1/oauth/yandex/service-id?redirect_uri=${REDIRECT_URI}`)

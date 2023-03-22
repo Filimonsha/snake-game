@@ -15,6 +15,7 @@ import { useChangeProfileMutation } from '../../../../store/api/yadnex/profile/p
 import { toast } from 'react-toastify'
 import defaultAvatar from '../../../../assets/img/default-avatar.png';
 import { withErrorBoundary } from '../../../../modules/errorBoundary/withErrorBoundary'
+import { Header } from '../../../../modules/header'
 
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserProfileInfo>(DEFAULT_USER_DATA)
@@ -31,14 +32,12 @@ const Profile: React.FC = () => {
 
   const handleSubmit = async (userData: UserProfileInfo) => {
     try {
-      const res = await changeProfile(userData);
-      if ('data' in res) {
+      const response = await changeProfile(userData);
+      if ('data' in response) {
         toast.success('Profile has been updated');
-      } else {
-        throw new Error('Cannot update profile');
       }
-    } catch {
-      toast.error('Cannot update profile');
+    } catch(e) {
+      console.error(e)
     }
   };
 
@@ -53,6 +52,9 @@ const Profile: React.FC = () => {
   return (
     <div className={styles.profile}>
       <div className={styles.profileCircle}>
+        <div className={styles.headerContainer}>
+          <Header />
+        </div>
         <div className={styles.wrapper}>
           <Container className={styles.container}>
             <Formik

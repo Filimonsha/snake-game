@@ -29,13 +29,13 @@ export class User extends Model<TUserFull> {
   
   @AllowNull(false)
   @Matches(Pattern.Login, { message: Message.Login })
-  @Unique({ name: 'login', msg: 'Login must be unique'})
+  @Unique({ name: 'login', msg: 'Login already exists'})
   @Column
   login!: string
   
   @AllowNull(false)
   @IsEmail({}, { message: Message.Email })
-  @Unique({ name: 'email', msg: 'Email must be unique'})
+  @Unique({ name: 'email', msg: 'Email already exists'})
   @Column
   email!: string
   
@@ -45,7 +45,7 @@ export class User extends Model<TUserFull> {
   
   @AllowNull(false)
   @Matches(Pattern.Phone, { message: Message.Phone })
-  @Unique({ name: 'phone', msg: 'Phone must be unique'})
+  @Unique({ name: 'phone', msg: 'Phone already exists'})
   @Column
   phone!: string
 

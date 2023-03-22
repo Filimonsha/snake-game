@@ -1,6 +1,6 @@
 .errorPage {
   background-color: var(--primary);
-  color: var(--background-color);
+  color: var(--background-color-dark);
   min-height: 100vh;
   background-image: radial-gradient(var(--secondary-o25), transparent);
 }
@@ -39,7 +39,7 @@
 }
 
 .errorPageLink {
-  color: var(--background-color);
+  color: var(--background-color-dark);
   font-size: 20px;
   
   &:hover {

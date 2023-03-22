@@ -61,7 +61,7 @@ const LeaderBoard: React.FC = () => {
     })
     if (!normalizedData) return
     setData(normalizedData)
-    const topPlayers = normalizedData.sort((a, b) => b.score - a.score).slice(0, 3);
+    const topPlayers = normalizedData.slice(0, 3);
     topPlayers.forEach(player => player.avatar = (player.avatar ? RESOURCES_HOST + player.avatar : defaultAvatar))
     setTopPlayersData(topPlayers);
   }, [queryData])
@@ -76,7 +76,7 @@ const LeaderBoard: React.FC = () => {
           <div className={styles.wrapperTop}>
             <h1 className='mb-3'>Top Players</h1>
             <div className='d-flex justify-content-evenly mb-3'>
-              {topPlayersData && topPlayersData.map(data => {return <TopPlayerCard key={data.id} {...data}/>})} 
+              {topPlayersData && topPlayersData.map(data => <TopPlayerCard key={data.id} {...data}/> )} 
             </div>
           </div>
           <div className={styles.wrapperBottom}>
