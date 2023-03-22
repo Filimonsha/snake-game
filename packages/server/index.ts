@@ -31,7 +31,7 @@ async function startServer() {
 
   // content security policy
   app.use(cspMiddleware())
-  
+
   // parse cookies
   app.use(cookieParser())
 
@@ -70,10 +70,10 @@ async function startServer() {
 
   if (isDev()) {
     vite = await createViteServer({
-      server: { 
+      server: {
         middlewareMode: true,
         cors: {
-          credentials: true, 
+          credentials: true,
           origin: 'http://localhost:3000'
         }},
       root: srcPath,
@@ -87,7 +87,13 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')))
     app.use('/snakeGame', express.static(path.resolve(distPath, 'snakeGame')))
 
-    app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'], credentials: true }))
+    app.use(cors({ origin:
+        [
+          'http://localhost:3000',
+          'http://localhost:3001',
+          'https://england-snake-21.ya-praktikum.tech'
+        ]
+      , credentials: true }))
   }
 
   const styleSheets = getStyleSheets()

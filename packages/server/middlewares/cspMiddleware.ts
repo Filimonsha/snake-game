@@ -1,14 +1,13 @@
-import { expressCspHeader, INLINE, NONCE, NONE, SELF } from 'express-csp-header';
+import { expressCspHeader, SELF } from 'express-csp-header'
 
 export const cspMiddleware = () => (
   expressCspHeader({
     directives: {
-        'default-src': [SELF, 'ws://localhost:24678', 'http://localhost:24678/'],
-        'script-src': [NONCE, SELF],
-        'style-src': [SELF, INLINE],
-        'object-src': [NONE],
-        'img-src': [SELF, INLINE],
-        'worker-src': [SELF]
+      'default-src': ['*'],
+      'script-src': [SELF, 'unsafe-inline', 'unsafe-eval', '*'],
+      'style-src': [SELF, 'unsafe-inline', '*'],
+      'img-src': [SELF, ' data:', 'https:', '*'],
+      'worker-src': [SELF]
     }
   })
 )

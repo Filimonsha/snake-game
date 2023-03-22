@@ -1,3 +1,5 @@
+import { SERVER_HOST } from './host'
+
 export const MAIN_ROUTE = '/'
 export const SIGN_IN_ROUTE = '/sign-in'
 export const SIGN_UP_ROUTE = '/sign-up'
@@ -7,6 +9,5 @@ export const PROFILE_ROUTE = '/profile'
 export const GAME_ROUTE = '/game'
 export const ERROR_ROUTE = '/error'
 
-export const SERVER_BASE = 'http://localhost:'
-export const SERVER_PORT = 3001
-export const SERVER_API = '/api/v1/'
+export const SERVER_BASE = SERVER_HOST
+export const SERVER_API = `${SERVER_BASE}/api/v1/`
